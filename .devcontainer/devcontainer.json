@@ -2,5 +2,6 @@
   "image": "registry.gitlab.com/codematos/pluscoder:latest",
   "features": {
   },
-  "postCreateCommand": "echo \"HELLO=HELLO\" > .env"
+  "onCreateCommand": "./.devcontainer/oncreate.sh",
+  "postAttachCommand": "plus-coder --show-repo"
 }
