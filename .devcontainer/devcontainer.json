@@ -2,5 +2,5 @@
   "image": "registry.gitlab.com/codematos/pluscoder:latest",
   "features": {
   },
-  "postCreateCommand": "echo \"PASSWORD=$(python3 -c 'import getpass; print(getpass.getpass(\"Enter your password: \"))')\" > .env"
+  "postCreateCommand": "echo \"HELLO=HELLO\" > .env"
 }
