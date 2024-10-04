@@ -1,2 +1,80 @@
-auto_commits: false
+#------------------------------------------------------------------------------
+# PlusCoder Configuration
+#------------------------------------------------------------------------------
 
+#------------------------------------------------------------------------------
+# Application Behavior
+#------------------------------------------------------------------------------
+# streaming: true                 # Enable/disable LLM streaming
+# user_feedback: true             # Enable/disable user feedback
+# display_internal_outputs: false # Display internal agent outputs
+# auto_confirm: false             # Auto-confirm pluscoder execution
+# init: true                      # Enable/disable initial setup
+# read_only: false                # Enable/disable read-only mode
+# user_input: ""                  # Predefined user input to run pluscoder agents once
+
+#------------------------------------------------------------------------------
+# File Paths
+#------------------------------------------------------------------------------
+# overview_filename: PROJECT_OVERVIEW.md     # Project overview filename
+# log_filename: pluscoder.log                # Log filename
+# overview_file_path: PROJECT_OVERVIEW.md    # Path to project overview file
+# guidelines_file_path: CODING_GUIDELINES.md # Path to coding guidelines file
+
+#------------------------------------------------------------------------------
+# Model and API Settings
+#------------------------------------------------------------------------------
+model: anthropic.claude-3-5-sonnet-20240620-v1:0 # LLM model to use
+provider: null           # Provider (aws_bedrock, openai, litellm, anthropic, null)
+# openai_api_key:          # OpenAI API key
+# openai_api_base:         # OpenAI API base URL
+# anthropic_api_key:       # Anthropic API key
+
+#------------------------------------------------------------------------------
+# AWS Settings
+#------------------------------------------------------------------------------
+# aws_access_key_id:       # AWS Access Key ID
+# aws_secret_access_key:   # AWS Secret Access Key
+# aws_profile: default     # AWS profile name
+
+#------------------------------------------------------------------------------
+# Git Settings
+#------------------------------------------------------------------------------
+auto_commits: false       # Enable/disable automatic Git commits
+allow_dirty_commits: false # Allow commits in a dirty repository
+
+#------------------------------------------------------------------------------
+# Test and Lint Settings
+#------------------------------------------------------------------------------
+# run_tests_after_edit: false  # Run tests after file edits
+# run_lint_after_edit: false   # Run linter after file edits
+# test_command:                # Command to run tests
+# lint_command:                # Command to run linter
+# auto_run_linter_fix: false   # Auto-run linter fix before linting
+# lint_fix_command:            # Command to run linter fix
+
+#------------------------------------------------------------------------------
+# Repomap Settings
+#------------------------------------------------------------------------------
+# use_repomap: false           # Enable/disable repomap feature
+# repomap_level: 2             # Repomap detail level (0: minimal, 1: moderate, 2: detailed)
+# repomap_exclude_files: []    # List of files to exclude from repomap
+repo_exclude_files: ['.devcontainer', '.pluscoder', '.plus_coder']       # Regex patterns to exclude files from repo operations
+
+#------------------------------------------------------------------------------
+# Display Options
+#------------------------------------------------------------------------------
+# show_repo: false             # Show repository information
+# show_repomap: false          # Show repository map
+# show_config: false           # Show configuration information
+
+#------------------------------------------------------------------------------
+# Custom Prompt Commands
+#------------------------------------------------------------------------------
+# custom_prompt_commands: []   # Custom prompt commands (prompt_name, description, prompt)
+
+#------------------------------------------------------------------------------
+# Additional Settings
+#------------------------------------------------------------------------------
+# Uncomment and set the endpoint URL if needed
+# endpoint_url: https://bedrock-runtime.us-east-1.amazonaws.com/

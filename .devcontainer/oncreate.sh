@@ -6,6 +6,11 @@ set -x
 # Run from repo root
 cat .devcontainer/bashrc_epilog.sh >> ~/.bashrc
 
+# Install git and X11 clipboard tools (required for the application)
+apt-get update && apt-get install -y \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
 git config --global --add safe.directory /workspaces/react-example
 
 pip install --no-cache git+https://gitlab.com/codematos/pluscoder.git@develop
