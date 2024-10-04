@@ -1,5 +1,5 @@
 {
-  "image": "nikolaik/python3.12-nodejs22-slim",
+  "image": "nikolaik/python-nodejs:python3.12-nodejs22-slim",
   "features": {
   },
   "onCreateCommand": "./.devcontainer/oncreate.sh",
