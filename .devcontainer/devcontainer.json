@@ -1,5 +1,5 @@
 {
-  "image": "registry.gitlab.com/codematos/pluscoder:latest",
+  "image": "python3.12-nodejs22-slim",
   "features": {
   },
   "onCreateCommand": "./.devcontainer/oncreate.sh",
