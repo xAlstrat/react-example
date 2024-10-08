@@ -28,7 +28,7 @@
 ### Task based workflows
 Define a list of task with the Orchestrator Agent to delegate:
 Example:
-1. Run `pluscoder --auto-commits true --auto_confirm true`
+1. Run `pluscoder --auto_commits true --auto_confirm true`
 2. Choose Orchestrator Agent (`1`)
 3. Write `/custom documentation` (look [.pluscoder-config.yml](.pluscoder-config.yml) to see custom instruction)
 4. If tasks doesn't start, tell the agent: `Delegate doc tasks now`
