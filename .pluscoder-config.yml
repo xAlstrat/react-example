@@ -75,3 +75,8 @@ custom_prompt_commands:
   - prompt_name: feat
     description: Feat & Doc
     prompt: Solve the following feature requirement then document it at DOCS.md
+  - prompt_name: documentation
+    description: Document usage and development documentation
+    prompt: |
+      Generate 2 task; one for generate the usage of this project from the user perpective to /docs/index.md 
+      and another task to document this repo from developer perspective at docs/dev.md. Delegate it now.
