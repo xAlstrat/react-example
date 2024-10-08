@@ -71,10 +71,7 @@ repo_exclude_files: ['.devcontainer', '.pluscoder', '.plus_coder']       # Regex
 #------------------------------------------------------------------------------
 # Custom Prompt Commands
 #------------------------------------------------------------------------------
-# custom_prompt_commands: []   # Custom prompt commands (prompt_name, description, prompt)
-
-#------------------------------------------------------------------------------
-# Additional Settings
-#------------------------------------------------------------------------------
-# Uncomment and set the endpoint URL if needed
-# endpoint_url: https://bedrock-runtime.us-east-1.amazonaws.com/
+custom_prompt_commands:
+  - prompt_name: feat
+    description: Feat & Doc
+    prompt: Solve the following feature requirement then document it at DOCS.md
