@@ -1,5 +1,5 @@
 # Pluscoder
-[Full Documentation](https://gitlab.com/codematos/pluscoder/-/blob/main/README.md)
+[Full Documentation](https://gitlab.com/codematos/pluscoder-repository/-/blob/main/README.md)
 
 
 ### Run

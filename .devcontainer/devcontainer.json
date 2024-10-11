@@ -4,8 +4,14 @@
   },
   "onCreateCommand": "./.devcontainer/oncreate.sh",
   "postAttachCommand": "pluscoder --show_repo",
+  "postStartCommand": "nohup bash -c 'npm start &'",
   // Adds on Earthly syntax highlighting extension
   "customizations": {
+        "codespaces": {
+            "openFiles": [
+            "README.md"
+            ]
+      },
       "vscode": {
           "settings": {
               "terminal.integrated.profiles.linux": {
