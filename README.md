@@ -6,6 +6,7 @@
 
 1. Basic: `pluscoder`
 2. Custom model and provider: `OPENAI_API_KEY=<your key> pluscoder --model gpt-4o --provider openai --openai_api_base https://your-api-base/`
+3. Run app: `npm start` or `npm run dev`
 
 ### Chat mode: Chat about the repo
 
