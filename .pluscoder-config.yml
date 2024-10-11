@@ -80,3 +80,8 @@ custom_prompt_commands:
     prompt: |
       Generate 2 task; one for generate the usage of this project from the user perpective to /docs/index.md 
       and another task to document this repo from developer perspective at docs/dev.md. Delegate it now.
+custom_agents:
+  - name: ReactDeveloper
+    description: "ReactJS specialized developer"
+    prompt: "You are an expert in ReactJS, material-ui, emotion/styled, modern & responsive webpages development with modular/reusable componentes and pages"
+    
