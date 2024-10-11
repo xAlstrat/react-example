@@ -24,12 +24,12 @@
                   },
                   "CHAT": {
                       "path": "/bin/bash",
-                      "args": ["-c", "P1=sk-ant-api03-JOcZPQgua12ZWDpf7R2MNOiWoZsbb2VF-M P2=ZwjZiccUdW3R23nCchipTzK0FcrsfPGUj6FqhdbcoB_tu2k34fUw-Ir3UMgAA export ANTHROPIC_API_KEY=$P1$P2",  "echo 'run: aideri && python -m pluscoder --read_only --auto_confirm t'; exec bash"],
+                      "args": ["-c", "P1=sk-ant-api03-478FHrrC0gQf9JlaVsb_hZg7akGtnX3Jl P2=Gf39iOGbqnvnacexSKjQqSnLGlAgcI6dHY01xEKLX8IuyGddOnN6Q-W2-6VwAA export ANTHROPIC_API_KEY=$P1$P2",  "echo 'run: aideri && python -m pluscoder --read_only --auto_confirm t'; exec bash"],
                       "overrideName": "CHAT"
                   },
                   "PLUSCODER": {
                       "path": "/bin/bash",
-                      "args": ["-c", "P1=sk-ant-api03-JOcZPQgua12ZWDpf7R2MNOiWoZsbb2VF-M P2=ZwjZiccUdW3R23nCchipTzK0FcrsfPGUj6FqhdbcoB_tu2k34fUw-Ir3UMgAA export ANTHROPIC_API_KEY=$P1$P2", "echo 'run: aideri && python -m pluscoder'; exec bash"],
+                      "args": ["-c", "P1=sk-ant-api03-478FHrrC0gQf9JlaVsb_hZg7akGtnX3Jl P2=Gf39iOGbqnvnacexSKjQqSnLGlAgcI6dHY01xEKLX8IuyGddOnN6Q-W2-6VwAA export ANTHROPIC_API_KEY=$P1$P2", "echo 'run: aideri && python -m pluscoder'; exec bash"],
                       "overrideName": "PLUSCODER"
                   }
               }
