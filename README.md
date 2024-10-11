@@ -17,9 +17,10 @@
 
 ### Editor mode: Edit any file in any way
 
-1. Run: `pluscoder --auto_commits false`
-2. Choose Developer Agent (`4`)
-3. Ask: `Make the image nodes to look circular instead of squared`
+1. Run server in a bash: `npm start`
+1. Run in another bash: `pluscoder --auto_commits false`
+2. Choose Developer Agent (`6`)
+3. Ask: `Remove the image from the hero and are more text about the amazing capabilities of Pluscoder Code Agent. Give it a dark theme`
 4. Run `/agent` and choose Stakeholder Agent `2` 
 5. Ask:
     ```

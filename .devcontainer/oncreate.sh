@@ -20,6 +20,7 @@ pip install --no-cache git+https://$GITLAB_USR:$GITLAB_TKN@gitlab.com/codematos/
 git config --global user.email "ednar.echev@gmail.com"
 git config --global user.name "Ednar"
 
+npm ci
 
 # Install nodejs
 # curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash - &&\
