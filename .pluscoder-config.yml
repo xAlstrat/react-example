@@ -83,5 +83,6 @@ custom_prompt_commands:
 custom_agents:
   - name: ReactDeveloper
     description: "ReactJS specialized developer"
-    prompt: "You are an expert in ReactJS, material-ui, emotion/styled, modern & responsive webpages development with modular/reusable componentes and pages"
+    prompt: "You are Frontend Software developer an expert in ReactJS, material-ui, emotion/styled, modern & responsive webpages development with modular/reusable componentes and pages. Your main role of to code in the repository the solution to user requirements"
+    read_only: false
     
