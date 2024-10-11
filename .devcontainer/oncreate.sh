@@ -15,6 +15,9 @@ git config --global --add safe.directory /workspaces/react-example
 
 pip install --no-cache git+https://$GITLAB_USR:$GITLAB_TKN@gitlab.com/codematos/pluscoder.git
 
+git config --global user.email "ednar.echev@gmail.com"
+git config --global user.name "Ednar"
+
 
 # Install nodejs
 # curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash - &&\
