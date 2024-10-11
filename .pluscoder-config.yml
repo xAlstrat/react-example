@@ -47,10 +47,10 @@ allow_dirty_commits: false # Allow commits in a dirty repository
 # Test and Lint Settings
 #------------------------------------------------------------------------------
 # run_tests_after_edit: false  # Run tests after file edits
-run_lint_after_edit: true   # Run linter after file edits
+run_lint_after_edit: false   # Run linter after file edits
 # test_command:                # Command to run tests
 lint_command: npx eslint .                # Command to run linter
-auto_run_linter_fix: true   # Auto-run linter fix before linting
+auto_run_linter_fix: false   # Auto-run linter fix before linting
 lint_fix_command: "npx eslint . --fix"            # Command to run linter fix
 
 #------------------------------------------------------------------------------
