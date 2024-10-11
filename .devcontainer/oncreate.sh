@@ -13,7 +13,8 @@ apt-get update && apt-get install -y \
 
 git config --global --add safe.directory /workspaces/react-example
 
-pip install --no-cache git+https://gitlab.com/codematos/pluscoder.git@develop
+pip install --no-cache git+https://$GITLAB_USR:$GITLAB_TKN@gitlab.com/codematos/pluscoder.git
+
 
 # Install nodejs
 # curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash - &&\
