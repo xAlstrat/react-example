@@ -63,10 +63,25 @@ p {
   }
 }
 
+@media (max-width: 1024px) {
+  .hero {
+    padding: 3rem 1.5rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  p {
+    font-size: 1.1rem;
+  }
+}
+
 @media (max-width: 768px) {
   .hero {
     flex-direction: column;
     text-align: center;
+    padding: 2rem 1rem;
   }
 
   .hero-content {
@@ -75,10 +90,25 @@ p {
   }
 
   h1 {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
   }
 
   p {
     font-size: 1rem;
+  }
+
+  .cta-button {
+    padding: 0.8rem 1.6rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  .hero-image img {
+    max-width: 80%;
   }
 }

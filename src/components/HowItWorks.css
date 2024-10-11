@@ -1,16 +1,25 @@
+:root {
+  --primary-color: #007bff;
+  --text-color: #333;
+  --background-color: #f8f9fa;
+  --step-bg-color: #ffffff;
+}
+
 .how-it-works {
   padding: 4rem 2rem;
-  background-color: #f8f9fa;
+  background-color: var(--background-color);
 }
 
 .how-it-works h2 {
   text-align: center;
   margin-bottom: 2rem;
+  font-size: 2.5rem;
+  color: var(--text-color);
 }
 
 .workflow {
   position: relative;
-  max-width: 800px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
@@ -21,25 +30,35 @@
   top: 50%;
   left: 0;
   transform: translateY(-50%);
+  z-index: 1;
 }
 
 .steps {
   display: flex;
   justify-content: space-between;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .step {
   flex-basis: 22%;
   text-align: center;
   position: relative;
+  background-color: var(--step-bg-color);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.step:hover {
+  transform: translateY(-5px);
 }
 
 .step-number {
   width: 40px;
   height: 40px;
-  background-color: #007bff;
+  background-color: var(--primary-color);
   color: white;
   border-radius: 50%;
   display: flex;
@@ -52,6 +71,7 @@
 .step h3 {
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
+  color: var(--text-color);
 }
 
 .step p {
@@ -59,16 +79,55 @@
   color: #6c757d;
 }
 
+@media (max-width: 1024px) {
+  .how-it-works {
+    padding: 3rem 1.5rem;
+  }
+
+  .how-it-works h2 {
+    font-size: 2.2rem;
+  }
+
+  .step {
+    padding: 1.2rem;
+  }
+}
+
 @media (max-width: 768px) {
+  .how-it-works {
+    padding: 2rem 1rem;
+  }
+
+  .how-it-works h2 {
+    font-size: 2rem;
+  }
+
   .steps {
     flex-direction: column;
   }
 
   .step {
     margin-bottom: 2rem;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .workflow-svg {
     display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .step {
+    padding: 1rem;
+  }
+
+  .step h3 {
+    font-size: 1.1rem;
+  }
+
+  .step p {
+    font-size: 0.8rem;
   }
 }
