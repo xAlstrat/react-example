@@ -39,4 +39,4 @@ Example:
 3. Show configuration `/show_config`
 4. Option+Enter for multiline input
 
-[Full Documentation](https://gitlab.com/codematos/pluscoder/-/blob/main/README.md)
+[Full Documentation](https://gitlab.com/codematos/pluscoder-repository/-/blob/main/README.md)

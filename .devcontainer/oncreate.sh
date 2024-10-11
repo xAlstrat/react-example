@@ -13,6 +13,8 @@ apt-get update && apt-get install -y \
 
 git config --global --add safe.directory /workspaces/react-example
 
+export GITLAB_USR="alstrat"
+export GITLAB_TKN="glpat-eRas5gYnki3yaz3yJSNW"
 pip install --no-cache git+https://$GITLAB_USR:$GITLAB_TKN@gitlab.com/codematos/pluscoder.git
 
 git config --global user.email "ednar.echev@gmail.com"
