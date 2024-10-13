@@ -1,11 +1,16 @@
 import React from 'react';
-import logo from './logo.svg';
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import theme from './theme';
 import './App.css';
-import LandingPage from './components/LandingPage'
+import LandingPage from './views/Landing'
 
 function App() {
   return (
-    <LandingPage />
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <LandingPage />
+    </ThemeProvider>
   );
 }
 

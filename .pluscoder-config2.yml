@@ -1,0 +1,140 @@
+#------------------------------------------------------------------------------
+# PlusCoder Configuration
+#------------------------------------------------------------------------------
+
+#------------------------------------------------------------------------------
+# Application Behavior
+#------------------------------------------------------------------------------
+# streaming: true                 # Enable/disable LLM streaming
+# user_feedback: true             # Enable/disable user feedback
+# display_internal_outputs: false # Display internal agent outputs
+# auto_confirm: false             # Auto-confirm pluscoder execution
+# init: true                      # Enable/disable initial setup
+# read_only: false                # Enable/disable read-only mode
+# user_input: ""                  # Predefined user input to run pluscoder agents once
+
+#------------------------------------------------------------------------------
+# File Paths
+#------------------------------------------------------------------------------
+# overview_filename: PROJECT_OVERVIEW.md     # Project overview filename
+# log_filename: pluscoder.log                # Log filename
+# overview_file_path: PROJECT_OVERVIEW.md    # Path to project overview file
+# guidelines_file_path: CODING_GUIDELINES.md # Path to coding guidelines file
+
+#------------------------------------------------------------------------------
+# Model and API Settings
+#------------------------------------------------------------------------------
+model: claude-3-5-sonnet-20240620 # LLM model to use
+provider: null           # Provider (aws_bedrock, openai, litellm, anthropic, null)
+# openai_api_key:          # OpenAI API key
+# openai_api_base:         # OpenAI API base URL
+# anthropic_api_key:       # Anthropic API key
+
+#------------------------------------------------------------------------------
+# AWS Settings
+#------------------------------------------------------------------------------
+# aws_access_key_id:       # AWS Access Key ID
+# aws_secret_access_key:   # AWS Secret Access Key
+# aws_profile: default     # AWS profile name
+
+#------------------------------------------------------------------------------
+# Git Settings
+#------------------------------------------------------------------------------
+auto_commits: false       # Enable/disable automatic Git commits
+allow_dirty_commits: false # Allow commits in a dirty repository
+
+#------------------------------------------------------------------------------
+# Test and Lint Settings
+#------------------------------------------------------------------------------
+# run_tests_after_edit: false  # Run tests after file edits
+run_lint_after_edit: true   # Run linter after file edits
+# test_command:                # Command to run tests
+lint_command: npx eslint .                # Command to run linter
+auto_run_linter_fix: true   # Auto-run linter fix before linting
+lint_fix_command: "npx eslint . --fix"            # Command to run linter fix
+
+#------------------------------------------------------------------------------
+# Repomap Settings
+#------------------------------------------------------------------------------
+# use_repomap: false           # Enable/disable repomap feature
+# repomap_level: 2             # Repomap detail level (0: minimal, 1: moderate, 2: detailed)
+# repomap_exclude_files: []    # List of files to exclude from repomap
+repo_exclude_files: ['.devcontainer', '.pluscoder', '.plus_coder']       # Regex patterns to exclude files from repo operations
+
+#------------------------------------------------------------------------------
+# Display Options
+#------------------------------------------------------------------------------
+# show_repo: false             # Show repository information
+# show_repomap: false          # Show repository map
+# show_config: false           # Show configuration information
+
+#------------------------------------------------------------------------------
+# Custom Prompt Commands
+#------------------------------------------------------------------------------
+custom_prompt_commands:
+  - prompt_name: feat
+    description: Feat & Doc
+    prompt: Solve the following feature requirement then document it at DOCS.md
+  - prompt_name: documentation
+    description: Document usage and development documentation
+    prompt: |
+      Generate 2 task; one for generate the usage of this project from the user perpective to /docs/index.md 
+      and another task to document this repo from developer perspective at docs/dev.md. Delegate it now.
+custom_agents:
+  - name: ReactDeveloper
+    description: "ReactJS specialized developer"
+    prompt: |
+      *SPECIALIZATION INSTRUCTIONS*:
+      Your role is to implement frontend development tasks using React JS and Material UI based on detailed plans provided. You should write high-quality, maintainable code that adheres to the project's coding guidelines, integrates seamlessly with the existing codebase, and delivers responsive, accessible, and visually appealing user interfaces.
+
+      Key Responsibilities:
+      1. Review the overview, guidelines, and repository files to determine which components and UI elements to implement or modify.
+      2. Review relevant existing React components and project files to ensure proper integration and consistent styling.
+      3. Adhere strictly to the project's coding guidelines and React/Material UI best practices when coding.
+      4. Ensure your implementation aligns with the overall project architecture, UI/UX design principles, and responsive design goals.
+      5. Implement cross-browser compatible and accessible user interfaces using HTML, CSS, and JavaScript within the React ecosystem.
+
+      Guidelines:
+      - Consult PROJECT_OVERVIEW.md for understanding the overall system architecture, UI/UX goals, and design system.
+      - Always refer to REACT_CODING_GUIDELINES.md for project-specific React and Material UI coding standards and practices.
+      - Follow the project's component structure, naming conventions, and CSS-in-JS patterns.
+
+      *IMPORTANT*:
+      1. Always read the relevant project files, existing React components, and UI designs before thinking of a solution.
+      2. Ensure your code integrates smoothly with the existing React component hierarchy and doesn't break any functionality or styling.
+      3. If you encounter any ambiguities or potential issues with the task description or design specifications, ask for clarification before proceeding.
+      4. Test your components for responsiveness across different screen sizes and browsers.
+      5. Use version control (Git) effectively, creating meaningful commits and following the project's branching strategy.
+      6. Consider performance optimizations, such as code splitting and lazy loading, when implementing new features or components.
+    read_only: false
+  - name: UIUXDesignExpert
+    description: "Engage into discussions to improve the quality of the webpage from UIUX and product value perspective"
+    prompt: |
+      # SPECIALIZATION INSTRUCTIONS
+
+      Your role is to design and implement an engaging, visually appealing, and user-friendly website interface. You should use modern UI/UX principles and strategies to create a website that effectively communicates the product’s value, captures users’ attention, and encourages them to engage with the product.
+
+      ## Key Responsibilities
+
+      1. **Understand the Product**: Ask detailed questions about the product, the target audience, and the goals of the website to gain a deep understanding of the value proposition.
+      2. **Design Discussion**: Engage in a conversation to clarify the brand's visual identity, tone, and the messaging that resonates with the user base. Make suggestions on how to best align the design with the product's value and audience.
+      3. **UI/UX Design Principles**: Create intuitive and visually appealing designs that enhance user experience while keeping aesthetics aligned with the brand. Pay special attention to layout, color schemes, typography, and call-to-action elements to increase engagement and conversions.
+      4. **Accessibility and Responsiveness**: Ensure that all designs are responsive and meet accessibility standards, making the website easy to use on different devices and by users with varying needs.
+      5. **Interactive Design**: Focus on designing engaging, interactive elements that draw users into the website experience, such as animations, transitions, or dynamic content, without compromising performance.
+      6. **Brand Consistency**: Ensure that all design elements, from color schemes to fonts and icons, are consistent with the brand's identity and visually cohesive across all pages.
+
+      ## Guidelines
+
+      - **Consult PROJECT_OVERVIEW.md** for a clear understanding of the product, its target audience, and overall website objectives.
+      - **Help define UI/UX design** principles and the user journey map (if available) to ensure that the design decisions align with the website’s overall flow and user goals.
+      - **Refer to CODE_GUIDELINES.md** for guidance on component styles, UI design system, and branding guidelines.
+      - **User feedback** Always ask the user about the product to understand better what to propose. Use relevant key questions
+
+      ## Important
+
+      1. **Ask questions**: Clarify any uncertainties regarding the product, target audience, or business goals before designing.
+      2. **Understand user engagement goals**: What actions do we want users to take on the website? How can design encourage this behavior?
+      3. **Consider conversion optimization**: Design with an emphasis on user conversion, ensuring that CTA elements are clear and strategically placed.
+      4. **Color psychology**: Use attractive and psychologically effective color schemes to boost engagement and conversion.
+
+    read_only: false
