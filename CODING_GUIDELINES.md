@@ -203,6 +203,51 @@ Key points for Grid v2:
 
 By following these reusable patterns, you can maintain consistency and improve the maintainability of the codebase.
 
+### 7. DelayedList Usage
+
+The DelayedList component provides an animated list where items appear with a delay. This can be used to create engaging and dynamic user interfaces.
+
+Usage:
+```javascript
+import DelayedList from '../components/DelayedList';
+import { Code, BugReport, Description, RateReview, Rule, Science, Update } from '@mui/icons-material';
+
+function DelayedListExample() {
+  const items = [
+    { icon: <Code />, text: "Automated code refactoring", color: "#1976d2" },
+    { icon: <BugReport />, text: "AI-driven bug detection", color: "#d32f2f" },
+    { icon: <Description />, text: "Documentation generation", color: "#388e3c" },
+    { icon: <RateReview />, text: "Code review assistance", color: "#f57c00" },
+    { icon: <Rule />, text: "Standards and guidelines enforcement", color: "#7b1fa2" },
+    { icon: <Science />, text: "Test case generation", color: "#0288d1" },
+    { icon: <Update />, text: "Legacy code modernization", color: "#00796b" },
+  ];
+
+  return (
+    <DelayedList
+      items={items}
+      itemDelay={500}
+      startDelay={250}
+    />
+  );
+}
+```
+
+Key points for DelayedList:
+- Import from the appropriate path where DelayedList is located
+- `items` prop: An array of objects, each with `icon`, `text`, and `color` properties
+  - `icon`: A Material-UI icon component
+  - `text`: The text content of the item
+  - `color`: A color string (e.g., hex code) for the item
+- `itemDelay` prop: The delay in milliseconds between each item appearing
+- `startDelay` prop: The initial delay before the first item appears
+
+Performance considerations:
+- For large lists, consider using virtualization techniques to improve performance
+- Be mindful of the total delay time for long lists, as it may impact user experience
+
+By using the DelayedList component, you can create visually appealing, animated lists that gradually reveal their content to the user.
+
 ## Reusable Patterns
 
 ### 1. Theme Configuration
@@ -325,3 +370,48 @@ Key points for Grid v2:
 - Supports spacing prop for gaps between grid items
 
 By following these reusable patterns, you can maintain consistency and improve the maintainability of the codebase.
+
+### 7. DelayedList Usage
+
+The DelayedList component provides an animated list where items appear with a delay. This can be used to create engaging and dynamic user interfaces.
+
+Usage:
+```javascript
+import DelayedList from '../components/DelayedList';
+import { Code, BugReport, Description, RateReview, Rule, Science, Update } from '@mui/icons-material';
+
+function DelayedListExample() {
+  const items = [
+    { icon: <Code />, text: "Automated code refactoring", color: "#1976d2" },
+    { icon: <BugReport />, text: "AI-driven bug detection", color: "#d32f2f" },
+    { icon: <Description />, text: "Documentation generation", color: "#388e3c" },
+    { icon: <RateReview />, text: "Code review assistance", color: "#f57c00" },
+    { icon: <Rule />, text: "Standards and guidelines enforcement", color: "#7b1fa2" },
+    { icon: <Science />, text: "Test case generation", color: "#0288d1" },
+    { icon: <Update />, text: "Legacy code modernization", color: "#00796b" },
+  ];
+
+  return (
+    <DelayedList
+      items={items}
+      itemDelay={500}
+      startDelay={250}
+    />
+  );
+}
+```
+
+Key points for DelayedList:
+- Import from the appropriate path where DelayedList is located
+- `items` prop: An array of objects, each with `icon`, `text`, and `color` properties
+  - `icon`: A Material-UI icon component
+  - `text`: The text content of the item
+  - `color`: A color string (e.g., hex code) for the item
+- `itemDelay` prop: The delay in milliseconds between each item appearing
+- `startDelay` prop: The initial delay before the first item appears
+
+Performance considerations:
+- For large lists, consider using virtualization techniques to improve performance
+- Be mindful of the total delay time for long lists, as it may impact user experience
+
+By using the DelayedList component, you can create visually appealing, animated lists that gradually reveal their content to the user.

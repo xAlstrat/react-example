@@ -1,11 +1,10 @@
 import React from 'react';
-import { Box, Typography, useTheme, Fade } from '@mui/material';
+import { Box, Typography, useTheme, Fade, Container } from '@mui/material';
 import VSCodeSkeleton from 'components/VSCodeSkeleton';
 import ConsoleComponent from 'components/ConsolePaper';
 import DelayedList from 'components/DelayedList';
 import HighlightedText from 'components/HighlightedText';
 import BashInputDisplay from 'components/BashInputDisplay';
-import CloudFeatureDisplay from 'components/CloudFeatureDisplay';
 import Section from 'components/Section';
 import UpdateIcon from '@mui/icons-material/Update';
 import EmojiObjectsIcon from '@mui/icons-material/EmojiObjects';
@@ -16,7 +15,10 @@ import CodeIcon from '@mui/icons-material/Code';
 import CloudQueueIcon from '@mui/icons-material/CloudQueue';
 import BuildIcon from '@mui/icons-material/Build';
 import Grid from '@mui/material/Grid2';
+import WorkflowDiagram from 'components/WorkflowDiagram';
+import { Code, BugReport, Description, RateReview, Rule, Science, Update } from '@mui/icons-material';
 
+import '@xyflow/react/dist/base.css';
 const CodeAssistant = () => {
   const consoleItems = [
     { icon: <UpdateIcon />, text: "Automated file updates & context loading", color: "#0097a7" },
@@ -39,14 +41,14 @@ const CodeAssistant = () => {
           textAlign: 'center',
         }}
       >
-        <Typography 
-          variant="h4" 
-          component="h3" 
-          align="center" 
-          gutterBottom 
-          sx={{ 
-            fontWeight: 300, 
-            textTransform: 'uppercase', 
+        <Typography
+          variant="h4"
+          component="h3"
+          align="center"
+          gutterBottom
+          sx={{
+            fontWeight: 300,
+            textTransform: 'uppercase',
             letterSpacing: '0.1em',
           }}
         >
@@ -87,40 +89,58 @@ const CodeAssistant = () => {
 };
 
 const CloudUseCaseSection = () => {
+  const taskItems = [
+    { icon: <Code />, text: "Automated code refactoring", color: "#1976d2" },
+    { icon: <BugReport />, text: "AI-driven bug detection", color: "#d32f2f" },
+    { icon: <Description />, text: "Documentation generation", color: "#388e3c" },
+    { icon: <RateReview />, text: "Code review assistance", color: "#f57c00" },
+    { icon: <Rule />, text: "Standards and guidelines enforcement", color: "#7b1fa2" },
+    { icon: <Science />, text: "Test case generation", color: "#0288d1" },
+    { icon: <Update />, text: "Legacy code modernization", color: "#00796b" }
+  ];
   return (
     <>
-      <Box
-        mb={3}
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          textAlign: 'center',
-        }}
-      >
-        <Typography 
-          variant="h4" 
-          component="h3" 
-          align="center" 
-          gutterBottom 
-          sx={{ 
-            fontWeight: 300, 
-            textTransform: 'uppercase', 
-            letterSpacing: '0.1em',
+      <Container maxWidth="xl">
+        <Box
+          mb={3}
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            textAlign: 'center',
           }}
         >
-          Cloud-based Asynchronous Coding
-        </Typography>
-        <Typography variant="h6" gutterBottom>
-          Leave Pluscoder working in the cloud, asynchronously performing coding or code maintenance tasks.
-        </Typography>
-      </Box>
-      <Grid container spacing={4} justifyContent={"center"}>
-        <Grid item size={12}>
-          <CloudFeatureDisplay />
+          <Typography
+            variant="h4"
+            component="h3"
+            align="center"
+            gutterBottom
+            sx={{
+              fontWeight: 300,
+              textTransform: 'uppercase',
+              letterSpacing: '0.1em',
+            }}
+          >
+            Cloud-based Asynchronous Coding
+          </Typography>
+          <Typography variant="h6" gutterBottom>
+            Leave Pluscoder working in the cloud, asynchronously performing coding or code maintenance tasks.
+          </Typography>
+        </Box>
+        <Grid container spacing={4} justifyContent={"center"}>
+          <Grid item size={{ xs: 12, md: 6 }}>
+            <Box sx={{ height: 500 }}><WorkflowDiagram /></Box>
+          </Grid>
+          <Grid item size={{ xs: 12, md: 6 }}>
+            <DelayedList
+              items={taskItems}
+              itemDelay={500}
+              startDelay={250}
+            />
+          </Grid>
         </Grid>
-      </Grid>
+      </Container>
     </>
   );
 };
@@ -138,14 +158,14 @@ const UseCaseSection = ({ title, description, icon, items }) => {
           textAlign: 'center',
         }}
       >
-        <Typography 
-          variant="h4" 
-          component="h3" 
-          align="center" 
-          gutterBottom 
-          sx={{ 
-            fontWeight: 300, 
-            textTransform: 'uppercase', 
+        <Typography
+          variant="h4"
+          component="h3"
+          align="center"
+          gutterBottom
+          sx={{
+            fontWeight: 300,
+            textTransform: 'uppercase',
             letterSpacing: '0.1em',
           }}
         >
@@ -195,12 +215,12 @@ const UseCases = () => {
   ];
 
   return (
-    <Section id="use-cases" index={3} bgColor="dark2">
-        <Typography variant="h2" component="h2" align="center" gutterBottom sx={{ fontWeight: 'bold', mb: 6, color: theme.palette.common.white }}>
-          AI for <HighlightedText>everybody</HighlightedText> and <HighlightedText>everywhere</HighlightedText>
-        </Typography>
-        <CodeAssistant />
-        <CloudUseCaseSection />
+    <Section id="use-cases" index={3} bgColor="dark1">
+      <Typography variant="h2" component="h2" align="center" gutterBottom sx={{ fontWeight: 'bold', mb: 6, color: theme.palette.common.white }}>
+        AI for <HighlightedText>everybody</HighlightedText> and <HighlightedText>everywhere</HighlightedText>
+      </Typography>
+      <CodeAssistant />
+      <CloudUseCaseSection />
     </Section>
   );
 };
