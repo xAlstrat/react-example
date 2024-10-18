@@ -14,6 +14,7 @@ import MenuBookIcon from '@mui/icons-material/MenuBook';
 import CodeIcon from '@mui/icons-material/Code';
 import Grid from '@mui/material/Grid2';
 import WorkflowDiagram from 'components/WorkflowDiagram';
+import SlidingTextDisplay from 'components/SlidingTextDisplay';
 import AnimatedElement from 'components/AnimatedElement';
 import { Code, BugReport, Description, RateReview, Rule, Science, Update, Storage, Cloud, Security } from '@mui/icons-material';
 
@@ -162,15 +163,8 @@ const CloudUseCaseSection = () => {
               <Typography variant="h6" gutterBottom>
                 Common cloud use cases
               </Typography>
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, justifyContent: 'center' }}>
-                {taskItems.map((item, index) => (
-                  <DelayedList
-                    key={index}
-                    items={[item]}
-                    itemDelay={0}
-                    startDelay={index * 200}
-                  />
-                ))}
+              <Box sx={{ height: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <SlidingTextDisplay items={taskItems} interval={3000} fullWidth={true} showBackground={true} loop={false} />
               </Box>
             </Box>
           </AnimatedElement>
