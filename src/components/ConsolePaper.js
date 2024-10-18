@@ -33,6 +33,7 @@ const ConsoleContent = styled(Box)(({ theme }) => ({
   padding: theme.spacing(2),
   height: '330px',
   overflowY: 'auto',
+  backgroundColor: '#1E1E1E', // Added dark background color
 }));
 
 const ConsoleComponent = ({ children }) => (
