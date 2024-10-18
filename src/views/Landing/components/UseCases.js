@@ -159,13 +159,13 @@ const CloudUseCaseSection = () => {
                 </ListItem>
               ))}
             </List>
-            <Box sx={{ mt: 4 }}>
+            <Box sx={{ mt: 2, mb: 2 }}>
               <Typography variant="h6" gutterBottom>
                 Common cloud use cases
               </Typography>
-              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, justifyContent: 'center' }}>
                 {taskItems.map((item, index) => (
-                  <Box key={index} sx={{ height: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <Box key={index} sx={{ width: '200px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <SlidingTextDisplay 
                       items={[item]} 
                       interval={3000} 
