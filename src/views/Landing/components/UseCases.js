@@ -163,8 +163,18 @@ const CloudUseCaseSection = () => {
               <Typography variant="h6" gutterBottom>
                 Common cloud use cases
               </Typography>
-              <Box sx={{ height: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <SlidingTextDisplay items={taskItems} interval={3000} fullWidth={true} showBackground={true} loop={false} />
+              <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                {taskItems.map((item, index) => (
+                  <Box key={index} sx={{ height: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <SlidingTextDisplay 
+                      items={[item]} 
+                      interval={3000} 
+                      fullWidth={true} 
+                      showBackground={true} 
+                      loop={false} 
+                    />
+                  </Box>
+                ))}
               </Box>
             </Box>
           </AnimatedElement>
