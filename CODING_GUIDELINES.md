@@ -176,19 +176,16 @@ The project uses Material-UI's Grid v2 for layout. This newer version of Grid pr
 
 Usage:
 ```javascript
-import Grid from '@mui/material/Unstable_Grid2';
+import Grid from '@mui/material/Grid2';
 
 function GridExample() {
   return (
-    <Grid container spacing={2}>
-      <Grid xs={12} sm={6} md={4}>
-        <Item>xs=12 sm=6 md=4</Item>
+    <Grid container spacing={4} justifyContent="center">
+      <Grid item size={6}>
+        <Item>Content</Item>
       </Grid>
-      <Grid xs={12} sm={6} md={4}>
-        <Item>xs=12 sm=6 md=4</Item>
-      </Grid>
-      <Grid xs={12} sm={6} md={4}>
-        <Item>xs=12 sm=6 md=4</Item>
+      <Grid item size={{ xs: 12, md: 6 }}>
+        <Item>Responsive Content</Item>
       </Grid>
     </Grid>
   );
@@ -196,10 +193,23 @@ function GridExample() {
 ```
 
 Key points for Grid v2:
-- Import from `@mui/material/Unstable_Grid2`
-- Uses `xs`, `sm`, `md`, `lg`, `xl` props for responsive layouts
-- `container` prop for parent grid, no need for `item` prop on child grids
-- Supports spacing prop for gaps between grid items
+- Import from `@mui/material/Grid2`
+- Use `container` prop for parent grid
+- Use `item` prop for child grid elements
+- Use `spacing` prop on container for gaps between grid items
+- Use `justifyContent` prop for alignment of grid items
+- Use `size` prop for responsive layouts:
+  - Single value: `size={6}` for fixed size across all breakpoints
+  - Object: `size={{ xs: 12, md: 6 }}` for responsive sizes
+- Available breakpoints: xs, sm, md, lg, xl
+- Values for `size` prop range from 1 to 12, representing the number of columns the item should span
+
+Best Practices:
+- Use Grid system for creating responsive layouts
+- Nest Grid components for complex layouts
+- Combine with Box component for additional styling when needed
+- Use the `spacing` prop consistently for uniform gaps between items
+- Leverage responsive `size` props to create mobile-friendly designs
 
 By following these reusable patterns, you can maintain consistency and improve the maintainability of the codebase.
 
@@ -247,6 +257,54 @@ Performance considerations:
 - Be mindful of the total delay time for long lists, as it may impact user experience
 
 By using the DelayedList component, you can create visually appealing, animated lists that gradually reveal their content to the user.
+
+### 8. AnimatedElement Usage
+
+The AnimatedElement component provides a way to animate elements as they enter the viewport. This can be used to create engaging and dynamic user interfaces with fade-in and slide-up effects.
+
+Usage:
+```javascript
+import AnimatedElement from '../components/AnimatedElement';
+
+function ExampleComponent() {
+  return (
+    <AnimatedElement delay={0.2}>
+      <YourComponentOrElement />
+    </AnimatedElement>
+  );
+}
+```
+
+Key points for AnimatedElement:
+- Import from the appropriate path where AnimatedElement is located
+- Wrap the component or element you want to animate with AnimatedElement
+- `delay` prop: Optional. Specifies the delay in seconds before the animation starts (default is 0)
+
+Example with multiple animated elements:
+```javascript
+function SectionWithAnimations() {
+  return (
+    <div>
+      <AnimatedElement>
+        <h2>Section Title</h2>
+      </AnimatedElement>
+      <AnimatedElement delay={0.2}>
+        <p>First paragraph with a slight delay</p>
+      </AnimatedElement>
+      <AnimatedElement delay={0.4}>
+        <button>Call to Action</button>
+      </AnimatedElement>
+    </div>
+  );
+}
+```
+
+Performance considerations:
+- Use AnimatedElement judiciously, especially for frequently re-rendered components
+- For long lists or grids, consider using virtualization techniques along with AnimatedElement
+- Be mindful of the total delay time and the number of animated elements on a page to maintain good performance
+
+By using the AnimatedElement component, you can easily add subtle animations to your UI elements, enhancing the overall user experience and drawing attention to important parts of your interface.
 
 ## Reusable Patterns
 
@@ -344,19 +402,16 @@ The project uses Material-UI's Grid v2 for layout. This newer version of Grid pr
 
 Usage:
 ```javascript
-import Grid from '@mui/material/Unstable_Grid2';
+import Grid from '@mui/material/Grid2';
 
 function GridExample() {
   return (
-    <Grid container spacing={2}>
-      <Grid xs={12} sm={6} md={4}>
-        <Item>xs=12 sm=6 md=4</Item>
+    <Grid container spacing={4} justifyContent="center">
+      <Grid item size={6}>
+        <Item>Content</Item>
       </Grid>
-      <Grid xs={12} sm={6} md={4}>
-        <Item>xs=12 sm=6 md=4</Item>
-      </Grid>
-      <Grid xs={12} sm={6} md={4}>
-        <Item>xs=12 sm=6 md=4</Item>
+      <Grid item size={{ xs: 12, md: 6 }}>
+        <Item>Responsive Content</Item>
       </Grid>
     </Grid>
   );
@@ -364,10 +419,23 @@ function GridExample() {
 ```
 
 Key points for Grid v2:
-- Import from `@mui/material/Unstable_Grid2`
-- Uses `xs`, `sm`, `md`, `lg`, `xl` props for responsive layouts
-- `container` prop for parent grid, no need for `item` prop on child grids
-- Supports spacing prop for gaps between grid items
+- Import from `@mui/material/Grid2`
+- Use `container` prop for parent grid
+- Use `item` prop for child grid elements
+- Use `spacing` prop on container for gaps between grid items
+- Use `justifyContent` prop for alignment of grid items
+- Use `size` prop for responsive layouts:
+  - Single value: `size={6}` for fixed size across all breakpoints
+  - Object: `size={{ xs: 12, md: 6 }}` for responsive sizes
+- Available breakpoints: xs, sm, md, lg, xl
+- Values for `size` prop range from 1 to 12, representing the number of columns the item should span
+
+Best Practices:
+- Use Grid system for creating responsive layouts
+- Nest Grid components for complex layouts
+- Combine with Box component for additional styling when needed
+- Use the `spacing` prop consistently for uniform gaps between items
+- Leverage responsive `size` props to create mobile-friendly designs
 
 By following these reusable patterns, you can maintain consistency and improve the maintainability of the codebase.
 
@@ -415,3 +483,51 @@ Performance considerations:
 - Be mindful of the total delay time for long lists, as it may impact user experience
 
 By using the DelayedList component, you can create visually appealing, animated lists that gradually reveal their content to the user.
+
+### 8. AnimatedElement Usage
+
+The AnimatedElement component provides a way to animate elements as they enter the viewport. This can be used to create engaging and dynamic user interfaces with fade-in and slide-up effects.
+
+Usage:
+```javascript
+import AnimatedElement from '../components/AnimatedElement';
+
+function ExampleComponent() {
+  return (
+    <AnimatedElement delay={0.2}>
+      <YourComponentOrElement />
+    </AnimatedElement>
+  );
+}
+```
+
+Key points for AnimatedElement:
+- Import from the appropriate path where AnimatedElement is located
+- Wrap the component or element you want to animate with AnimatedElement
+- `delay` prop: Optional. Specifies the delay in seconds before the animation starts (default is 0)
+
+Example with multiple animated elements:
+```javascript
+function SectionWithAnimations() {
+  return (
+    <div>
+      <AnimatedElement>
+        <h2>Section Title</h2>
+      </AnimatedElement>
+      <AnimatedElement delay={0.2}>
+        <p>First paragraph with a slight delay</p>
+      </AnimatedElement>
+      <AnimatedElement delay={0.4}>
+        <button>Call to Action</button>
+      </AnimatedElement>
+    </div>
+  );
+}
+```
+
+Performance considerations:
+- Use AnimatedElement judiciously, especially for frequently re-rendered components
+- For long lists or grids, consider using virtualization techniques along with AnimatedElement
+- Be mindful of the total delay time and the number of animated elements on a page to maintain good performance
+
+By using the AnimatedElement component, you can easily add subtle animations to your UI elements, enhancing the overall user experience and drawing attention to important parts of your interface.
