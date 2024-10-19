@@ -31,6 +31,13 @@ const NodeBase = styled.div`
   text-align: center;
   box-shadow: 0 0 20px rgba(142, 45, 226, 0.6);
   transition: all 0.3s ease;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 
   &:hover {
     box-shadow: 0 0 30px rgba(142, 45, 226, 0.8);
@@ -154,10 +161,10 @@ const _MainNode = ({ data }) => {
       </TurboNodeContainer>
       <Handle type="source" position={Position.Right} />
       <Handle type="target" position={Position.Bottom} id='bottom' />
-      <div style={{ position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)', fontSize: '10px', color: 'white' }}>sources</div>
-      <div style={{ position: 'absolute', bottom: '5px', left: '50%', transform: 'translateX(-50%)', fontSize: '10px', color: 'white' }}>output</div>
-      <div style={{ position: 'absolute', left: '5px', top: '50%', transform: 'translateY(-50%) rotate(-90deg)', fontSize: '10px', color: 'white' }}>input</div>
-      <div style={{ position: 'absolute', right: '5px', top: '50%', transform: 'translateY(-50%) rotate(90deg)', fontSize: '10px', color: 'white' }}>llm</div>
+      <div style={{ position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)', fontSize: '14px', color: 'white' }}>sources</div>
+      <div style={{ position: 'absolute', bottom: '5px', left: '50%', transform: 'translateX(-50%)', fontSize: '14px', color: 'white' }}>llm</div>
+      <div style={{ position: 'absolute', left: '5px', top: '50%', transform: 'translateY(-50%) rotate(-90deg)', fontSize: '14px', color: 'white' }}>input</div>
+      <div style={{ position: 'absolute', right: '5px', top: '50%', transform: 'translateY(-50%) rotate(90deg)', fontSize: '14px', color: 'white' }}>output</div>
     </NodeBase>
   );
 };
@@ -221,7 +228,7 @@ const initialNodes = [
   },
   {
     id: '2',
-    position: { x: 200 - 29, y: 150 - 50 },
+    position: { x: 200 - 100, y: 150 - 100 },
     data: { 
       icon: <ProcessIcon />, 
       title: 'Pluscoder', 
