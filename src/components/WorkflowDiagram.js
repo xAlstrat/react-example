@@ -150,11 +150,14 @@ const _MainNode = ({ data }) => {
         <TurboNodeIcon>{data.icon}</TurboNodeIcon>
         <TurboNodeText>
           <TurboNodeTitle>{data.title}</TurboNodeTitle>
-          <TurboNodeSubline>{data.subline}</TurboNodeSubline>
         </TurboNodeText>
       </TurboNodeContainer>
       <Handle type="source" position={Position.Right} />
       <Handle type="target" position={Position.Bottom} id='bottom' />
+      <div style={{ position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)', fontSize: '10px', color: 'white' }}>sources</div>
+      <div style={{ position: 'absolute', bottom: '5px', left: '50%', transform: 'translateX(-50%)', fontSize: '10px', color: 'white' }}>output</div>
+      <div style={{ position: 'absolute', left: '5px', top: '50%', transform: 'translateY(-50%) rotate(-90deg)', fontSize: '10px', color: 'white' }}>input</div>
+      <div style={{ position: 'absolute', right: '5px', top: '50%', transform: 'translateY(-50%) rotate(90deg)', fontSize: '10px', color: 'white' }}>llm</div>
     </NodeBase>
   );
 };
@@ -221,8 +224,7 @@ const initialNodes = [
     position: { x: 200 - 29, y: 150 - 50 },
     data: { 
       icon: <ProcessIcon />, 
-      title: 'Pluscoder Agents', 
-      subline: '.git repo',
+      title: 'Pluscoder', 
     },
     type: 'main',
   },
