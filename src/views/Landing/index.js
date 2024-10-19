@@ -18,7 +18,7 @@ function LandingPage() {
         <Hero />
         <UseCases />
         <KeyFeatures id="key-features" />
-        {/* <DisplayComponents /> */}
+        <DisplayComponents />
         {/* <HowItWorks />
         <StudyCases />
         <Testimonials /> */}

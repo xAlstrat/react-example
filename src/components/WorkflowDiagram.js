@@ -14,6 +14,7 @@ import ApiIcon from '@mui/icons-material/Api';
 import FolderIcon from '@mui/icons-material/Folder';
 import DescriptionIcon from '@mui/icons-material/Description';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
 
 import '@xyflow/react/dist/base.css';
 import TurboEdge from './TurboEdge';
@@ -210,7 +211,7 @@ const initialNodes = [
     position: { x: 100 - 29, y: 150 - 31},
     data: { 
       icon: <SmartToyIcon />, 
-      title: 'Your process', 
+      title: 'Trigger & Input', 
       sourceHandlePosition: Position.Right
     },
     type: 'data',
@@ -311,6 +312,7 @@ const WorkflowDiagram = () => {
 
   return (
     <StyledReactFlow
+    preventScrolling={false}
       nodes={nodes}
       edges={edges}
       onNodesChange={onNodesChange}

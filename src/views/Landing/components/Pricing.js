@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Typography, Container, Grid, Card, CardContent, CardHeader, Button } from '@mui/material';
+import Section from 'components/Section';
 
 const tiers = [
   {
@@ -38,51 +39,53 @@ const tiers = [
 
 const Pricing = () => {
   return (
-    <Box sx={{ bgcolor: 'background.paper', py: 8 }}>
-      <Container maxWidth="lg">
-        <Typography variant="h2" align="center" color="text.primary" gutterBottom>
-          Pricing
-        </Typography>
-        <Typography variant="h5" align="center" color="text.secondary" paragraph>
-          Choose the plan that fits your needs
-        </Typography>
-        <Grid container spacing={4} alignItems="flex-end">
-          {tiers.map((tier) => (
-            <Grid item key={tier.title} xs={12} sm={6} md={4}>
-              <Card>
-                <CardHeader
-                  title={tier.title}
-                  subheader={tier.subheader}
-                  titleTypographyProps={{ align: 'center' }}
-                  subheaderTypographyProps={{ align: 'center' }}
-                  sx={{ backgroundColor: (theme) => theme.palette.grey[200] }}
-                />
-                <CardContent>
-                  <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'baseline', mb: 2 }}>
-                    <Typography component="h2" variant="h3" color="text.primary">
-                      ${tier.price}
-                    </Typography>
-                    <Typography variant="h6" color="text.secondary">
-                      /mo
-                    </Typography>
-                  </Box>
-                  <ul>
-                    {tier.description.map((line) => (
-                      <Typography component="li" variant="subtitle1" align="center" key={line}>
-                        {line}
+    <Section id="pricing" bgColor="dark1">
+      <Box sx={{ bgcolor: 'background.paper', py: 8 }}>
+        <Container maxWidth="lg">
+          <Typography variant="h2" align="center" color="text.primary" gutterBottom>
+            Pricing
+          </Typography>
+          <Typography variant="h5" align="center" color="text.secondary" paragraph>
+            Choose the plan that fits your needs
+          </Typography>
+          <Grid container spacing={4} alignItems="flex-end">
+            {tiers.map((tier) => (
+              <Grid item key={tier.title} xs={12} sm={6} md={4}>
+                <Card>
+                  <CardHeader
+                    title={tier.title}
+                    subheader={tier.subheader}
+                    titleTypographyProps={{ align: 'center' }}
+                    subheaderTypographyProps={{ align: 'center' }}
+                    sx={{ backgroundColor: (theme) => theme.palette.grey[200] }}
+                  />
+                  <CardContent>
+                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'baseline', mb: 2 }}>
+                      <Typography component="h2" variant="h3" color="text.primary">
+                        ${tier.price}
                       </Typography>
-                    ))}
-                  </ul>
-                  <Button fullWidth variant={tier.buttonVariant} color="primary">
-                    {tier.buttonText}
-                  </Button>
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
-    </Box>
+                      <Typography variant="h6" color="text.secondary">
+                        /mo
+                      </Typography>
+                    </Box>
+                    <ul>
+                      {tier.description.map((line) => (
+                        <Typography component="li" variant="subtitle1" align="center" key={line}>
+                          {line}
+                        </Typography>
+                      ))}
+                    </ul>
+                    <Button fullWidth variant={tier.buttonVariant} color="primary">
+                      {tier.buttonText}
+                    </Button>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </Box>
+    </Section>
   );
 };
 

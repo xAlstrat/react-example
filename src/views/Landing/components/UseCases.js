@@ -14,7 +14,6 @@ import MenuBookIcon from '@mui/icons-material/MenuBook';
 import CodeIcon from '@mui/icons-material/Code';
 import Grid from '@mui/material/Grid2';
 import WorkflowDiagram from 'components/WorkflowDiagram';
-import SlidingTextDisplay from 'components/SlidingTextDisplay';
 import TextDisplay from 'components/TextDisplay';
 import AnimatedElement from 'components/AnimatedElement';
 import { Code, BugReport, Description, RateReview, Rule, Science, Update, Storage, Cloud, Security } from '@mui/icons-material';

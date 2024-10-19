@@ -31,9 +31,9 @@ const Header = () => {
 
   const menuItems = [
     { label: 'Home', to: 'hero' },
-    { label: 'Features', to: 'key-features' },
-    { label: 'How It Works', to: 'how-it-works' },
     { label: 'Use Cases', to: 'use-cases' },
+    // { label: 'Features', to: 'key-features' },
+    { label: 'Pricing', to: 'pricing' },
   ];
 
   return (

@@ -3,6 +3,7 @@ import { Box, Typography, Button } from '@mui/material';
 import { styled, keyframes } from '@mui/system';
 import { scroller } from 'react-scroll';
 import BashDisplay from 'components/BashDisplay';
+import AnimatedElement from 'components/AnimatedElement';
 import AnimatedText from 'components/AnimatedText';
 import Section from 'components/Section';
 import HighlightedText from 'components/HighlightedText';
@@ -113,28 +114,33 @@ const Hero = () => {
             <HighlightedText>Repository automation</HighlightedText> & <HighlightedText>coding assistance</HighlightedText><br /> 
             <strong>anywhere</strong> with just one command
           </StyledTypography>
-          <Box mt={4} mb={4} width="100%" maxWidth="800px">
-            <BashDisplay />
-          </Box>
-          <Typography
-            variant="caption"
-            sx={{
-              fontWeight: 'bold',
-              opacity: 0.7,
-              marginBottom: 2,
-              color: 'white',
-            }}
-          >
-            Yes. This website was created with +coder
-          </Typography>
-          <StyledButton 
-            variant="contained" 
-            color="secondary" 
-            size="large" 
-            onClick={() => scroller.scrollTo('key-features', { smooth: true, duration: 500 })}
-          >
-            Start Automating
-          </StyledButton>
+            <Box mt={4} mb={4} width="100%" maxWidth="800px">
+          <AnimatedElement>
+              <BashDisplay />
+              </AnimatedElement>
+            </Box>
+            <Typography
+              variant="caption"
+              sx={{
+                fontWeight: 'bold',
+                opacity: 0.7,
+                marginBottom: 2,
+                color: 'white',
+              }}
+            >
+              Yes. This website was created with +coder
+            </Typography>
+          
+          <AnimatedElement delay={0.4}>
+            <StyledButton 
+              variant="contained" 
+              color="secondary" 
+              size="large" 
+              onClick={() => scroller.scrollTo('pricing', { smooth: true, duration: 500 })}
+            >
+              Start Automating
+            </StyledButton>
+          </AnimatedElement>
         </HeroContent>
       </HeroWrapper>
     </Section>

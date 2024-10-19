@@ -92,7 +92,7 @@ const BashDisplay = () => {
 
   const resetAnimation = () => {
     setAnimationStage(0);
-    setDisplayText('$ pluscoder --input \'Look m\'am im coding\' --agent my-coding-expert --yes');
+    setDisplayText('$ pluscoder --input \'Look m\'am im coding\' --agent my-coding-expert');
     setIsTyping(false);
   };
 
@@ -101,11 +101,11 @@ const BashDisplay = () => {
       setIsTyping(true);
       const typingTimer = setTimeout(() => {
         setIsTyping(false);
-      }, 750);
+      }, 500);
 
       const nextStageTimer = setTimeout(() => {
         if (animationStage === animationTexts.length) {
-          scroller.scrollTo('key-features', {
+          scroller.scrollTo('use-cases', {
             duration: 500,
             smooth: true,
           });
@@ -115,7 +115,7 @@ const BashDisplay = () => {
           setAnimationStage(animationStage + 1);
           setDisplayText(animationTexts[animationStage].text);
         }
-      }, 1200);
+      }, 800);
 
       return () => {
         clearTimeout(typingTimer);
