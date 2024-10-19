@@ -27,12 +27,12 @@ const NodeBase = styled.div`
   border-radius: 8px;
   color: #ffffff;
   font-weight: 300;
-  padding: 15px;
+  padding: 10px;
   text-align: center;
   box-shadow: 0 0 20px rgba(142, 45, 226, 0.6);
   transition: all 0.3s ease;
-  width: 200px;
-  height: 200px;
+  width: 160px;
+  height: 160px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -154,17 +154,17 @@ const _MainNode = ({ data }) => {
       <Handle type="target" position={Position.Left} />
       <Handle type="target" position={Position.Top} id='top' />
       <TurboNodeContainer>
-        <TurboNodeIcon>{data.icon}</TurboNodeIcon>
+        <TurboNodeIcon style={{ fontSize: '32px' }}>{data.icon}</TurboNodeIcon>
         <TurboNodeText>
-          <TurboNodeTitle>{data.title}</TurboNodeTitle>
+          <TurboNodeTitle style={{ fontSize: '16px' }}>{data.title}</TurboNodeTitle>
         </TurboNodeText>
       </TurboNodeContainer>
       <Handle type="source" position={Position.Right} />
       <Handle type="target" position={Position.Bottom} id='bottom' />
-      <div style={{ position: 'absolute', top: '5px', left: '50%', transform: 'translateX(-50%)', fontSize: '14px', color: 'white' }}>sources</div>
-      <div style={{ position: 'absolute', bottom: '5px', left: '50%', transform: 'translateX(-50%)', fontSize: '14px', color: 'white' }}>llm</div>
-      <div style={{ position: 'absolute', left: '5px', top: '50%', transform: 'translateY(-50%) rotate(-90deg)', fontSize: '14px', color: 'white' }}>input</div>
-      <div style={{ position: 'absolute', right: '5px', top: '50%', transform: 'translateY(-50%) rotate(90deg)', fontSize: '14px', color: 'white' }}>output</div>
+      <div style={{ position: 'absolute', top: '3px', left: '50%', transform: 'translateX(-50%)', fontSize: '12px', color: 'white' }}>sources</div>
+      <div style={{ position: 'absolute', bottom: '3px', left: '50%', transform: 'translateX(-50%)', fontSize: '12px', color: 'white' }}>llm</div>
+      <div style={{ position: 'absolute', left: '3px', top: '50%', transform: 'translateY(-50%) rotate(-90deg)', fontSize: '12px', color: 'white' }}>input</div>
+      <div style={{ position: 'absolute', right: '3px', top: '50%', transform: 'translateY(-50%) rotate(90deg)', fontSize: '12px', color: 'white' }}>output</div>
     </NodeBase>
   );
 };
@@ -228,7 +228,7 @@ const initialNodes = [
   },
   {
     id: '2',
-    position: { x: 200 - 100, y: 150 - 100 },
+    position: { x: 200 - 80, y: 150 - 80 },
     data: { 
       icon: <ProcessIcon />, 
       title: 'Pluscoder', 
