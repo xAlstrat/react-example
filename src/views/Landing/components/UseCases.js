@@ -15,6 +15,7 @@ import CodeIcon from '@mui/icons-material/Code';
 import Grid from '@mui/material/Grid2';
 import WorkflowDiagram from 'components/WorkflowDiagram';
 import SlidingTextDisplay from 'components/SlidingTextDisplay';
+import TextDisplay from 'components/TextDisplay';
 import AnimatedElement from 'components/AnimatedElement';
 import { Code, BugReport, Description, RateReview, Rule, Science, Update, Storage, Cloud, Security } from '@mui/icons-material';
 
@@ -165,14 +166,12 @@ const CloudUseCaseSection = () => {
               </Typography>
               <Grid container spacing={2} justifyContent="center">
                 {taskItems.map((item, index) => (
-                  <Grid item key={index}>
+                  <Grid size="auto" key={index}>
                     <Box sx={{ height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <SlidingTextDisplay 
-                        items={[item]} 
-                        interval={3000} 
+                      <TextDisplay 
+                        item={item}
                         fullWidth={false}
-                        showBackground={true} 
-                        loop={false} 
+                        showBackground={true}
                       />
                     </Box>
                   </Grid>
