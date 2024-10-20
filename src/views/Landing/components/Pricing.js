@@ -50,14 +50,33 @@ const StyledButton = styled(Button)(({ theme }) => ({
 
 const StyledSlider = styled(Slider)(({ theme }) => ({
   color: theme.palette.secondary.main,
+  height: 8,
   '& .MuiSlider-thumb': {
+    height: 24,
+    width: 24,
     backgroundColor: theme.palette.secondary.light,
-  },
-  '& .MuiSlider-rail': {
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    border: '2px solid currentColor',
+    '&:focus, &:hover, &.Mui-active, &.Mui-focusVisible': {
+      boxShadow: 'inherit',
+    },
+    '&:before': {
+      display: 'none',
+    },
   },
   '& .MuiSlider-track': {
-    background: `linear-gradient(45deg, ${theme.palette.secondary.dark} 30%, ${theme.palette.secondary.main} 90%)`,
+    height: 8,
+    borderRadius: 4,
+  },
+  '& .MuiSlider-rail': {
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+  },
+  '& .MuiSlider-valueLabel': {
+    display: 'none',
+  },
+  '& .MuiSlider-mark': {
+    display: 'none',
   },
 }));
 
@@ -105,11 +124,12 @@ const Pricing = () => {
   const [teamSizeRange, setTeamSizeRange] = useState(0);
   const baseTeamPrice = 30;
   
-  const teamSizeRanges = ['1-10', '11-50', '51-200', '>200'];
+  const teamSizeRanges = ['', '1-10', '11-50', '51-200', '>200', ''];
   const discountRates = [0, 0.1, 0.2, 0.3];
 
   const getTeamPrice = (range) => {
-    return Math.round(baseTeamPrice * (1 - discountRates[range]));
+    const discountIndex = Math.max(0, Math.min(range - 1, discountRates.length - 1));
+    return Math.round(baseTeamPrice * (1 - discountRates[discountIndex]));
   };
 
   const teamPrice = getTeamPrice(teamSizeRange);
@@ -153,20 +173,11 @@ const Pricing = () => {
                       </Typography>
                     )}
                     {tier.title === 'Team' && (
-                      <Box sx={{ mb: 2 }}>
-                        <Typography id="team-size-slider" gutterBottom color="common.white">
-                          Select your team size for volume pricing
-                        </Typography>
+                      <Box sx={{ mb: 2, mt: 2, px: 2 }}>
                         <StyledSlider
                           value={teamSizeRange}
                           onChange={handleTeamSizeChange}
-                          aria-labelledby="team-size-slider"
-                          valueLabelDisplay="auto"
                           step={1}
-                          marks={teamSizeRanges.map((range, index) => ({
-                            value: index,
-                            label: range,
-                          }))}
                           min={0}
                           max={3}
                         />
