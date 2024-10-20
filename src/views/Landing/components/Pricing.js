@@ -114,7 +114,7 @@ const PricingCard = ({ tier, isPopular }) => (
   </StyledCard>
 );
 
-const tiers = [
+const standardTiers = [
   {
     title: 'Intern',
     subtitle: 'You can download PearAI directly, and use our free trial, or your own API key 😎',
@@ -158,12 +158,31 @@ const tiers = [
   },
 ];
 
+const enterpriseTiers = [
+  {
+    title: 'Enterprise',
+    subtitle: 'Customized solutions for large-scale implementations',
+    price: 'Custom',
+    features: [
+      'Dedicated account manager',
+      'Custom AI model training',
+      'Advanced security features',
+      'API access and integration support',
+      'Unlimited PearAI Credits',
+      'On-premise deployment options',
+    ],
+    buttonText: 'Contact Sales',
+  },
+];
+
 const Pricing = () => {
   const [selectedTab, setSelectedTab] = useState(0);
 
   const handleTabChange = (event, newValue) => {
     setSelectedTab(newValue);
   };
+
+  const currentTiers = selectedTab === 0 ? standardTiers : enterpriseTiers;
 
   return (
     <Section id="pricing" bgColor="dark1">
@@ -178,10 +197,10 @@ const Pricing = () => {
               <Tab label="Enterprise" />
             </Tabs>
           </Box>
-          <Grid container spacing={4} alignItems="stretch">
-            {tiers.map((tier, index) => (
-              <Grid item key={tier.title} xs={12} sm={6} md={4}>
-                <PricingCard tier={tier} isPopular={index === 1} />
+          <Grid container spacing={4} alignItems="stretch" justifyContent="center">
+            {currentTiers.map((tier, index) => (
+              <Grid item key={tier.title} xs={12} sm={6} md={selectedTab === 0 ? 4 : 6}>
+                <PricingCard tier={tier} isPopular={selectedTab === 0 ? index === 1 : true} />
               </Grid>
             ))}
           </Grid>
