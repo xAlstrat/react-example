@@ -30,15 +30,14 @@ const StyledCardContent = styled(CardContent)(({ theme }) => ({
 }));
 
 const StyledButton = styled(Button)(({ theme }) => ({
-  background: 'linear-gradient(45deg, #6b46c1 30%, #9f7aea 90%)',
-  border: 0,
-  borderRadius: 3,
-  boxShadow: '0 3px 5px 2px rgba(155, 105, 235, .3)',
-  color: 'white',
-  height: 48,
-  padding: '0 30px',
+  marginTop: theme.spacing(2),
+  padding: theme.spacing(1.5, 4),
+  fontWeight: 'bold',
+  boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+  transition: 'all 0.3s ease',
   '&:hover': {
-    background: 'linear-gradient(45deg, #9f7aea 30%, #6b46c1 90%)',
+    transform: 'translateY(-2px)',
+    boxShadow: '0 6px 8px rgba(0,0,0,0.15)',
   },
 }));
 
@@ -171,7 +170,12 @@ const Pricing = () => {
                         </Typography>
                       ))}
                     </ul>
-                    <StyledButton fullWidth variant={tier.buttonVariant}>
+                    <StyledButton
+                      fullWidth
+                      variant="contained"
+                      color="secondary"
+                      size="large"
+                    >
                       {tier.buttonText}
                     </StyledButton>
                   </StyledCardContent>
