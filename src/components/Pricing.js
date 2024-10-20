@@ -38,40 +38,50 @@ const tiers = [
 ];
 
 const DarkCard = styled(Card)(({ theme }) => ({
-  backgroundColor: theme.custom.darkPricing.background,
+  backgroundColor: theme.custom.darkPricing.headerBackground,
   color: theme.custom.darkPricing.textPrimary,
+  border: `1px solid ${theme.custom.darkPricing.textSecondary}`,
   '& .MuiCardHeader-root': {
-    backgroundColor: theme.custom.darkPricing.headerBackground,
+    backgroundColor: theme.custom.darkPricing.background,
   },
   '& .MuiCardHeader-title': {
     color: theme.custom.darkPricing.textPrimary,
+    fontWeight: 'bold',
   },
   '& .MuiCardHeader-subheader': {
-    color: theme.custom.darkPricing.textSecondary,
+    color: theme.palette.primary.main,
   },
   '& .MuiTypography-root': {
     color: theme.custom.darkPricing.textPrimary,
   },
   '& .MuiButton-root': {
     color: theme.custom.darkPricing.textPrimary,
-    borderColor: theme.custom.darkPricing.textPrimary,
+    borderColor: theme.palette.primary.main,
   },
   '& .MuiButton-contained': {
     backgroundColor: theme.palette.primary.main,
+    color: theme.custom.darkPricing.background,
     '&:hover': {
       backgroundColor: theme.palette.primary.dark,
+    },
+  },
+  '& .MuiButton-outlined': {
+    borderColor: theme.palette.primary.main,
+    color: theme.palette.primary.main,
+    '&:hover': {
+      backgroundColor: `${theme.palette.primary.main}22`,
     },
   },
 }));
 
 const Pricing = () => {
   return (
-    <Box sx={{ bgcolor: 'background.paper', py: 8 }}>
+    <Box sx={{ bgcolor: 'custom.darkPricing.background', py: 8 }}>
       <Container maxWidth="lg">
-        <Typography variant="h2" align="center" color="text.primary" gutterBottom>
+        <Typography variant="h2" align="center" color="custom.darkPricing.textPrimary" gutterBottom>
           Pricing
         </Typography>
-        <Typography variant="h5" align="center" color="text.secondary" paragraph>
+        <Typography variant="h5" align="center" color="custom.darkPricing.textSecondary" paragraph>
           Choose the plan that fits your needs
         </Typography>
         <Grid container spacing={4} alignItems="flex-end">
@@ -93,7 +103,7 @@ const Pricing = () => {
                       /mo
                     </Typography>
                   </Box>
-                  <ul>
+                  <ul style={{ listStyle: 'none', padding: 0 }}>
                     {tier.description.map((line) => (
                       <Typography component="li" variant="subtitle1" align="center" key={line}>
                         {line}
