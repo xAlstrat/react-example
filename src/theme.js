@@ -34,6 +34,12 @@ const theme = createTheme({
         boxShadow: `0 6px 12px ${palette.primary.main}40`,
       },
     },
+    darkPricing: {
+      background: '#1e1e1e',
+      headerBackground: '#252526',
+      textPrimary: '#ffffff',
+      textSecondary: '#d4d4d4',
+    },
     fadeInUp: {
       '@keyframes fadeInUp': {
         from: {

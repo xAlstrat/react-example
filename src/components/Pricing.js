@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Typography, Container, Grid, Card, CardContent, CardHeader, Button } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
 const tiers = [
   {
@@ -36,6 +37,33 @@ const tiers = [
   },
 ];
 
+const DarkCard = styled(Card)(({ theme }) => ({
+  backgroundColor: theme.custom.darkPricing.background,
+  color: theme.custom.darkPricing.textPrimary,
+  '& .MuiCardHeader-root': {
+    backgroundColor: theme.custom.darkPricing.headerBackground,
+  },
+  '& .MuiCardHeader-title': {
+    color: theme.custom.darkPricing.textPrimary,
+  },
+  '& .MuiCardHeader-subheader': {
+    color: theme.custom.darkPricing.textSecondary,
+  },
+  '& .MuiTypography-root': {
+    color: theme.custom.darkPricing.textPrimary,
+  },
+  '& .MuiButton-root': {
+    color: theme.custom.darkPricing.textPrimary,
+    borderColor: theme.custom.darkPricing.textPrimary,
+  },
+  '& .MuiButton-contained': {
+    backgroundColor: theme.palette.primary.main,
+    '&:hover': {
+      backgroundColor: theme.palette.primary.dark,
+    },
+  },
+}));
+
 const Pricing = () => {
   return (
     <Box sx={{ bgcolor: 'background.paper', py: 8 }}>
@@ -49,20 +77,19 @@ const Pricing = () => {
         <Grid container spacing={4} alignItems="flex-end">
           {tiers.map((tier) => (
             <Grid item key={tier.title} xs={12} sm={6} md={4}>
-              <Card>
+              <DarkCard>
                 <CardHeader
                   title={tier.title}
                   subheader={tier.subheader}
                   titleTypographyProps={{ align: 'center' }}
                   subheaderTypographyProps={{ align: 'center' }}
-                  sx={{ backgroundColor: (theme) => theme.palette.grey[200] }}
                 />
                 <CardContent>
                   <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'baseline', mb: 2 }}>
-                    <Typography component="h2" variant="h3" color="text.primary">
+                    <Typography component="h2" variant="h3">
                       ${tier.price}
                     </Typography>
-                    <Typography variant="h6" color="text.secondary">
+                    <Typography variant="h6">
                       /mo
                     </Typography>
                   </Box>
@@ -77,7 +104,7 @@ const Pricing = () => {
                     {tier.buttonText}
                   </Button>
                 </CardContent>
-              </Card>
+              </DarkCard>
             </Grid>
           ))}
         </Grid>
