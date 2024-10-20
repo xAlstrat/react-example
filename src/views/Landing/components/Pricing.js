@@ -11,18 +11,20 @@ const StyledTabs = styled(MuiTabs)(({ theme }) => ({
     display: 'none',
   },
   '& .MuiTabs-flexContainer': {
-    backgroundColor: theme.palette.background.paper,
-    borderRadius: theme.shape.borderRadius,
-    padding: theme.spacing(0.5),
+    display: 'inline-flex',
+    borderRadius: '30px',
+    padding: '4px',
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
   },
 }));
 
 const StyledTab = styled(MuiTab)(({ theme }) => ({
   color: theme.palette.text.secondary,
+  padding: '8px 24px',
+  borderRadius: '24px',
   '&.Mui-selected': {
     color: theme.palette.common.white,
     backgroundColor: theme.palette.primary.main,
-    borderRadius: theme.shape.borderRadius,
   },
   '&:not(:last-of-type)': {
     marginRight: theme.spacing(1),
@@ -214,8 +216,8 @@ const Pricing = () => {
           <Typography variant="h2" align="center" color="primary.main" gutterBottom>
             Pricing
           </Typography>
-          <Box sx={{ mb: 4 }}>
-            <StyledTabs value={selectedTab} onChange={handleTabChange} centered>
+          <Box sx={{ mb: 4, display: 'flex', justifyContent: 'center' }}>
+            <StyledTabs value={selectedTab} onChange={handleTabChange}>
               <StyledTab label="Standard" />
               <StyledTab label="Enterprise" />
             </StyledTabs>
