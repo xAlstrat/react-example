@@ -3,7 +3,7 @@ import { Box, Typography, Container, Grid, Card, CardContent, CardHeader, Button
 import Section from 'components/Section';
 
 const StyledCard = styled(Card)(({ theme }) => ({
-  backgroundColor: 'rgba(30, 30, 30, 0.8)',
+  backgroundColor: 'rgba(44, 44, 44, 0.8)',
   backdropFilter: 'blur(10px)',
   border: '1px solid rgba(255, 255, 255, 0.1)',
   borderRadius: theme.spacing(2),
@@ -138,13 +138,13 @@ const Pricing = () => {
   };
 
   return (
-    <Section id="pricing">
+    <Section id="pricing" bgColor="dark2">
       <Box sx={{ py: 8 }}>
         <Container maxWidth="lg">
           <Typography variant="h2" align="center" color="common.white" gutterBottom>
             Pricing
           </Typography>
-          <Typography variant="h5" align="center" color="primary.light" paragraph>
+          <Typography variant="h5" align="center" color="grey.400" paragraph>
             Choose the plan that fits your needs
           </Typography>
           <Grid container spacing={4} alignItems="flex-end">
