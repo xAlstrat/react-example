@@ -1,5 +1,6 @@
-import React from 'react';
-import { Box, Typography, Container, Grid, Card, CardContent, CardHeader, Button, styled } from '@mui/material';
+import React, { useState } from 'react';
+import { Box, Typography, Container, Grid, Card, CardContent, Button, styled, ToggleButtonGroup, ToggleButton } from '@mui/material';
+import CheckIcon from '@mui/icons-material/Check';
 import Section from 'components/Section';
 
 const StyledCard = styled(Card)(({ theme }) => ({
@@ -7,26 +8,16 @@ const StyledCard = styled(Card)(({ theme }) => ({
   backdropFilter: 'blur(10px)',
   border: '1px solid rgba(255, 255, 255, 0.1)',
   borderRadius: theme.spacing(2),
-  transition: 'transform 0.3s ease-in-out',
-  '&:hover': {
-    transform: 'scale(1.05)',
-  },
-}));
-
-const StyledCardHeader = styled(CardHeader)(({ theme }) => ({
-  backgroundColor: 'transparent',
-  color: theme.palette.common.white,
-  '& .MuiCardHeader-title': {
-    fontSize: '1.5rem',
-    fontWeight: 'bold',
-    color: theme.palette.primary.light,
-  },
-  '& .MuiCardHeader-subheader': {
-    color: theme.palette.secondary.light,
-  },
+  height: '100%',
+  display: 'flex',
+  flexDirection: 'column',
 }));
 
 const StyledCardContent = styled(CardContent)(({ theme }) => ({
+  flexGrow: 1,
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'space-between',
   color: theme.palette.common.white,
   '& .MuiTypography-root': {
     color: 'rgba(255, 255, 255, 0.8)',
@@ -37,58 +28,80 @@ const StyledButton = styled(Button)(({ theme }) => ({
   marginTop: theme.spacing(2),
   padding: theme.spacing(1.5, 4),
   fontWeight: 'bold',
-  backgroundColor: theme.palette.secondary.main,
+  backgroundColor: theme.palette.primary.main,
   color: theme.palette.common.white,
-  boxShadow: '0 4px 6px rgba(0,0,0,0.2)',
-  transition: 'all 0.3s ease',
   '&:hover': {
-    backgroundColor: theme.palette.secondary.dark,
-    transform: 'translateY(-2px)',
-    boxShadow: '0 6px 8px rgba(0,0,0,0.3)',
+    backgroundColor: theme.palette.primary.dark,
+  },
+}));
+
+const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({ theme }) => ({
+  display: 'inline-flex',
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: 'rgba(255, 255, 255, 0.08)',
+  '& .MuiToggleButton-root': {
+    color: theme.palette.common.white,
+    '&.Mui-selected': {
+      backgroundColor: theme.palette.primary.main,
+      color: theme.palette.common.white,
+      '&:hover': {
+        backgroundColor: theme.palette.primary.dark,
+      },
+    },
   },
 }));
 
 const tiers = [
   {
-    title: 'Personal',
-    price: '10',
+    title: 'Intern',
+    price: 'Free',
     description: [
-      'Interactive mode',
-      'Automated mode',
-      'Custom agents',
-      'Unlimited repositories',
+      'Use our free trial, your own API key, or local models',
+      'Community Discord server',
     ],
-    buttonText: 'Get started',
+    buttonText: 'Windows',
     buttonVariant: 'outlined',
+    version: 'version 1.3.0',
+    lastRelease: 'last release Oct 7, 2024',
   },
   {
-    title: 'Team',
-    subheader: 'Most popular',
-    price: '20',
+    title: 'Junior Engineer (Monthly)',
+    price: '15',
+    oldPrice: '18',
+    period: '/month',
     description: [
-      'All Personal features',
-      'Standard Support',
-      'Collaborative features',
-      'Up to 50 developers',
+      'Monthly refill of PearAI Credits for market-leading AI models',
+      'Full privacy: zero data retention policy with Anthropic',
+      'Direct customer support by the founders and contributors',
+      'Private Discord channel',
     ],
-    buttonText: 'Get started',
+    buttonText: 'Get Started',
     buttonVariant: 'contained',
   },
   {
-    title: 'Enterprise',
-    price: 'Custom',
+    title: '10x Engineer (Yearly)',
+    price: '10',
+    oldPrice: '14',
+    period: '/month',
     description: [
-      'All Team features',
-      'Enterprise Support',
-      'Custom SLAs',
-      'Dedicated account manager',
+      'Everything from monthly',
+      'Priority for new feature requests',
+      'Early access to new features (e.g. o1-mini and o1-preview)',
     ],
-    buttonText: 'Contact us',
-    buttonVariant: 'outlined',
+    buttonText: 'Get Started',
+    buttonVariant: 'contained',
   },
 ];
 
 const Pricing = () => {
+  const [selectedPlan, setSelectedPlan] = useState('Standard');
+
+  const handlePlanChange = (event, newPlan) => {
+    if (newPlan !== null) {
+      setSelectedPlan(newPlan);
+    }
+  };
+
   return (
     <Section id="pricing" bgColor="dark1">
       <Box sx={{ py: 8 }}>
@@ -96,43 +109,88 @@ const Pricing = () => {
           <Typography variant="h2" align="center" color="common.white" gutterBottom>
             Pricing
           </Typography>
-          <Typography variant="h5" align="center" color="grey.400" paragraph>
-            Choose the plan that fits your needs
-          </Typography>
-          <Grid container spacing={4} alignItems="flex-end">
+          <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
+            <StyledToggleButtonGroup
+              value={selectedPlan}
+              exclusive
+              onChange={handlePlanChange}
+              aria-label="pricing plan"
+            >
+              <ToggleButton value="Standard" aria-label="standard plan">
+                Standard
+              </ToggleButton>
+              <ToggleButton value="Enterprise" aria-label="enterprise plan">
+                Enterprise
+              </ToggleButton>
+            </StyledToggleButtonGroup>
+          </Box>
+          <Grid container spacing={4} alignItems="stretch">
             {tiers.map((tier) => (
-              <Grid item key={tier.title} xs={12} sm={6} md={4}>
+              <Grid item key={tier.title} xs={12} sm={tier.title === 'Intern' ? 12 : 6} md={4}>
                 <StyledCard>
-                  <StyledCardHeader
-                    title={tier.title}
-                    subheader={tier.subheader}
-                    titleTypographyProps={{ align: 'center' }}
-                    subheaderTypographyProps={{ align: 'center' }}
-                  />
                   <StyledCardContent>
-                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'baseline', mb: 2 }}>
-                      <Typography component="h2" variant="h3" color="common.white">
-                        ${tier.price}
+                    <Box>
+                      <Typography variant="h4" component="h2" gutterBottom>
+                        {tier.title}
                       </Typography>
-                      <Typography variant="h6" color="primary.light">
-                        {tier.title === 'Team' ? '/mo per dev' : (tier.title !== 'Enterprise' && '/mo')}
-                      </Typography>
-                    </Box>
-                    <ul style={{ listStyle: 'none', padding: 0 }}>
-                      {tier.description.map((line) => (
-                        <Typography component="li" variant="body1" align="center" key={line} color="common.white">
-                          • {line}
+                      <Box sx={{ display: 'flex', alignItems: 'baseline', mb: 2 }}>
+                        <Typography component="h3" variant="h3" color="common.white">
+                          {tier.price === 'Free' ? 'Free' : `$${tier.price}`}
                         </Typography>
-                      ))}
-                    </ul>
-                    <StyledButton
-                      fullWidth
-                      variant="contained"
-                      color="secondary"
-                      size="large"
-                    >
-                      {tier.buttonText}
-                    </StyledButton>
+                        {tier.period && (
+                          <Typography variant="h6" color="primary.light" sx={{ ml: 1 }}>
+                            {tier.period}
+                          </Typography>
+                        )}
+                      </Box>
+                      {tier.oldPrice && (
+                        <Typography variant="body2" color="text.secondary" sx={{ textDecoration: 'line-through', mb: 2 }}>
+                          ${tier.oldPrice}{tier.period}
+                        </Typography>
+                      )}
+                      <Box sx={{ mt: 2 }}>
+                        {tier.description.map((line) => (
+                          <Box key={line} sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+                            <CheckIcon sx={{ mr: 1, color: 'primary.main' }} />
+                            <Typography variant="body1">{line}</Typography>
+                          </Box>
+                        ))}
+                      </Box>
+                    </Box>
+                    <Box sx={{ mt: 'auto' }}>
+                      {tier.title === 'Intern' ? (
+                        <>
+                          <Grid container spacing={2}>
+                            <Grid item xs={6}>
+                              <StyledButton fullWidth variant="outlined">
+                                Windows
+                              </StyledButton>
+                            </Grid>
+                            <Grid item xs={6}>
+                              <StyledButton fullWidth variant="outlined">
+                                Linux x64
+                              </StyledButton>
+                            </Grid>
+                          </Grid>
+                          <StyledButton fullWidth variant="outlined" sx={{ mt: 2 }}>
+                            MacOS
+                          </StyledButton>
+                          <Typography variant="body2" align="center" sx={{ mt: 2 }}>
+                            {tier.version}
+                          </Typography>
+                          <Typography variant="body2" align="center">
+                            {tier.lastRelease}
+                          </Typography>
+                        </>
+                      ) : (
+                        <StyledButton
+                          fullWidth
+                          variant={tier.buttonVariant}
+                        >
+                          {tier.buttonText}
+                        </StyledButton>
+                      )}
+                    </Box>
                   </StyledCardContent>
                 </StyledCard>
               </Grid>
