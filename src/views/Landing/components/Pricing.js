@@ -1,10 +1,33 @@
 import React, { useState } from 'react';
-import { Box, Typography, Container, Grid, Card, CardContent, Button, styled, Tabs, Tab } from '@mui/material';
+import { Box, Typography, Container, Grid, Card, CardContent, Button, styled, Tabs as MuiTabs, Tab as MuiTab } from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
 import WindowIcon from '@mui/icons-material/Window';
 import AppleIcon from '@mui/icons-material/Apple';
 import LinuxIcon from '@mui/icons-material/Android';
 import Section from 'components/Section';
+
+const StyledTabs = styled(MuiTabs)(({ theme }) => ({
+  '& .MuiTabs-indicator': {
+    display: 'none',
+  },
+  '& .MuiTabs-flexContainer': {
+    backgroundColor: theme.palette.background.paper,
+    borderRadius: theme.shape.borderRadius,
+    padding: theme.spacing(0.5),
+  },
+}));
+
+const StyledTab = styled(MuiTab)(({ theme }) => ({
+  color: theme.palette.text.secondary,
+  '&.Mui-selected': {
+    color: theme.palette.common.white,
+    backgroundColor: theme.palette.primary.main,
+    borderRadius: theme.shape.borderRadius,
+  },
+  '&:not(:last-of-type)': {
+    marginRight: theme.spacing(1),
+  },
+}));
 
 const StyledCard = styled(Card)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -191,11 +214,11 @@ const Pricing = () => {
           <Typography variant="h2" align="center" color="primary.main" gutterBottom>
             Pricing
           </Typography>
-          <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 4 }}>
-            <Tabs value={selectedTab} onChange={handleTabChange} centered>
-              <Tab label="Standard" />
-              <Tab label="Enterprise" />
-            </Tabs>
+          <Box sx={{ mb: 4 }}>
+            <StyledTabs value={selectedTab} onChange={handleTabChange} centered>
+              <StyledTab label="Standard" />
+              <StyledTab label="Enterprise" />
+            </StyledTabs>
           </Box>
           <Grid container spacing={4} alignItems="stretch" justifyContent="center">
             {currentTiers.map((tier, index) => (
