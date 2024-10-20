@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Box, Typography, Container, Grid, Card, CardContent, CardHeader, Button, Slider, styled } from '@mui/material';
+import React from 'react';
+import { Box, Typography, Container, Grid, Card, CardContent, CardHeader, Button, styled } from '@mui/material';
 import Section from 'components/Section';
 
 const StyledCard = styled(Card)(({ theme }) => ({
@@ -48,42 +48,10 @@ const StyledButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-const StyledSlider = styled(Slider)(({ theme }) => ({
-  color: theme.palette.secondary.main,
-  height: 8,
-  '& .MuiSlider-thumb': {
-    height: 24,
-    width: 24,
-    backgroundColor: theme.palette.secondary.light,
-    border: '2px solid currentColor',
-    '&:focus, &:hover, &.Mui-active, &.Mui-focusVisible': {
-      boxShadow: 'inherit',
-    },
-    '&:before': {
-      display: 'none',
-    },
-  },
-  '& .MuiSlider-track': {
-    height: 8,
-    borderRadius: 4,
-  },
-  '& .MuiSlider-rail': {
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-  },
-  '& .MuiSlider-valueLabel': {
-    display: 'none',
-  },
-  '& .MuiSlider-mark': {
-    display: 'none',
-  },
-}));
-
 const tiers = [
   {
     title: 'Personal',
-    price: '20',
+    price: '10',
     description: [
       'Interactive mode',
       'Automated mode',
@@ -96,12 +64,12 @@ const tiers = [
   {
     title: 'Team',
     subheader: 'Most popular',
-    price: '30',
+    price: '20',
     description: [
       'All Personal features',
       'Standard Support',
       'Collaborative features',
-      'Volume discounts available',
+      'Up to 50 developers',
     ],
     buttonText: 'Get started',
     buttonVariant: 'contained',
@@ -121,24 +89,8 @@ const tiers = [
 ];
 
 const Pricing = () => {
-  const [teamSizeRange, setTeamSizeRange] = useState(0);
-  const baseTeamPrice = 30;
-  
-  const teamSizeRanges = ['1-10', '11-50', '51-200', '>200'];
-  const discountRates = [0, 0.1, 0.2, 0.3];
-
-  const getTeamPrice = (range) => {
-    return Math.round(baseTeamPrice * (1 - discountRates[range]));
-  };
-
-  const teamPrice = getTeamPrice(teamSizeRange);
-
-  const handleTeamSizeChange = (event, newValue) => {
-    setTeamSizeRange(newValue);
-  };
-
   return (
-    <Section id="pricing" bgColor="dark2">
+    <Section id="pricing" bgColor="dark1">
       <Box sx={{ py: 8 }}>
         <Container maxWidth="lg">
           <Typography variant="h2" align="center" color="common.white" gutterBottom>
@@ -160,29 +112,12 @@ const Pricing = () => {
                   <StyledCardContent>
                     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'baseline', mb: 2 }}>
                       <Typography component="h2" variant="h3" color="common.white">
-                        ${tier.title === 'Team' ? teamPrice : tier.price}
+                        ${tier.price}
                       </Typography>
                       <Typography variant="h6" color="primary.light">
                         {tier.title === 'Team' ? '/mo per dev' : (tier.title !== 'Enterprise' && '/mo')}
                       </Typography>
                     </Box>
-                    {tier.title === 'Team' && (
-                      <Typography variant="body2" align="center" color="primary.light">
-                        Team size: {teamSizeRanges[teamSizeRange]}
-                      </Typography>
-                    )}
-                    {tier.title === 'Team' && (
-                      <Box sx={{ mb: 2, mt: 2, px: 2 }}>
-                        <StyledSlider
-                          value={teamSizeRange}
-                          onChange={handleTeamSizeChange}
-                          step={1}
-                          min={0}
-                          max={3}
-                          marks={teamSizeRanges.map((_, index) => ({ value: index }))}
-                        />
-                      </Box>
-                    )}
                     <ul style={{ listStyle: 'none', padding: 0 }}>
                       {tier.description.map((line) => (
                         <Typography component="li" variant="body1" align="center" key={line} color="common.white">
