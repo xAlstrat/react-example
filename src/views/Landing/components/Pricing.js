@@ -1,5 +1,5 @@
-import React from 'react';
-import { Box, Typography, Container, Grid, Card, CardContent, Button, styled } from '@mui/material';
+import React, { useState } from 'react';
+import { Box, Typography, Container, Grid, Card, CardContent, Button, styled, Tabs, Tab } from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
 import WindowIcon from '@mui/icons-material/Window';
 import AppleIcon from '@mui/icons-material/Apple';
@@ -9,10 +9,10 @@ import Section from 'components/Section';
 const StyledCard = styled(Card)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
   borderRadius: theme.shape.borderRadius,
-  boxShadow: theme.shadows[4],
   height: '100%',
   display: 'flex',
   flexDirection: 'column',
+  justifyContent: 'space-between',
 }));
 
 const StyledCardContent = styled(CardContent)(({ theme }) => ({
@@ -48,6 +48,71 @@ const DownloadButton = styled(Button)(({ theme }) => ({
   marginRight: theme.spacing(1),
   marginBottom: theme.spacing(1),
 }));
+
+const PricingCard = ({ tier, isPopular }) => (
+  <StyledCard elevation={isPopular ? 8 : 1}>
+    <StyledCardContent>
+      <Box>
+        <Typography variant="h5" component="h2" gutterBottom color="primary.main">
+          {tier.title}
+        </Typography>
+        <Typography variant="body2" color="text.secondary" paragraph>
+          {tier.subtitle}
+        </Typography>
+        <PriceTypography>
+          {tier.price === 'Free' ? tier.price : `$${tier.price}`}
+          {tier.period && (
+            <Typography variant="h6" component="span" color="text.secondary">
+              {tier.period}
+            </Typography>
+          )}
+        </PriceTypography>
+        {tier.originalPrice && (
+          <Typography variant="body2" color="success.main" paragraph>
+            (Early Bird)
+          </Typography>
+        )}
+        <FeatureList>
+          {tier.features.map((feature, index) => (
+            <Feature key={index}>
+              <CheckIcon color="success" style={{ marginRight: 8 }} />
+              <Typography variant="body2">{feature}</Typography>
+            </Feature>
+          ))}
+        </FeatureList>
+      </Box>
+      <Box>
+        {tier.downloadButtons ? (
+          <Box>
+            {tier.downloadButtons.map((button, index) => (
+              <DownloadButton
+                key={index}
+                variant="outlined"
+                color="primary"
+                startIcon={
+                  button === 'Windows' ? <WindowIcon /> :
+                  button === 'MacOS' ? <AppleIcon /> :
+                  <LinuxIcon />
+                }
+              >
+                {button}
+              </DownloadButton>
+            ))}
+          </Box>
+        ) : (
+          <Button fullWidth variant="contained" color="primary">
+            {tier.buttonText || 'Get Started'}
+          </Button>
+        )}
+      </Box>
+      {tier.version && (
+        <Typography variant="caption" color="text.secondary" align="center" style={{ marginTop: 16 }}>
+          {tier.version}
+        </Typography>
+      )}
+    </StyledCardContent>
+  </StyledCard>
+);
 
 const tiers = [
   {
@@ -94,81 +159,29 @@ const tiers = [
 ];
 
 const Pricing = () => {
+  const [selectedTab, setSelectedTab] = useState(0);
+
+  const handleTabChange = (event, newValue) => {
+    setSelectedTab(newValue);
+  };
+
   return (
     <Section id="pricing" bgColor="dark1">
       <Box sx={{ py: 8 }}>
         <Container maxWidth="lg">
-          <Typography variant="h2" align="center" color="common.white" gutterBottom>
+          <Typography variant="h2" align="center" color="primary.main" gutterBottom>
             Pricing
           </Typography>
+          <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 4 }}>
+            <Tabs value={selectedTab} onChange={handleTabChange} centered>
+              <Tab label="Standard" />
+              <Tab label="Enterprise" />
+            </Tabs>
+          </Box>
           <Grid container spacing={4} alignItems="stretch">
-            {tiers.map((tier) => (
+            {tiers.map((tier, index) => (
               <Grid item key={tier.title} xs={12} sm={6} md={4}>
-                <StyledCard>
-                  <StyledCardContent>
-                    <Box>
-                      <Typography variant="h5" component="h2" gutterBottom color="primary">
-                        {tier.title}
-                      </Typography>
-                      <Typography variant="subtitle1" color="textSecondary" gutterBottom>
-                        {tier.subtitle}
-                      </Typography>
-                      <PriceTypography>
-                        {tier.price === 'Free' ? tier.price : `$${tier.price}`}
-                        {tier.period && (
-                          <Typography variant="h6" component="span" color="textSecondary">
-                            {tier.period}
-                          </Typography>
-                        )}
-                      </PriceTypography>
-                      {tier.originalPrice && (
-                        <Typography variant="body2" color="textSecondary" style={{ textDecoration: 'line-through' }}>
-                          ${tier.originalPrice}{tier.period}
-                        </Typography>
-                      )}
-                      <Typography variant="body2" color="textSecondary" gutterBottom>
-                        {tier.description}
-                      </Typography>
-                      <FeatureList>
-                        {tier.features.map((feature, index) => (
-                          <Feature key={index}>
-                            <CheckIcon color="primary" style={{ marginRight: 8 }} />
-                            {feature}
-                          </Feature>
-                        ))}
-                      </FeatureList>
-                    </Box>
-                    <Box mt="auto">
-                      {tier.downloadButtons ? (
-                        <Box>
-                          {tier.downloadButtons.map((button, index) => (
-                            <DownloadButton
-                              key={index}
-                              variant="outlined"
-                              color="primary"
-                              startIcon={
-                                button === 'Windows' ? <WindowIcon /> :
-                                button === 'MacOS' ? <AppleIcon /> :
-                                <LinuxIcon />
-                              }
-                            >
-                              {button}
-                            </DownloadButton>
-                          ))}
-                        </Box>
-                      ) : (
-                        <Button fullWidth variant="contained" color="primary">
-                          {tier.buttonText}
-                        </Button>
-                      )}
-                    </Box>
-                    {tier.version && (
-                      <Typography variant="caption" color="textSecondary" align="center" style={{ marginTop: 16 }}>
-                        {tier.version}
-                      </Typography>
-                    )}
-                  </StyledCardContent>
-                </StyledCard>
+                <PricingCard tier={tier} isPopular={index === 1} />
               </Grid>
             ))}
           </Grid>
