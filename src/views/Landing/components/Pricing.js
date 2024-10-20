@@ -1,36 +1,41 @@
-import React from 'react';
-import { Box, Typography, Container, Grid, Card, CardContent, CardHeader, Button } from '@mui/material';
+import React, { useState } from 'react';
+import { Box, Typography, Container, Grid, Card, CardContent, CardHeader, Button, Slider } from '@mui/material';
 import Section from 'components/Section';
 
 const tiers = [
   {
-    title: 'Basic',
-    price: '19',
-    description: ['5 repositories', 'Basic code maintenance', 'Standard support'],
+    title: 'Personal',
+    price: '20',
+    description: [
+      'Interactive mode',
+      'Automated mode',
+      'Custom agents',
+      'Unlimited repositories',
+    ],
     buttonText: 'Get started',
     buttonVariant: 'outlined',
   },
   {
-    title: 'Pro',
+    title: 'Team',
     subheader: 'Most popular',
-    price: '49',
+    price: '30',
     description: [
-      '20 repositories',
-      'Advanced code maintenance',
-      'Custom agents',
-      'Priority support',
+      'Per developer',
+      'All Personal features',
+      'Standard Support',
+      'Collaborative features',
     ],
-    buttonText: 'Get started',
+    buttonText: 'Calculate price',
     buttonVariant: 'contained',
   },
   {
     title: 'Enterprise',
     price: 'Custom',
     description: [
-      'Unlimited repositories',
-      'Full suite of features',
-      'Dedicated support',
-      'Custom integrations',
+      'All Team features',
+      'Enterprise Support',
+      'Custom SLAs',
+      'Dedicated account manager',
     ],
     buttonText: 'Contact us',
     buttonVariant: 'outlined',
@@ -38,6 +43,14 @@ const tiers = [
 ];
 
 const Pricing = () => {
+  const [teamSize, setTeamSize] = useState(1);
+  const baseTeamPrice = 30;
+  const teamPrice = Math.round(baseTeamPrice * teamSize * (1 - teamSize * 0.01));
+
+  const handleTeamSizeChange = (event, newValue) => {
+    setTeamSize(newValue);
+  };
+
   return (
     <Section id="pricing" bgColor="dark1">
       <Box sx={{ bgcolor: 'background.paper', py: 8 }}>
@@ -62,12 +75,29 @@ const Pricing = () => {
                   <CardContent>
                     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'baseline', mb: 2 }}>
                       <Typography component="h2" variant="h3" color="text.primary">
-                        ${tier.price}
+                        ${tier.title === 'Team' ? teamPrice : tier.price}
                       </Typography>
                       <Typography variant="h6" color="text.secondary">
-                        /mo
+                        {tier.title !== 'Enterprise' && '/mo'}
                       </Typography>
                     </Box>
+                    {tier.title === 'Team' && (
+                      <Box sx={{ mb: 2 }}>
+                        <Typography id="team-size-slider" gutterBottom>
+                          Team Size: {teamSize}
+                        </Typography>
+                        <Slider
+                          value={teamSize}
+                          onChange={handleTeamSizeChange}
+                          aria-labelledby="team-size-slider"
+                          valueLabelDisplay="auto"
+                          step={1}
+                          marks
+                          min={1}
+                          max={20}
+                        />
+                      </Box>
+                    )}
                     <ul>
                       {tier.description.map((line) => (
                         <Typography component="li" variant="subtitle1" align="center" key={line}>
