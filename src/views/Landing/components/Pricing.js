@@ -1,6 +1,59 @@
 import React, { useState } from 'react';
-import { Box, Typography, Container, Grid, Card, CardContent, CardHeader, Button, Slider } from '@mui/material';
+import { Box, Typography, Container, Grid, Card, CardContent, CardHeader, Button, Slider, styled } from '@mui/material';
 import Section from 'components/Section';
+
+const StyledCard = styled(Card)(({ theme }) => ({
+  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+  backdropFilter: 'blur(10px)',
+  border: '1px solid rgba(255, 255, 255, 0.2)',
+  borderRadius: theme.spacing(2),
+  transition: 'transform 0.3s ease-in-out',
+  '&:hover': {
+    transform: 'scale(1.05)',
+  },
+}));
+
+const StyledCardHeader = styled(CardHeader)(({ theme }) => ({
+  backgroundColor: 'transparent',
+  color: theme.palette.common.white,
+  '& .MuiCardHeader-title': {
+    fontSize: '1.5rem',
+    fontWeight: 'bold',
+  },
+  '& .MuiCardHeader-subheader': {
+    color: theme.palette.primary.light,
+  },
+}));
+
+const StyledCardContent = styled(CardContent)(({ theme }) => ({
+  color: theme.palette.common.white,
+}));
+
+const StyledButton = styled(Button)(({ theme }) => ({
+  background: 'linear-gradient(45deg, #6b46c1 30%, #9f7aea 90%)',
+  border: 0,
+  borderRadius: 3,
+  boxShadow: '0 3px 5px 2px rgba(155, 105, 235, .3)',
+  color: 'white',
+  height: 48,
+  padding: '0 30px',
+  '&:hover': {
+    background: 'linear-gradient(45deg, #9f7aea 30%, #6b46c1 90%)',
+  },
+}));
+
+const StyledSlider = styled(Slider)(({ theme }) => ({
+  color: theme.palette.primary.main,
+  '& .MuiSlider-thumb': {
+    backgroundColor: theme.palette.primary.light,
+  },
+  '& .MuiSlider-rail': {
+    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+  },
+  '& .MuiSlider-track': {
+    background: 'linear-gradient(45deg, #6b46c1 30%, #9f7aea 90%)',
+  },
+}));
 
 const tiers = [
   {
@@ -63,41 +116,40 @@ const Pricing = () => {
   };
 
   return (
-    <Section id="pricing" bgColor="dark1">
-      <Box sx={{ bgcolor: 'background.paper', py: 8 }}>
+    <Section id="pricing">
+      <Box sx={{ py: 8 }}>
         <Container maxWidth="lg">
-          <Typography variant="h2" align="center" color="text.primary" gutterBottom>
+          <Typography variant="h2" align="center" color="common.white" gutterBottom>
             Pricing
           </Typography>
-          <Typography variant="h5" align="center" color="text.secondary" paragraph>
+          <Typography variant="h5" align="center" color="primary.light" paragraph>
             Choose the plan that fits your needs
           </Typography>
           <Grid container spacing={4} alignItems="flex-end">
             {tiers.map((tier) => (
               <Grid item key={tier.title} xs={12} sm={6} md={4}>
-                <Card>
-                  <CardHeader
+                <StyledCard>
+                  <StyledCardHeader
                     title={tier.title}
                     subheader={tier.subheader}
                     titleTypographyProps={{ align: 'center' }}
                     subheaderTypographyProps={{ align: 'center' }}
-                    sx={{ backgroundColor: (theme) => theme.palette.grey[200] }}
                   />
-                  <CardContent>
+                  <StyledCardContent>
                     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'baseline', mb: 2 }}>
-                      <Typography component="h2" variant="h3" color="text.primary">
+                      <Typography component="h2" variant="h3" color="common.white">
                         ${tier.title === 'Team' ? teamPrice : tier.price}
                       </Typography>
-                      <Typography variant="h6" color="text.secondary">
+                      <Typography variant="h6" color="primary.light">
                         {tier.title === 'Team' ? '/mo per dev' : (tier.title !== 'Enterprise' && '/mo')}
                       </Typography>
                     </Box>
                     {tier.title === 'Team' && (
                       <Box sx={{ mb: 2 }}>
-                        <Typography id="team-size-slider" gutterBottom>
+                        <Typography id="team-size-slider" gutterBottom color="common.white">
                           Team Size: {teamSizeRanges[teamSizeRange]}
                         </Typography>
-                        <Slider
+                        <StyledSlider
                           value={teamSizeRange}
                           onChange={handleTeamSizeChange}
                           aria-labelledby="team-size-slider"
@@ -112,18 +164,18 @@ const Pricing = () => {
                         />
                       </Box>
                     )}
-                    <ul>
+                    <ul style={{ listStyle: 'none', padding: 0 }}>
                       {tier.description.map((line) => (
-                        <Typography component="li" variant="subtitle1" align="center" key={line}>
-                          {line}
+                        <Typography component="li" variant="body1" align="center" key={line} color="common.white">
+                          • {line}
                         </Typography>
                       ))}
                     </ul>
-                    <Button fullWidth variant={tier.buttonVariant} color="primary">
+                    <StyledButton fullWidth variant={tier.buttonVariant}>
                       {tier.buttonText}
-                    </Button>
-                  </CardContent>
-                </Card>
+                    </StyledButton>
+                  </StyledCardContent>
+                </StyledCard>
               </Grid>
             ))}
           </Grid>
