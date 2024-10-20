@@ -33,7 +33,8 @@ const StyledTab = styled(MuiTab)(({ theme }) => ({
 }));
 
 const StyledCard = styled(Card)(({ theme }) => ({
-  backgroundColor: theme.palette.background.paper,
+  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+  backdropFilter: 'brightness(1.05)',
   borderRadius: theme.shape.borderRadius,
   height: '100%',
   display: 'flex',
