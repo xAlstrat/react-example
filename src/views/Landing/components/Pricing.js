@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Box, Typography, Container, Grid, Card, CardContent, Button, styled, Tabs as MuiTabs, Tab as MuiTab } from '@mui/material';
+import { Box, Typography, Container, Grid, Card, CardContent, Button, styled, Tabs as MuiTabs, Tab as MuiTab, useTheme } from '@mui/material';
 import CheckIcon from '@mui/icons-material/Check';
 import WindowIcon from '@mui/icons-material/Window';
 import AppleIcon from '@mui/icons-material/Apple';
 import LinuxIcon from '@mui/icons-material/Android';
 import Section from 'components/Section';
+import HighlightedText from 'components/HighlightedText';
 
 const StyledTabs = styled(MuiTabs)(({ theme }) => ({
   '& .MuiTabs-indicator': {
@@ -202,6 +203,7 @@ const enterpriseTiers = [
 
 const Pricing = () => {
   const [selectedTab, setSelectedTab] = useState(0);
+  const theme = useTheme();
 
   const handleTabChange = (event, newValue) => {
     setSelectedTab(newValue);
@@ -213,8 +215,18 @@ const Pricing = () => {
     <Section id="pricing" bgColor="dark1">
       <Box sx={{ py: 8 }}>
         <Container maxWidth="lg">
-          <Typography variant="h2" align="center" color="primary.main" gutterBottom>
-            Develop <Box component="span" sx={{ color: 'success.main', fontWeight: 'bold' }}>10x</Box> faster just now
+          <Typography 
+            variant="h2" 
+            component="h2" 
+            align="center" 
+            gutterBottom 
+            sx={{ 
+              fontWeight: 'bold', 
+              mb: 6, 
+              color: theme.palette.common.white 
+            }}
+          >
+            Develop <HighlightedText>10x</HighlightedText> faster just now
           </Typography>
           <Box sx={{ mb: 4, display: 'flex', justifyContent: 'center' }}>
             <StyledTabs value={selectedTab} onChange={handleTabChange}>
