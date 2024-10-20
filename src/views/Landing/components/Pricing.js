@@ -43,12 +43,23 @@ const tiers = [
 ];
 
 const Pricing = () => {
-  const [teamSize, setTeamSize] = useState(1);
+  const [teamSizeRange, setTeamSizeRange] = useState(0);
   const baseTeamPrice = 30;
-  const teamPrice = Math.round(baseTeamPrice * teamSize * (1 - teamSize * 0.01));
+  
+  const teamSizeRanges = ['1-10', '11-50', '51-200', '>200'];
+  const discountRates = [0, 0.1, 0.2, 0.3];
+
+  const getTeamPrice = (range) => {
+    const maxSize = range === 3 ? 200 : parseInt(teamSizeRanges[range].split('-')[1]);
+    const minSize = range === 3 ? 201 : parseInt(teamSizeRanges[range].split('-')[0]);
+    const avgSize = (maxSize + minSize) / 2;
+    return Math.round(baseTeamPrice * avgSize * (1 - discountRates[range]));
+  };
+
+  const teamPrice = getTeamPrice(teamSizeRange);
 
   const handleTeamSizeChange = (event, newValue) => {
-    setTeamSize(newValue);
+    setTeamSizeRange(newValue);
   };
 
   return (
@@ -78,23 +89,26 @@ const Pricing = () => {
                         ${tier.title === 'Team' ? teamPrice : tier.price}
                       </Typography>
                       <Typography variant="h6" color="text.secondary">
-                        {tier.title !== 'Enterprise' && '/mo'}
+                        {tier.title === 'Team' ? '/mo per dev' : (tier.title !== 'Enterprise' && '/mo')}
                       </Typography>
                     </Box>
                     {tier.title === 'Team' && (
                       <Box sx={{ mb: 2 }}>
                         <Typography id="team-size-slider" gutterBottom>
-                          Team Size: {teamSize}
+                          Team Size: {teamSizeRanges[teamSizeRange]}
                         </Typography>
                         <Slider
-                          value={teamSize}
+                          value={teamSizeRange}
                           onChange={handleTeamSizeChange}
                           aria-labelledby="team-size-slider"
                           valueLabelDisplay="auto"
                           step={1}
-                          marks
-                          min={1}
-                          max={20}
+                          marks={teamSizeRanges.map((range, index) => ({
+                            value: index,
+                            label: range,
+                          }))}
+                          min={0}
+                          max={3}
                         />
                       </Box>
                     )}
