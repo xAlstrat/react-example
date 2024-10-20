@@ -214,7 +214,7 @@ const Pricing = () => {
       <Box sx={{ py: 8 }}>
         <Container maxWidth="lg">
           <Typography variant="h2" align="center" color="primary.main" gutterBottom>
-            Pricing
+            Develop <Box component="span" sx={{ color: 'success.main', fontWeight: 'bold' }}>10x</Box> faster just now
           </Typography>
           <Box sx={{ mb: 4, display: 'flex', justifyContent: 'center' }}>
             <StyledTabs value={selectedTab} onChange={handleTabChange}>
