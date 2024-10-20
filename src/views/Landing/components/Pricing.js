@@ -79,12 +79,12 @@ const tiers = [
     subheader: 'Most popular',
     price: '30',
     description: [
-      'Per developer',
       'All Personal features',
       'Standard Support',
       'Collaborative features',
+      'Volume discounts available',
     ],
-    buttonText: 'Calculate price',
+    buttonText: 'Get started',
     buttonVariant: 'contained',
   },
   {
@@ -109,10 +109,7 @@ const Pricing = () => {
   const discountRates = [0, 0.1, 0.2, 0.3];
 
   const getTeamPrice = (range) => {
-    const maxSize = range === 3 ? 200 : parseInt(teamSizeRanges[range].split('-')[1]);
-    const minSize = range === 3 ? 201 : parseInt(teamSizeRanges[range].split('-')[0]);
-    const avgSize = (maxSize + minSize) / 2;
-    return Math.round(baseTeamPrice * avgSize * (1 - discountRates[range]));
+    return Math.round(baseTeamPrice * (1 - discountRates[range]));
   };
 
   const teamPrice = getTeamPrice(teamSizeRange);
@@ -151,9 +148,14 @@ const Pricing = () => {
                       </Typography>
                     </Box>
                     {tier.title === 'Team' && (
+                      <Typography variant="body2" align="center" color="primary.light">
+                        Based on team size: {teamSizeRanges[teamSizeRange]}
+                      </Typography>
+                    )}
+                    {tier.title === 'Team' && (
                       <Box sx={{ mb: 2 }}>
                         <Typography id="team-size-slider" gutterBottom color="common.white">
-                          Team Size: {teamSizeRanges[teamSizeRange]}
+                          Select your team size for volume pricing
                         </Typography>
                         <StyledSlider
                           value={teamSizeRange}
