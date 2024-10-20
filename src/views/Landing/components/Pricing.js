@@ -124,12 +124,11 @@ const Pricing = () => {
   const [teamSizeRange, setTeamSizeRange] = useState(0);
   const baseTeamPrice = 30;
   
-  const teamSizeRanges = ['', '1-10', '11-50', '51-200', '>200', ''];
+  const teamSizeRanges = ['1-10', '11-50', '51-200', '>200'];
   const discountRates = [0, 0.1, 0.2, 0.3];
 
   const getTeamPrice = (range) => {
-    const discountIndex = Math.max(0, Math.min(range - 1, discountRates.length - 1));
-    return Math.round(baseTeamPrice * (1 - discountRates[discountIndex]));
+    return Math.round(baseTeamPrice * (1 - discountRates[range]));
   };
 
   const teamPrice = getTeamPrice(teamSizeRange);
@@ -169,7 +168,7 @@ const Pricing = () => {
                     </Box>
                     {tier.title === 'Team' && (
                       <Typography variant="body2" align="center" color="primary.light">
-                        Based on team size: {teamSizeRanges[teamSizeRange]}
+                        Team size: {teamSizeRanges[teamSizeRange]}
                       </Typography>
                     )}
                     {tier.title === 'Team' && (
@@ -180,6 +179,7 @@ const Pricing = () => {
                           step={1}
                           min={0}
                           max={3}
+                          marks={teamSizeRanges.map((_, index) => ({ value: index }))}
                         />
                       </Box>
                     )}
