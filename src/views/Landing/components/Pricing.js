@@ -3,9 +3,9 @@ import { Box, Typography, Container, Grid, Card, CardContent, CardHeader, Button
 import Section from 'components/Section';
 
 const StyledCard = styled(Card)(({ theme }) => ({
-  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+  backgroundColor: 'rgba(30, 30, 30, 0.8)',
   backdropFilter: 'blur(10px)',
-  border: '1px solid rgba(255, 255, 255, 0.2)',
+  border: '1px solid rgba(255, 255, 255, 0.1)',
   borderRadius: theme.spacing(2),
   transition: 'transform 0.3s ease-in-out',
   '&:hover': {
@@ -19,38 +19,45 @@ const StyledCardHeader = styled(CardHeader)(({ theme }) => ({
   '& .MuiCardHeader-title': {
     fontSize: '1.5rem',
     fontWeight: 'bold',
+    color: theme.palette.primary.light,
   },
   '& .MuiCardHeader-subheader': {
-    color: theme.palette.primary.light,
+    color: theme.palette.secondary.light,
   },
 }));
 
 const StyledCardContent = styled(CardContent)(({ theme }) => ({
   color: theme.palette.common.white,
+  '& .MuiTypography-root': {
+    color: 'rgba(255, 255, 255, 0.8)',
+  },
 }));
 
 const StyledButton = styled(Button)(({ theme }) => ({
   marginTop: theme.spacing(2),
   padding: theme.spacing(1.5, 4),
   fontWeight: 'bold',
-  boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+  backgroundColor: theme.palette.secondary.main,
+  color: theme.palette.common.white,
+  boxShadow: '0 4px 6px rgba(0,0,0,0.2)',
   transition: 'all 0.3s ease',
   '&:hover': {
+    backgroundColor: theme.palette.secondary.dark,
     transform: 'translateY(-2px)',
-    boxShadow: '0 6px 8px rgba(0,0,0,0.15)',
+    boxShadow: '0 6px 8px rgba(0,0,0,0.3)',
   },
 }));
 
 const StyledSlider = styled(Slider)(({ theme }) => ({
-  color: theme.palette.primary.main,
+  color: theme.palette.secondary.main,
   '& .MuiSlider-thumb': {
-    backgroundColor: theme.palette.primary.light,
+    backgroundColor: theme.palette.secondary.light,
   },
   '& .MuiSlider-rail': {
-    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
   },
   '& .MuiSlider-track': {
-    background: 'linear-gradient(45deg, #6b46c1 30%, #9f7aea 90%)',
+    background: `linear-gradient(45deg, ${theme.palette.secondary.dark} 30%, ${theme.palette.secondary.main} 90%)`,
   },
 }));
 
