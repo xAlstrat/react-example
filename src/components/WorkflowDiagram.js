@@ -3,18 +3,17 @@ import { Box } from '@mui/material';
 import styled from '@emotion/styled';
 import {
   ReactFlow,
-  Controls,
   useNodesState,
   useEdgesState,
   addEdge,
 } from '@xyflow/react';
 import ProcessIcon from '@mui/icons-material/Settings';
-import ResultIcon from '@mui/icons-material/Done';
 import ApiIcon from '@mui/icons-material/Api';
 import FolderIcon from '@mui/icons-material/Folder';
 import DescriptionIcon from '@mui/icons-material/Description';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
-import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import CloudIcon from '@mui/icons-material/Cloud';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 import '@xyflow/react/dist/base.css';
 import TurboEdge from './TurboEdge';
@@ -171,7 +170,8 @@ const _SubDataNode = ({ data }) => {
     <DataNode>
       <GradientIcon>{data.icon}</GradientIcon>
       <DataNodeTitle position={data.titlePosition || 'bottom'}>{data.title}</DataNodeTitle>
-      <Handle type="source" position={data.sourceHandlePosition || Position.Bottom} />
+      <Handle type="target" position={Position.Left} />
+      <Handle type="source" position={data.sourceHandlePosition || Position.Right} />
     </DataNode>
   );
 };
@@ -180,17 +180,6 @@ const MainNode = memo(_MainNode);
 const SubDataNode = memo(_SubDataNode);
 const TurboNode = memo(_TurboNode);
 const ModelNode = memo(_ModelNode);
-
-const _TextNode = ({ data }) => {
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <div style={{ fontSize: '12px', textAlign: 'center' }}>{data.title}</div>
-      <Handle type="target" position={Position.Left} />
-    </div>
-  );
-};
-
-const TextNode = memo(_TextNode);
 
 const initialNodes = [
   {
@@ -255,17 +244,19 @@ const initialNodes = [
     id: '4a',
     position: { x: 330, y: 80 },
     data: { 
+      icon: <CloudIcon />,
       title: 'Cloud Events', 
     },
-    type: 'text',
+    type: 'data',
   },
   {
     id: '4b',
-    position: { x: 330, y: 120 },
+    position: { x: 330, y: 140 },
     data: { 
+      icon: <GitHubIcon />,
       title: 'Code Repo', 
     },
-    type: 'text',
+    type: 'data',
   },
 ];
 
@@ -275,8 +266,8 @@ const initialEdges = [
   { id: 'e3b-2', source: '3b', target: '2', label: 'Injects data', animated: true, targetHandle: "top" },
   { id: 'e3c-2', source: '3c', target: '2', label: 'Injects data', animated: true, targetHandle: "top" },
   { id: 'e5-2', source: '5', target: '2', label: 'Provides LLM', animated: true, targetHandle: "bottom" },
-  { id: 'e2-4a', source: '2', target: '4a', label: 'Produces' },
-  { id: 'e2-4b', source: '2', target: '4b', label: 'Produces' },
+  { id: 'e2-4a', source: '2', target: '4a', label: 'Produces', animated: true, },
+  { id: 'e2-4b', source: '2', target: '4b', label: 'Produces', animated: true, },
 ];
 
 const nodeTypes = {
@@ -284,7 +275,6 @@ const nodeTypes = {
   main: MainNode,
   data: SubDataNode,
   model: ModelNode,
-  text: TextNode,
 };
 
 const edgeTypes = {
@@ -297,12 +287,12 @@ const defaultEdgeOptions = {
 };
 
 const WorkflowDiagram = () => {
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [nodes, , onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   const onConnect = useCallback(
     (params) => setEdges((els) => addEdge(params, els)),
-    [],
+    [setEdges],
   );
 
   return (
