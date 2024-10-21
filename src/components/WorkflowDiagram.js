@@ -77,7 +77,7 @@ const DataNodeTitle = styled.div`
   left: 50%;
   transform: translateX(-50%);
   width: max-content;
-  ${props => props.position === 'top' ? 'bottom: 100%;' : 'top: 100%;'}
+  ${props => props.position === 'top' ? 'bottom: 70%;' : 'top: 70%;'}
 `;
 
 const GradientIcon = styled.div`
@@ -181,6 +181,16 @@ const SubDataNode = memo(_SubDataNode);
 const TurboNode = memo(_TurboNode);
 const ModelNode = memo(_ModelNode);
 
+const _TextNode = ({ data }) => {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <div style={{ fontSize: '12px', textAlign: 'center' }}>{data.title}</div>
+      <Handle type="target" position={Position.Left} />
+    </div>
+  );
+};
+
+const TextNode = memo(_TextNode);
 
 const initialNodes = [
   {
@@ -208,7 +218,7 @@ const initialNodes = [
     data: { 
       icon: <ApiIcon />, 
       title: 'API',
-      titlePosition: 'top',
+      titlePosition: 'bottom',
     },
     type: 'data',
   },
@@ -218,7 +228,7 @@ const initialNodes = [
     data: { 
       icon: <FolderIcon />, 
       title: 'Repository',
-      titlePosition: 'top',
+      titlePosition: 'bottom',
     },
     type: 'data',
   },
@@ -228,7 +238,7 @@ const initialNodes = [
     data: { 
       icon: <DescriptionIcon />, 
       title: 'Documents',
-      titlePosition: 'top',
+      titlePosition: 'bottom',
     },
     type: 'data',
   },
@@ -242,13 +252,20 @@ const initialNodes = [
     type: 'model',
   },
   {
-    id: '4',
-    position: { x: 330, y: 100 - 6 },
+    id: '4a',
+    position: { x: 330, y: 80 },
     data: { 
-      icon: <ResultIcon />, 
-      title: 'Result', 
+      title: 'Cloud Events', 
     },
-    type: 'turbo',
+    type: 'text',
+  },
+  {
+    id: '4b',
+    position: { x: 330, y: 120 },
+    data: { 
+      title: 'Code Repo', 
+    },
+    type: 'text',
   },
 ];
 
@@ -258,7 +275,8 @@ const initialEdges = [
   { id: 'e3b-2', source: '3b', target: '2', label: 'Injects data', animated: true, targetHandle: "top" },
   { id: 'e3c-2', source: '3c', target: '2', label: 'Injects data', animated: true, targetHandle: "top" },
   { id: 'e5-2', source: '5', target: '2', label: 'Provides LLM', animated: true, targetHandle: "bottom" },
-  { id: 'e2-4', source: '2', target: '4', label: 'Produces' },
+  { id: 'e2-4a', source: '2', target: '4a', label: 'Produces' },
+  { id: 'e2-4b', source: '2', target: '4b', label: 'Produces' },
 ];
 
 const nodeTypes = {
@@ -266,6 +284,7 @@ const nodeTypes = {
   main: MainNode,
   data: SubDataNode,
   model: ModelNode,
+  text: TextNode,
 };
 
 const edgeTypes = {
