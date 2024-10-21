@@ -1,14 +1,14 @@
 import React from 'react';
-import Header from './components/Header';
-import Hero from './components/Hero';
-import UseCases from './components/UseCases';
-import DisplayComponents from './components/DisplayComponents';
-import KeyFeatures from './components/KeyFeatures';
-import HowItWorks from './components/HowItWorks';
-import StudyCases from './components/StudyCases';
-import Testimonials from './components/Testimonials';
-import Pricing from './components/Pricing';
-import Footer from './components/Footer';
+import Header from './sections/Header';
+import Hero from './sections/Hero';
+import UseCases from './sections/UseCases';
+import DisplayComponents from './sections/DisplayComponents';
+import KeyFeatures from './sections/KeyFeatures';
+import HowItWorks from './sections/HowItWorks';
+import StudyCases from './sections/StudyCases';
+import Testimonials from './sections/Testimonials';
+import Pricing from './sections/Pricing';
+import Footer from './sections/Footer';
 
 function LandingPage() {
   return (
@@ -17,8 +17,8 @@ function LandingPage() {
       <main>
         <Hero />
         <UseCases />
-        <KeyFeatures id="key-features" />
-        <DisplayComponents />
+        {/* <KeyFeatures id="key-features" /> */}
+        {/* <DisplayComponents /> */}
         {/* <HowItWorks />
         <StudyCases />
         <Testimonials /> */}

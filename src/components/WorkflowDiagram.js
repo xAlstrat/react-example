@@ -27,12 +27,12 @@ const NodeBase = styled.div`
   border-radius: 8px;
   color: #ffffff;
   font-weight: 300;
-  padding: 10px;
+  padding: 0px;
   text-align: center;
   box-shadow: 0 0 20px rgba(142, 45, 226, 0.6);
   transition: all 0.3s ease;
-  width: 160px;
-  height: 160px;
+  width: 140px;
+  height: 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -55,21 +55,10 @@ const TurboNodeContainer = styled.div`
 `;
 
 const TurboNodeIcon = styled.div`
-  font-size: 20px;
-  margin-bottom: 5px;
-`;
-
-const TurboNodeText = styled.div`
-  text-align: center;
 `;
 
 const TurboNodeTitle = styled.div`
   font-weight: bold;
-  margin-bottom: 2px;
-`;
-
-const TurboNodeSubline = styled.div`
-  font-size: 8px;
 `;
 
 const DataNode = styled.div`
@@ -154,17 +143,15 @@ const _MainNode = ({ data }) => {
       <Handle type="target" position={Position.Left} />
       <Handle type="target" position={Position.Top} id='top' />
       <TurboNodeContainer>
-        <TurboNodeIcon style={{ fontSize: '32px' }}>{data.icon}</TurboNodeIcon>
-        <TurboNodeText>
+        <TurboNodeIcon>{data.icon}</TurboNodeIcon>
           <TurboNodeTitle style={{ fontSize: '16px' }}>{data.title}</TurboNodeTitle>
-        </TurboNodeText>
       </TurboNodeContainer>
       <Handle type="source" position={Position.Right} />
       <Handle type="target" position={Position.Bottom} id='bottom' />
-      <div style={{ position: 'absolute', top: '3px', left: '50%', transform: 'translateX(-50%)', fontSize: '12px', color: 'white' }}>sources</div>
-      <div style={{ position: 'absolute', bottom: '3px', left: '50%', transform: 'translateX(-50%)', fontSize: '12px', color: 'white' }}>llm</div>
-      <div style={{ position: 'absolute', left: '3px', top: '50%', transform: 'translateY(-50%) rotate(-90deg)', fontSize: '12px', color: 'white' }}>input</div>
-      <div style={{ position: 'absolute', right: '3px', top: '50%', transform: 'translateY(-50%) rotate(90deg)', fontSize: '12px', color: 'white' }}>output</div>
+      <div style={{ position: 'absolute', top: '3px', left: '50%', transform: 'translateX(-50%)', fontSize: '8px', color: 'white', textTransform: "uppercase" }}>sources</div>
+      <div style={{ position: 'absolute', bottom: '3px', left: '50%', transform: 'translateX(-50%)', fontSize: '8px', color: 'white', textTransform: "uppercase" }}>llm</div>
+      <div style={{ position: 'absolute', left: '-2px', top: '50%', transform: 'translateY(-50%) rotate(-90deg)', fontSize: '8px', color: 'white', textTransform: "uppercase" }}>input</div>
+      <div style={{ position: 'absolute', right: '-6px', top: '50%', transform: 'translateY(-50%) rotate(90deg)', fontSize: '8px', color: 'white', textTransform: "uppercase" }}>output</div>
     </NodeBase>
   );
 };
@@ -178,26 +165,6 @@ const _ModelNode = ({ data }) => {
     </div>
   );
 };
-
-const _TaskNode = ({ data }) => {
-
-  return (
-    <div style={{ 
-      border: '2px solid #ae53ba', 
-      borderRadius: '4px', 
-      padding: '10px', 
-      display: 'flex', 
-      flexDirection: 'column', 
-      alignItems: 'center',
-      overflow: 'hidden'
-    }}>
-      <div style={{ fontSize: '14px', fontWeight: 'bold', marginTop: '5px', marginBottom: '10px' }}>{data.title}</div>
-      <Handle type="target" position={Position.Left} />
-      <Handle type="source" position={Position.Right} />
-    </div>
-  );
-};
-
 
 const _SubDataNode = ({ data }) => {
   return (
@@ -218,20 +185,20 @@ const ModelNode = memo(_ModelNode);
 const initialNodes = [
   {
     id: '1',
-    position: { x: 100 - 29, y: 150 - 31},
+    position: { x: 100 - 29, y: 150 - 32},
     data: { 
-      icon: <SmartToyIcon />, 
-      title: 'Trigger & Input', 
+      icon: <ProcessIcon />, 
+      title: 'Trigger', 
       sourceHandlePosition: Position.Right
     },
     type: 'data',
   },
   {
     id: '2',
-    position: { x: 200 - 80, y: 150 - 80 },
+    position: { x: 200 - 40, y: 98 },
     data: { 
-      icon: <ProcessIcon />, 
-      title: 'Pluscoder', 
+      icon: <SmartToyIcon />, 
+      title: '+CODER', 
     },
     type: 'main',
   },

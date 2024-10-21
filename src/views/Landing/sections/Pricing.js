@@ -79,7 +79,11 @@ const PricingCard = ({ tier, isPopular }) => (
   <StyledCard elevation={isPopular ? 8 : 1}>
     <StyledCardContent>
       <Box>
-        <Typography variant="h5" component="h2" gutterBottom color="primary.main">
+        <Typography variant="h4" component="h2" gutterBottom sx={{
+              fontWeight: 300,
+              textTransform: 'uppercase',
+              letterSpacing: '0.1em',
+            }}>
           {tier.title}
         </Typography>
         <Typography variant="body2" color="text.secondary" paragraph>
@@ -142,57 +146,49 @@ const PricingCard = ({ tier, isPopular }) => (
 
 const standardTiers = [
   {
-    title: 'Junior Engineer (Monthly)',
-    subtitle: "Get the monthly subscription, and we'll take care of you. 😎",
+    title: 'Developer',
+    subtitle: "Perfect to boost you development to the next level",
     price: '15',
-    originalPrice: '18',
     period: '/month',
-    description: '(Early Bird)',
     features: [
-      'Monthly refill of PearAI Credits for market-leading AI models',
-      'Full privacy: zero data retention policy with Anthropic',
-      'Direct customer support by the founders and contributors',
-      'Private Discord channel',
       'Automated file updates and context loading',
-      'Custom context sources',
-      'Pre-defined and custom specialized agents',
-      'Multi-modal LLM support',
+      'Task based agent workflows and delegation',
+      'Pre-defined and specialized custom agents',
       'Tests/Lint feedback based solutions',
-      'Custom prompt commands',
-      'Task based executions',
+      'Adaptive context learning',
+      'Custom context sources',
+      'Multi-modal LLM support',
+      "Connect your own models",
+      "Standard support"
     ],
-    buttonText: 'Get Started',
-  },
-  {
-    title: '10x Engineer (Yearly)',
-    subtitle: "Pay one lump sum yearly, and you'll be treated like our VIP! 🤩",
-    price: '10',
-    originalPrice: '14',
-    period: '/month',
-    description: '(Early Bird)',
-    features: [
-      'Everything from monthly',
-      'Priority for new feature requests',
-      'Early access to new features (e.g. o1-mini and o1-preview)',
-    ],
-    buttonText: 'Get Started',
-  },
+    buttonText: 'Start Free Trial',
+  }
 ];
 
 const enterpriseTiers = [
   {
+    title: 'Team',
+    subtitle: 'Be a top-tier development team',
+    price: '35',
+    period: '/month',
+    features: [
+      'Everything in free for each developer',
+      '100% autonomous runs in your cloud and platforms',
+      'Event based hooks',
+      'Dedicated support for development and cloud environments',
+    ],
+    buttonText: 'Start Free Trial',
+  },
+  {
     title: 'Enterprise',
     subtitle: 'Customized solutions for large-scale implementations',
-    price: 'Custom',
+    price: 'CUSTOM',
+    period: '/yr',
     features: [
-      'Dedicated account manager',
-      'Custom AI model training',
-      'Advanced security features',
-      'API access and integration support',
-      'Unlimited PearAI Credits',
-      'On-premise deployment options',
+      'Everything in Team',
+      'Enterprise Support & Custom SLAs',
     ],
-    buttonText: 'Contact Sales',
+    buttonText: 'Let\'s talk',
   },
 ];
 
@@ -221,16 +217,16 @@ const Pricing = () => {
               color: theme.palette.common.white 
             }}
           >
-            Develop <HighlightedText>10x</HighlightedText> faster just now
+            Automate your code base <HighlightedText>10x</HighlightedText> faster now
           </Typography>
-          <Box sx={{ mb: 4, display: 'flex', justifyContent: 'center' }}>
+          {/* <Box sx={{ mb: 4, display: 'flex', justifyContent: 'center' }}>
             <StyledTabs value={selectedTab} onChange={handleTabChange}>
               <StyledTab label="Standard" />
               <StyledTab label="Enterprise" />
             </StyledTabs>
-          </Box>
+          </Box> */}
           <Grid container spacing={4} alignItems="stretch" justifyContent="center">
-            {currentTiers.map((tier, index) => (
+            {([...currentTiers, ...enterpriseTiers]).map((tier, index) => (
               <Grid item key={tier.title} xs={12} sm={6} md={selectedTab === 0 ? 4 : 6}>
                 <PricingCard tier={tier} isPopular={selectedTab === 0 ? index === 1 : true} />
               </Grid>
