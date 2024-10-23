@@ -137,20 +137,43 @@ const _TurboNode = ({ data }) => {
 };
 
 const _MainNode = ({ data }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   return (
     <NodeBase>
-      <Handle type="target" position={Position.Left} style={{opacity: 0}} />
-      <Handle type="target" position={Position.Top} id='top' style={{opacity: 0}}/>
+      {isMobile ? (
+        <>
+          <Handle type="target" position={Position.Top} id='input' style={{opacity: 0, left: '30%'}}/>
+          <Handle type="target" position={Position.Top} id='sources' style={{opacity: 0, left: '70%'}}/>
+          <Handle type="source" position={Position.Bottom} id='output' style={{opacity: 0}}/>
+        </>
+      ) : (
+        <>
+          <Handle type="target" position={Position.Left} style={{opacity: 0}} />
+          <Handle type="target" position={Position.Top} id='top' style={{opacity: 0}}/>
+          <Handle type="source" position={Position.Right} style={{opacity: 0}}/>
+          <Handle type="target" position={Position.Bottom} id='bottom' style={{opacity: 0}}/>
+        </>
+      )}
       <TurboNodeContainer>
         <TurboNodeIcon>{data.icon}</TurboNodeIcon>
-          <TurboNodeTitle style={{ fontSize: '16px' }}>{data.title}</TurboNodeTitle>
+        <TurboNodeTitle style={{ fontSize: '16px' }}>{data.title}</TurboNodeTitle>
       </TurboNodeContainer>
-      <Handle type="source" position={Position.Right} style={{opacity: 0}}/>
-      <Handle type="target" position={Position.Bottom} id='bottom' style={{opacity: 0}}/>
-      <div style={{ position: 'absolute', top: '3px', left: '50%', transform: 'translateX(-50%)', fontSize: '8px', color: 'white', textTransform: "uppercase" }}>sources</div>
-      <div style={{ position: 'absolute', bottom: '3px', left: '50%', transform: 'translateX(-50%)', fontSize: '8px', color: 'white', textTransform: "uppercase" }}>llm</div>
-      <div style={{ position: 'absolute', left: '-2px', top: '50%', transform: 'translateY(-50%) rotate(-90deg)', fontSize: '8px', color: 'white', textTransform: "uppercase" }}>input</div>
-      <div style={{ position: 'absolute', right: '-6px', top: '50%', transform: 'translateY(-50%) rotate(90deg)', fontSize: '8px', color: 'white', textTransform: "uppercase" }}>output</div>
+      {isMobile ? (
+        <>
+          <div style={{ position: 'absolute', top: '3px', left: '30%', transform: 'translateX(-50%)', fontSize: '8px', color: 'white', textTransform: "uppercase" }}>input</div>
+          <div style={{ position: 'absolute', top: '3px', left: '70%', transform: 'translateX(-50%)', fontSize: '8px', color: 'white', textTransform: "uppercase" }}>sources</div>
+          <div style={{ position: 'absolute', bottom: '3px', left: '50%', transform: 'translateX(-50%)', fontSize: '8px', color: 'white', textTransform: "uppercase" }}>output</div>
+        </>
+      ) : (
+        <>
+          <div style={{ position: 'absolute', top: '3px', left: '50%', transform: 'translateX(-50%)', fontSize: '8px', color: 'white', textTransform: "uppercase" }}>sources</div>
+          <div style={{ position: 'absolute', bottom: '3px', left: '50%', transform: 'translateX(-50%)', fontSize: '8px', color: 'white', textTransform: "uppercase" }}>llm</div>
+          <div style={{ position: 'absolute', left: '-2px', top: '50%', transform: 'translateY(-50%) rotate(-90deg)', fontSize: '8px', color: 'white', textTransform: "uppercase" }}>input</div>
+          <div style={{ position: 'absolute', right: '-6px', top: '50%', transform: 'translateY(-50%) rotate(90deg)', fontSize: '8px', color: 'white', textTransform: "uppercase" }}>output</div>
+        </>
+      )}
     </NodeBase>
   );
 };
@@ -296,11 +319,30 @@ const WorkflowDiagram = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   
   const mobileNodes = useMemo(() => initialNodes.map(node => {
+    const getSourcePosition = (id) => {
+      if (['3a', '3b', '3c'].includes(id)) return Position.Bottom;
+      if (id === '1') return Position.Right;
+      if (id === '2') return Position.Bottom;
+      return Position.Left;
+    };
+
+    const getTargetPosition = (id) => {
+      if (['4a', '4b'].includes(id)) return Position.Top;
+      return Position.Left;
+    };
     if (node.id === '5') return null; // Remove Model API node
     
     switch(node.id) {
       case '1': // Trigger
-        return { ...node, position: { x: 100 - 29, y: 50 } };
+        return { 
+          ...node, 
+          position: { x: 100 - 29, y: 50 },
+          data: {
+            ...node.data,
+            sourceHandlePosition: getSourcePosition(node.id),
+            targetHandlePosition: getTargetPosition(node.id)
+          }
+        };
       case '2': // Main node
         return { ...node, position: { x: 200 - 40, y: 150 } };
       case '3a': // API
@@ -311,6 +353,11 @@ const WorkflowDiagram = () => {
           position: { 
             x: node.position.x, 
             y: 50
+          },
+          data: {
+            ...node.data,
+            sourceHandlePosition: getSourcePosition(node.id),
+            targetHandlePosition: getTargetPosition(node.id)
           }
         };
       case '4a': // Cloud Events
@@ -320,6 +367,11 @@ const WorkflowDiagram = () => {
           position: {
             x: node.position.x - 130,
             y: node.id === '4a' ? 250 : 310
+          },
+          data: {
+            ...node.data,
+            sourceHandlePosition: getSourcePosition(node.id),
+            targetHandlePosition: getTargetPosition(node.id)
           }
         };
       default:
@@ -327,9 +379,20 @@ const WorkflowDiagram = () => {
     }
   }).filter(Boolean), []);
 
-  const mobileEdges = useMemo(() => initialEdges.filter(edge => 
-    edge.source !== '5' && edge.target !== '5'
-  ), []);
+  const mobileEdges = useMemo(() => initialEdges
+    .filter(edge => edge.source !== '5' && edge.target !== '5')
+    .map(edge => {
+      if (edge.source === '1') {
+        return { ...edge, targetHandle: 'input' };
+      }
+      if (['3a', '3b', '3c'].includes(edge.source)) {
+        return { ...edge, targetHandle: 'sources' };
+      }
+      if (edge.source === '2') {
+        return { ...edge, sourceHandle: 'output' };
+      }
+      return edge;
+    }), []);
 
   const [nodes, , onNodesChange] = useNodesState(isMobile ? mobileNodes : initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(isMobile ? mobileEdges : initialEdges);
