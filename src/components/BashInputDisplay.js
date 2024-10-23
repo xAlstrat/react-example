@@ -15,7 +15,8 @@ const blinkCaret = keyframes`
 const ConsoleContainer = styled(Box)(({ theme }) => ({
   backgroundColor: '#1e1e1e',
   borderRadius: theme.spacing(1),
-  padding: theme.spacing(1),
+  padding: theme.spacing(2),
+  margin: theme.spacing(0, 2),
   fontFamily: 'Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace',
   fontSize: '14px',
   lineHeight: 1.5,
@@ -24,6 +25,10 @@ const ConsoleContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
+  [theme.breakpoints.down('sm')]: {
+    padding: theme.spacing(1.5),
+    margin: theme.spacing(0, 1),
+  }
 }));
 
 const TextContainer = styled(Box)({
@@ -59,6 +64,13 @@ const ReturnButton = styled(Button)(({ theme }) => ({
     backgroundColor: '#222222',
     color: '#666666',
   },
+  [theme.breakpoints.down('sm')]: {
+    minWidth: '40px',
+    marginLeft: theme.spacing(1),
+    '& .buttonText': {
+      display: 'none'
+    }
+  }
 }));
 
 const BashInputDisplay = ({ text }) => {
@@ -80,7 +92,7 @@ const BashInputDisplay = ({ text }) => {
         </AnimatedText>
       </TextContainer>
       <ReturnButton variant="contained" disabled>
-        Return ↵
+        <span className="buttonText">Return</span> ↵
       </ReturnButton>
     </ConsoleContainer>
   );

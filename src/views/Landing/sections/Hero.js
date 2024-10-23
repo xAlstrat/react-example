@@ -34,28 +34,44 @@ const HeroContent = styled(Box)(({ theme }) => ({
   justifyContent: 'center',
   alignItems: 'center',
   minHeight: '100vh',
-  padding: 0,
+  padding: theme.spacing(2),
   position: 'relative',
   zIndex: 1,
   textAlign: 'center',
+  [theme.breakpoints.down('sm')]: {
+    padding: theme.spacing(1),
+  }
 }));
 
 const StyledTypography = styled(Typography)(({ theme }) => ({
   color: theme.palette.common.white,
   textShadow: '0 2px 4px rgba(0,0,0,0.1)',
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '1.75rem',
+    lineHeight: 1.2
+  }
 }));
 
-const AnimatedTextContainer = styled(Box)({
+const AnimatedTextContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'baseline',
   marginBottom: '16px',
-});
+  flexDirection: 'row',
+  [theme.breakpoints.down('sm')]: {
+    flexDirection: 'column',
+    alignItems: 'center',
+  }
+}));
 
-const FixedWidthBox = styled(Box)({
-  width: '350px', // Adjust this value based on the longest animated text
+const FixedWidthBox = styled(Box)(({ theme }) => ({
+  width: '350px',
   textAlign: 'left',
-});
+  [theme.breakpoints.down('sm')]: {
+    width: '100%',
+    textAlign: 'center'
+  }
+}));
 
 const StyledButton = styled(Button)(({ theme }) => ({
   marginTop: theme.spacing(4),
@@ -87,6 +103,10 @@ const LogoText = styled(Typography)(({ theme }) => ({
   '& span': {
     color: theme.palette.secondary.main,
   },
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '2rem',
+    marginBottom: theme.spacing(3),
+  }
 }));
 
 const Hero = () => {
@@ -110,11 +130,18 @@ const Hero = () => {
           <StyledTypography variant="h2" component="h1" gutterBottom>
             automated by AI
           </StyledTypography>
-          <StyledTypography variant="h4" gutterBottom>
+          <StyledTypography 
+            variant="h4" 
+            gutterBottom 
+            sx={{ 
+              fontSize: { xs: '1.2rem', sm: '1.5rem', md: '2.125rem' },
+              lineHeight: { xs: 1.3, sm: 1.4 }
+            }}
+          >
             <HighlightedText>Repository automation</HighlightedText> & <HighlightedText>coding assistance</HighlightedText><br /> 
             <strong>anywhere</strong> with just one command
           </StyledTypography>
-            <Box mt={4} mb={4} width="100%" maxWidth="800px">
+            <Box mt={4} mb={4} width="100%" maxWidth="800px" sx={{ px: { xs: 1, sm: 2 } }}>
           <AnimatedElement>
               <BashDisplay />
               </AnimatedElement>

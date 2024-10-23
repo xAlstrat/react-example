@@ -25,6 +25,7 @@ const ConsoleContainer = styled(Box)(({ theme }) => ({
   backgroundColor: '#1e1e1e',
   borderRadius: theme.spacing(1),
   padding: theme.spacing(2),
+  margin: theme.spacing(0, 2),
   fontFamily: 'Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace',
   fontSize: '14px',
   lineHeight: 1.5,
@@ -33,6 +34,10 @@ const ConsoleContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
+  [theme.breakpoints.down('sm')]: {
+    padding: theme.spacing(1.5),
+    margin: theme.spacing(0, 1),
+  }
 }));
 
 const TextContainer = styled(Box)({
@@ -43,10 +48,17 @@ const TextContainer = styled(Box)({
   alignItems: 'center',
 });
 
-const CommandLine = styled('div')({
+const CommandLine = styled('div')(({ theme }) => ({
   color: '#d4d4d4',
   whiteSpace: 'nowrap',
-});
+  fontSize: '14px',
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '12px',
+    whiteSpace: 'pre-wrap',
+    wordBreak: 'break-word',
+    lineHeight: 1.4
+  }
+}));
 
 const AnimatedText = styled('div')(({ color, isTyping }) => ({
   color: color || '#d4d4d4',
@@ -73,15 +85,24 @@ const ReturnButton = styled(Button)(({ theme }) => ({
   whiteSpace: 'nowrap',
   minWidth: '80px',
   flexShrink: 0,
-  marginLeft: theme.spacing(4),
+  marginLeft: theme.spacing(2),
+  padding: theme.spacing(1, 2),
   '&:hover': {
     backgroundColor: '#444444',
   },
+  [theme.breakpoints.down('sm')]: {
+    minWidth: '36px',
+    marginLeft: theme.spacing(1),
+    padding: theme.spacing(0.5, 1),
+    '& .buttonText': {
+      display: 'none'
+    }
+  }
 }));
 
 const BashDisplay = () => {
   const [animationStage, setAnimationStage] = useState(0);
-  const [displayText, setDisplayText] = useState('$ pluscoder --input \'Look m\'am im coding\' --agent my-coding-expert --yes');
+  const [displayText, setDisplayText] = useState('$ pluscoder --input "Look m\'am im coding"');
   const [isTyping, setIsTyping] = useState(false);
 
   const animationTexts = [
@@ -147,7 +168,7 @@ const BashDisplay = () => {
         onClick={handleReturnClick} 
         disabled={animationStage !== 0}
       >
-        Return ↵
+        <span className="buttonText">Return</span> ↵
       </ReturnButton>
     </ConsoleContainer>
   );
