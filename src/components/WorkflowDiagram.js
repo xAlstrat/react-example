@@ -130,8 +130,8 @@ const _TurboNode = ({ data }) => {
       <CircularNode>
         <GradientIcon>{data.icon}</GradientIcon>
       </CircularNode>
-      <Handle type="target" position={Position.Left} style={{top: "calc(50% + 12px)"}} />
-      <Handle type="source" position={Position.Right} style={{top: "calc(50% + 12px)"}} />
+      <Handle type="target" position={Position.Left} style={{top: "calc(50% + 12px)", opacity: 0}} />
+      <Handle type="source" position={Position.Right} style={{top: "calc(50% + 12px)", opacity: 0}} />
     </CircularNodeContainer>
   );
 };
@@ -139,14 +139,14 @@ const _TurboNode = ({ data }) => {
 const _MainNode = ({ data }) => {
   return (
     <NodeBase>
-      <Handle type="target" position={Position.Left} />
-      <Handle type="target" position={Position.Top} id='top' />
+      <Handle type="target" position={Position.Left} style={{opacity: 0}} />
+      <Handle type="target" position={Position.Top} id='top' style={{opacity: 0}}/>
       <TurboNodeContainer>
         <TurboNodeIcon>{data.icon}</TurboNodeIcon>
           <TurboNodeTitle style={{ fontSize: '16px' }}>{data.title}</TurboNodeTitle>
       </TurboNodeContainer>
-      <Handle type="source" position={Position.Right} />
-      <Handle type="target" position={Position.Bottom} id='bottom' />
+      <Handle type="source" position={Position.Right} style={{opacity: 0}}/>
+      <Handle type="target" position={Position.Bottom} id='bottom' style={{opacity: 0}}/>
       <div style={{ position: 'absolute', top: '3px', left: '50%', transform: 'translateX(-50%)', fontSize: '8px', color: 'white', textTransform: "uppercase" }}>sources</div>
       <div style={{ position: 'absolute', bottom: '3px', left: '50%', transform: 'translateX(-50%)', fontSize: '8px', color: 'white', textTransform: "uppercase" }}>llm</div>
       <div style={{ position: 'absolute', left: '-2px', top: '50%', transform: 'translateY(-50%) rotate(-90deg)', fontSize: '8px', color: 'white', textTransform: "uppercase" }}>input</div>
@@ -160,7 +160,7 @@ const _ModelNode = ({ data }) => {
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <GradientIcon>{data.icon}</GradientIcon>
       <div style={{ fontSize: '10px', marginTop: '5px' }}>{data.title}</div>
-      <Handle type="source" position={Position.Top} />
+      <Handle type="source" position={Position.Top} style={{opacity: 0}}/>
     </div>
   );
 };
@@ -170,8 +170,8 @@ const _SubDataNode = ({ data }) => {
     <DataNode>
       <GradientIcon>{data.icon}</GradientIcon>
       <DataNodeTitle position={data.titlePosition || 'bottom'}>{data.title}</DataNodeTitle>
-      <Handle type="target" position={Position.Left} />
-      <Handle type="source" position={data.sourceHandlePosition || Position.Right} />
+      {data.targetHandlePosition && <Handle type="target" position={data.targetHandlePosition} style={{opacity: 0}}/>}
+      {data.sourceHandlePosition && <Handle type="source" position={data.sourceHandlePosition || Position.Right} style={{opacity: 0}}/>}
     </DataNode>
   );
 };
@@ -188,7 +188,7 @@ const initialNodes = [
     data: { 
       icon: <ProcessIcon />, 
       title: 'Trigger', 
-      sourceHandlePosition: Position.Right
+      sourceHandlePosition: Position.Right,
     },
     type: 'data',
   },
@@ -208,6 +208,7 @@ const initialNodes = [
       icon: <ApiIcon />, 
       title: 'API',
       titlePosition: 'bottom',
+      sourceHandlePosition: Position.Bottom
     },
     type: 'data',
   },
@@ -218,6 +219,7 @@ const initialNodes = [
       icon: <FolderIcon />, 
       title: 'Repository',
       titlePosition: 'bottom',
+      sourceHandlePosition: Position.Bottom
     },
     type: 'data',
   },
@@ -226,8 +228,9 @@ const initialNodes = [
     position: { x: 265, y: 0 },
     data: { 
       icon: <DescriptionIcon />, 
-      title: 'Documents',
+      title: 'Guidelines',
       titlePosition: 'bottom',
+      sourceHandlePosition: Position.Bottom
     },
     type: 'data',
   },
@@ -246,6 +249,7 @@ const initialNodes = [
     data: { 
       icon: <CloudIcon />,
       title: 'Cloud Events', 
+      targetHandlePosition: Position.Left
     },
     type: 'data',
   },
@@ -254,7 +258,8 @@ const initialNodes = [
     position: { x: 330, y: 140 },
     data: { 
       icon: <GitHubIcon />,
-      title: 'Code Repo', 
+      title: 'Repo Commits', 
+      targetHandlePosition: Position.Left
     },
     type: 'data',
   },
@@ -283,26 +288,19 @@ const edgeTypes = {
 
 const defaultEdgeOptions = {
   type: 'turbo',
-  markerEnd: 'edge-circle',
+  //markerEnd: 'edge-circle',
 };
 
 const WorkflowDiagram = () => {
   const [nodes, , onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
-  const onConnect = useCallback(
-    (params) => setEdges((els) => addEdge(params, els)),
-    [setEdges],
-  );
-
   return (
     <StyledReactFlow
-    preventScrolling={false}
+      preventScrolling={false}
+      connectOnClick={false}
       nodes={nodes}
       edges={edges}
-      onNodesChange={onNodesChange}
-      onEdgesChange={onEdgesChange}
-      onConnect={onConnect}
       fitView
       nodeTypes={nodeTypes}
       edgeTypes={edgeTypes}
@@ -314,6 +312,8 @@ const WorkflowDiagram = () => {
       nodesConnectable={false}
       zoomOnDoubleClick={false}
       zoomOnScroll={false}
+      zoomOnPinch={false}
+      
     >
 
       <svg>

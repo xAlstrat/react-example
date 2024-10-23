@@ -33,7 +33,9 @@ const Header = () => {
     { label: 'Home', to: 'hero' },
     { label: 'Use Cases', to: 'use-cases' },
     // { label: 'Features', to: 'key-features' },
+    // Add FAQ to menu
     { label: 'Pricing', to: 'pricing' },
+    { label: 'FAQ', to: 'faq' },
   ];
 
   return (

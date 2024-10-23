@@ -2,13 +2,10 @@ import React from 'react';
 import Header from './sections/Header';
 import Hero from './sections/Hero';
 import UseCases from './sections/UseCases';
-import DisplayComponents from './sections/DisplayComponents';
-import KeyFeatures from './sections/KeyFeatures';
-import HowItWorks from './sections/HowItWorks';
-import StudyCases from './sections/StudyCases';
-import Testimonials from './sections/Testimonials';
+// Remove unused imports
 import Pricing from './sections/Pricing';
 import Footer from './sections/Footer';
+import FAQ from './sections/FAQ';
 
 function LandingPage() {
   return (
@@ -23,6 +20,7 @@ function LandingPage() {
         <StudyCases />
         <Testimonials /> */}
         <Pricing />
+        <FAQ />
       </main>
       <Footer />
     </div>

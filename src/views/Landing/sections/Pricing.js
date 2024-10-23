@@ -217,7 +217,7 @@ const Pricing = () => {
               color: theme.palette.common.white 
             }}
           >
-            Automate your code base <HighlightedText>10x</HighlightedText> faster now
+            Work on your code base <HighlightedText>10x</HighlightedText> faster now
           </Typography>
           {/* <Box sx={{ mb: 4, display: 'flex', justifyContent: 'center' }}>
             <StyledTabs value={selectedTab} onChange={handleTabChange}>
