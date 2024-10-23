@@ -30,7 +30,7 @@ const NodeBase = styled.div`
   text-align: center;
   box-shadow: 0 0 20px rgba(142, 45, 226, 0.6);
   transition: all 0.3s ease;
-  width: 140px;
+  width: ${({ theme }) => theme.breakpoints.down('sm') ? '210px' : '140px'};
   height: 100px;
   display: flex;
   flex-direction: column;
@@ -348,11 +348,16 @@ const WorkflowDiagram = () => {
       case '3a': // API
       case '3b': // Repository  
       case '3c': // Guidelines
+        const xPositions = {
+          '3a': 100,
+          '3b': 200,
+          '3c': 300
+        };
         return { 
           ...node, 
           position: { 
-            x: node.position.x, 
-            y: 50
+            x: xPositions[node.id], 
+            y: 30
           },
           data: {
             ...node.data,
