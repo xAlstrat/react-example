@@ -30,8 +30,11 @@ const NodeBase = styled.div`
   text-align: center;
   box-shadow: 0 0 20px rgba(142, 45, 226, 0.6);
   transition: all 0.3s ease;
-  width: ${({ theme }) => theme.breakpoints.down('sm') ? '210px' : '140px'};
+  width: 140px;
   height: 100px;
+  ${({ theme }) => theme.breakpoints.down('sm')} {
+    width: 210px;
+  }
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -415,7 +418,7 @@ const WorkflowDiagram = () => {
       defaultEdgeOptions={defaultEdgeOptions}
       panOnScroll={false}
       panOnDrag={false}
-      nodesDraggable={false}
+      nodesDraggable={true}
       elementsSelectable={false}
       nodesConnectable={false}
       zoomOnDoubleClick={false}
