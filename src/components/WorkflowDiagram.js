@@ -1,5 +1,5 @@
-import React, { memo, useCallback } from 'react';
-import { Box } from '@mui/material';
+import React, { memo, useCallback, useMemo } from 'react';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 import styled from '@emotion/styled';
 import {
   ReactFlow,
@@ -292,11 +292,51 @@ const defaultEdgeOptions = {
 };
 
 const WorkflowDiagram = () => {
-  const [nodes, , onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  
+  const mobileNodes = useMemo(() => initialNodes.map(node => {
+    if (node.id === '5') return null; // Remove Model API node
+    
+    switch(node.id) {
+      case '1': // Trigger
+        return { ...node, position: { x: 100 - 29, y: 50 } };
+      case '2': // Main node
+        return { ...node, position: { x: 200 - 40, y: 150 } };
+      case '3a': // API
+      case '3b': // Repository  
+      case '3c': // Guidelines
+        return { 
+          ...node, 
+          position: { 
+            x: node.position.x, 
+            y: 50
+          }
+        };
+      case '4a': // Cloud Events
+      case '4b': // Repo Commits
+        return {
+          ...node,
+          position: {
+            x: node.position.x - 130,
+            y: node.id === '4a' ? 250 : 310
+          }
+        };
+      default:
+        return node;
+    }
+  }).filter(Boolean), []);
+
+  const mobileEdges = useMemo(() => initialEdges.filter(edge => 
+    edge.source !== '5' && edge.target !== '5'
+  ), []);
+
+  const [nodes, , onNodesChange] = useNodesState(isMobile ? mobileNodes : initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(isMobile ? mobileEdges : initialEdges);
 
   return (
     <StyledReactFlow
+      style={{ height: isMobile ? '400px' : '500px' }}
       preventScrolling={false}
       connectOnClick={false}
       nodes={nodes}
