@@ -336,15 +336,15 @@ const WorkflowDiagram = () => {
       case '1': // Trigger
         return { 
           ...node, 
-          position: { x: 100 - 29, y: 50 },
+          position: { x: 100 - 29, y: 30 },
           data: {
             ...node.data,
-            sourceHandlePosition: getSourcePosition(node.id),
+            sourceHandlePosition: Position.Bottom,
             targetHandlePosition: getTargetPosition(node.id)
           }
         };
       case '2': // Main node
-        return { ...node, position: { x: 200 - 40, y: 150 } };
+        return { ...node, position: { x: 200 - 40, y: 120 } };
       case '3a': // API
       case '3b': // Repository  
       case '3c': // Guidelines
@@ -365,8 +365,8 @@ const WorkflowDiagram = () => {
         return {
           ...node,
           position: {
-            x: node.position.x - 130,
-            y: node.id === '4a' ? 250 : 310
+            x: node.id === '4a' ? 140 : 260,
+            y: 250
           },
           data: {
             ...node.data,
