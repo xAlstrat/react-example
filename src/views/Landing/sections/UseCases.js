@@ -20,7 +20,7 @@ import WorkflowDiagram from 'components/WorkflowDiagram';
 import TextDisplay from 'components/TextDisplay';
 import AnimatedElement from 'components/AnimatedElement';
 import Stack from '@mui/material/Stack';
-import { Code, BugReport, Description, RateReview, Rule, Science, Update, Storage, Cloud, Security, Expand } from '@mui/icons-material';
+import { Code, BugReport, Description, RateReview, Rule, Science, Update, Storage, Cloud, Security } from '@mui/icons-material';
 
 import '@xyflow/react/dist/base.css';
 const CodeAssistant = () => {
@@ -121,39 +121,39 @@ const CodeAssistant = () => {
         </Grid>
         <Grid item size={{ xs: 12, md: 6 }} >
           <AnimatedElement delay={0.8}>
-            <Typography variant="h6" gutterBottom>
-              Key Features
-            </Typography>
-            <List>
-              <ListItem>
-                <ListItemIcon><CodeIcon /></ListItemIcon>
-                <ListItemText primary="Smart Pattern Recognition and Best Practices Analysis" />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon><Storage /></ListItemIcon>
-                <ListItemText primary="Flexible Integration with External Knowledge Sources" />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon><Update /></ListItemIcon>
-                <ListItemText primary="Real-time Repository Synchronization and Code Generation" />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon><Science /></ListItemIcon>
-                <ListItemText primary="Intelligent Task Planning with Orchestrated Agent Workflows" />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon><SmartToyIcon /></ListItemIcon>
-                <ListItemText primary="Specialized Agents for Different Development Tasks" />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon><EmojiObjectsIcon /></ListItemIcon>
-                <ListItemText primary="Continuous Learning through Automated Feedback Loops" />
-              </ListItem>
-              <ListItem>
-                <ListItemIcon><Expand /></ListItemIcon>
-                <ListItemText primary="And many more capabilities..." />
-              </ListItem>
-            </List>
+            <Box
+              sx={{
+                background: 'rgba(255, 255, 255, 0.03)',
+                backdropFilter: 'blur(10px)',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                borderRadius: 2,
+                p: 4,
+                transition: 'all 0.3s ease',
+                '&:hover': {
+                  transform: 'translateY(-5px)',
+                  boxShadow: '0 8px 30px rgba(124, 58, 237, 0.1)',
+                  border: '1px solid rgba(124, 58, 237, 0.5)',
+                }
+              }}
+            >
+              <Typography variant="h5" gutterBottom sx={{ color: 'primary.main', fontWeight: 'bold', mb: 3 }}>
+                Key Capabilities
+              </Typography>
+              <Stack spacing={2}>
+                <Typography variant="body1">
+                  <HighlightedText>Smart Pattern Recognition</HighlightedText> and Best Practices Analysis for automated code improvements
+                </Typography>
+                <Typography variant="body1">
+                  <HighlightedText>Real-time Sync</HighlightedText> with repository and external knowledge sources integration
+                </Typography>
+                <Typography variant="body1">
+                  <HighlightedText>AI-Driven Workflows</HighlightedText> with intelligent task planning and orchestration
+                </Typography>
+                <Typography variant="body1">
+                  <HighlightedText>Specialized Agents</HighlightedText> for different development tasks and continuous learning
+                </Typography>
+              </Stack>
+            </Box>
           </AnimatedElement>
         </Grid>
       </Grid >
