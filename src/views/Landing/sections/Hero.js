@@ -128,7 +128,7 @@ const Hero = () => {
             </FixedWidthBox>
           </AnimatedTextContainer>
           <StyledTypography variant="h2" component="h1" gutterBottom>
-            automated by AI
+            automated by AI Agents
           </StyledTypography>
           <StyledTypography 
             variant="h4" 
@@ -139,7 +139,7 @@ const Hero = () => {
             }}
           >
             <HighlightedText>Repository automation</HighlightedText> & <HighlightedText>coding assistance</HighlightedText><br /> 
-            <strong>anywhere</strong> with just one command
+            with just one command
           </StyledTypography>
             <Box mt={4} mb={4} width="100%" maxWidth="800px" sx={{ px: { xs: 1, sm: 2 } }}>
           <AnimatedElement>

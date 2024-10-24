@@ -22,7 +22,7 @@ const AnimatedElement = ({ children, delay = 0, ...props }) => {
       }}
       {...props}
     >
-      {children}
+      {inView && children}
     </Box>
   );
 };

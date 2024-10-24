@@ -616,7 +616,7 @@ const ExampleSection = () => {
 
   return (
     <Section id="example-section" bgColor="dark1">
-      <Box sx={{ py: 8 }}>
+      <Box>
         <Container maxWidth="lg">
           <Typography 
             variant="h2" 

@@ -64,7 +64,7 @@ const FAQ = () => {
 
   return (
     <Section id="faq" bgColor="dark1">
-      <Box sx={{ py: 8 }}>
+      <Box sx={{}}>
         <Container maxWidth="lg">
           <Typography variant="h2" component="h2" align="center" gutterBottom sx={{ fontWeight: 'bold', mb: 6, color: 'white' }}>
             Frequently Asked Questions

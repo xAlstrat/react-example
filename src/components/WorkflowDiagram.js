@@ -124,6 +124,10 @@ const StyledReactFlow = styled(ReactFlow)`
   .react-flow__edge-text {
     font-size: 10px;
   }
+
+  .react-flow__edge-textwrapper {
+    display: none;
+  }
 `;
 
 const _TurboNode = ({ data }) => {
@@ -347,14 +351,14 @@ const WorkflowDiagram = () => {
           }
         };
       case '2': // Main node
-        return { ...node, position: { x: 200 - 40, y: 120 } };
+        return { ...node, position: { x: 100, y: 120 } };
       case '3a': // API
       case '3b': // Repository  
       case '3c': // Guidelines
         const xPositions = {
-          '3a': 100,
+          '3a': 135,
           '3b': 200,
-          '3c': 300
+          '3c': 265
         };
         return { 
           ...node, 
@@ -373,8 +377,8 @@ const WorkflowDiagram = () => {
         return {
           ...node,
           position: {
-            x: node.id === '4a' ? 140 : 260,
-            y: 250
+            x: node.id === '4a' ? 120 : 240,
+            y: 270
           },
           data: {
             ...node.data,
@@ -408,14 +412,15 @@ const WorkflowDiagram = () => {
   return (
     <StyledReactFlow
       style={{ height: isMobile ? '400px' : '500px' }}
-      preventScrolling={false}
-      connectOnClick={false}
       nodes={nodes}
       edges={edges}
       fitView
       nodeTypes={nodeTypes}
-      edgeTypes={edgeTypes}
+      onNodesChange={onNodesChange}
+      onEdgesChange={onEdgesChange}
       defaultEdgeOptions={defaultEdgeOptions}
+      preventScrolling={false}
+      connectOnClick={false}
       panOnScroll={false}
       panOnDrag={false}
       nodesDraggable={true}

@@ -204,7 +204,7 @@ const Pricing = () => {
 
   return (
     <Section id="pricing" bgColor="dark1">
-      <Box sx={{ py: 8 }}>
+      <Box sx={{}}>
         <Container maxWidth="lg">
           <Typography 
             variant="h2" 

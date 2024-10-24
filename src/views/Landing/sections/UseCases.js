@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Typography, useTheme, Container, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import VSCodeSkeleton from 'components/VSCodeSkeleton';
 import ConsoleComponent from 'components/ConsolePaper';
-import DelayedList from 'components/DelayedList';
+import SlidingTextDisplay from 'components/SlidingTextDisplay';
 import HighlightedText from 'components/HighlightedText';
 import BashInputDisplay from 'components/BashInputDisplay';
 import Section from 'components/Section';
@@ -10,23 +10,34 @@ import UpdateIcon from '@mui/icons-material/Update';
 import EmojiObjectsIcon from '@mui/icons-material/EmojiObjects';
 import DevicesIcon from '@mui/icons-material/Devices';
 import BugReportIcon from '@mui/icons-material/BugReport';
-import MenuBookIcon from '@mui/icons-material/MenuBook';
+import SmartToyIcon from '@mui/icons-material/SmartToy';
+import PersonIcon from '@mui/icons-material/Person';
 import CodeIcon from '@mui/icons-material/Code';
+import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
+import CheckIcon from '@mui/icons-material/Check';
 import Grid from '@mui/material/Grid2';
 import WorkflowDiagram from 'components/WorkflowDiagram';
 import TextDisplay from 'components/TextDisplay';
 import AnimatedElement from 'components/AnimatedElement';
-import { Code, BugReport, Description, RateReview, Rule, Science, Update, Storage, Cloud, Security } from '@mui/icons-material';
+import Stack from '@mui/material/Stack';
+import { Code, BugReport, Description, RateReview, Rule, Science, Update, Storage, Cloud, Security, Expand } from '@mui/icons-material';
 
 import '@xyflow/react/dist/base.css';
 const CodeAssistant = () => {
   const consoleItems = [
-    { icon: <UpdateIcon />, text: "Automated file updates & context loading", color: "#388e3c" },
-    { icon: <EmojiObjectsIcon />, text: "Pre-defined and custom specialized agents", color: "#388e3c" },
-    { icon: <DevicesIcon />, text: "Multi-modal LLM support", color: "#388e3c" },
-    { icon: <BugReportIcon />, text: "Automated test & lint command execution", color: "#388e3c" },
-    { icon: <MenuBookIcon />, text: "Custom external knowledge sources", color: "#388e3c" },
-    { icon: <CodeIcon />, text: "Custom prompt commands", color: "#388e3c" },
+    { icon: <PersonIcon />, text: "You: Add this new feature...", color: "#198dff" },
+  ];
+  const consoleItems2 = [
+    { icon: <SmartToyIcon />, text: "Let's start...", color: "#00a592" },
+    { icon: <HourglassBottomIcon />, text: "Thinking...", color: "#f57c00" },
+    { icon: <SmartToyIcon />, text: "1. Read context files", color: "#00a592" },
+    { icon: <SmartToyIcon />, text: "2. Analyzed company standards", color: "#00a592" },
+    { icon: <HourglassBottomIcon />, text: "Thinking...", color: "#f57c00" },
+    { icon: <SmartToyIcon />, text: "3. Editing files...", color: "#00a592" },
+    { icon: <CheckIcon />, text: "index.js, App.js updated!", color: "#388e3c" },
+    { icon: <HourglassBottomIcon />, text: "Running tests...", color: "#f57c00" },
+    { icon: <CheckIcon />, text: "Test passed!", color: "#388e3c" },
+    { icon: <SmartToyIcon />, text: "Request completed!", color: "#00a592" },
   ];
 
   return (
@@ -61,7 +72,7 @@ const CodeAssistant = () => {
         </AnimatedElement>
       </Box>
       <Grid container spacing={4} justifyContent={"center"}>
-        <Grid item size={6} sx={{ position: 'relative', height: '600px' }}>
+        <Grid item size={{ xs: 12, md: 6 }} sx={{ position: 'relative', height: '600px' }}>
           <Box sx={{ position: 'absolute', width: '90%', height: '100%', overflow: 'hidden' }}>
             <AnimatedElement delay={0.4}>
               <VSCodeSkeleton />
@@ -70,21 +81,46 @@ const CodeAssistant = () => {
 
           <Box sx={{
             position: 'absolute',
-            bottom: 0,
+            top: 100,
             right: 0,
             width: '70%',
-            height: '85%',
             zIndex: 1,
           }}>
             <AnimatedElement delay={0.8}>
               <Box sx={{ boxShadow: '0px 0px 10px rgba(0,0,0,0.5)' }}>
+
                 <ConsoleComponent>
-                  <DelayedList items={consoleItems} delay={500} />
-                  <BashInputDisplay text="tell me what pluscoder can do" />
+                  <Stack direction="column"
+                    spacing={2}
+                    sx={{
+                      height: '100%',
+                      justifyContent: "space-between",
+                      alignItems: "stretch",
+                    }}>
+
+                    <Box>
+                      <AnimatedElement delay={0}>
+                        <SlidingTextDisplay items={consoleItems} fullWidth={true} loop={false} />
+                      </AnimatedElement>
+                      <AnimatedElement delay={1}>
+                        <SlidingTextDisplay items={consoleItems2} interval={2000} fullWidth={true} loop={false} />
+                      </AnimatedElement>
+                      <AnimatedElement delay={consoleItems2.length * 2}>
+                        <SlidingTextDisplay items={[
+                          { icon: <SmartToyIcon />, text: "Would you like to update docs?", color: "#00a592" }
+                        ]} interval={2000} fullWidth={true} loop={false} />
+
+                      </AnimatedElement>
+                    </Box>
+                    <BashInputDisplay text="pluscoder" />
+                  </Stack>
                 </ConsoleComponent>
               </Box>
             </AnimatedElement>
           </Box>
+        </Grid>
+        <Grid item size={{ xs: 12, md: 6 }} >
+          asdas
         </Grid>
       </Grid >
     </>
@@ -100,13 +136,13 @@ const CloudUseCaseSection = () => {
   ];
 
   const taskItems = [
-    { icon: <Code />, text: "Automated code refactoring", color: "#1976d2" },
+    { icon: <Code />, text: "Automated code refactoring", color: "#198dff" },
     { icon: <BugReport />, text: "AI-driven bug detection", color: "#d32f2f" },
     { icon: <Description />, text: "Documentation generation", color: "#388e3c" },
     { icon: <RateReview />, text: "Code review assistance", color: "#f57c00" },
     { icon: <Rule />, text: "Standards and guidelines enforcement", color: "#7b1fa2" },
-    { icon: <Science />, text: "Test case generation", color: "#0288d1" },
-    { icon: <Update />, text: "Legacy code modernization", color: "#00796b" }
+    { icon: <Science />, text: "Test case generation", color: "#198dff" },
+    { icon: <Update />, text: "Legacy code modernization", color: "#00a592" }
   ];
 
   return (
@@ -165,14 +201,12 @@ const CloudUseCaseSection = () => {
               </Typography>
               <Grid container spacing={2} justifyContent="center">
                 {taskItems.map((item, index) => (
-                  <Grid size="auto" key={index}>
-                    <Box sx={{ height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                      <TextDisplay 
-                        item={item}
-                        fullWidth={false}
-                        showBackground={true}
-                      />
-                    </Box>
+                  <Grid item size="auto" key={index}>
+                    <TextDisplay
+                      item={item}
+                      fullWidth={false}
+                      showBackground={true}
+                    />
                   </Grid>
                 ))}
               </Grid>
@@ -189,11 +223,13 @@ const UseCases = () => {
 
   return (
     <Section id="use-cases" index={3} bgColor="dark1">
-      <Typography variant="h2" component="h2" align="center" gutterBottom sx={{ fontWeight: 'bold', mb: 6, color: theme.palette.common.white }}>
-        AI for <HighlightedText>everybody</HighlightedText> and <HighlightedText>everywhere</HighlightedText> at your company
-      </Typography>
-      <CodeAssistant />
-      <CloudUseCaseSection />
+      <Container maxWidth="lg">
+        <Typography variant="h2" component="h2" align="center" gutterBottom sx={{ fontWeight: 'bold', mb: 6, color: theme.palette.common.white }}>
+          AI Agents <HighlightedText>everywhere</HighlightedText> at your company
+        </Typography>
+        <CodeAssistant />
+        <CloudUseCaseSection />
+      </Container>
     </Section>
   );
 };
