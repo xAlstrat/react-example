@@ -1,5 +1,7 @@
 import React from 'react';
-import { Box, Typography, useTheme, Container, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import { Box, Typography, useTheme, Container, List, ListItem, ListItemIcon, ListItemText, Button } from '@mui/material';
+import { styled } from '@mui/system';
+import { scroller } from 'react-scroll';
 import VSCodeSkeleton from 'components/VSCodeSkeleton';
 import ConsoleComponent from 'components/ConsolePaper';
 import SlidingTextDisplay from 'components/SlidingTextDisplay';
@@ -23,6 +25,18 @@ import Stack from '@mui/material/Stack';
 import { Code, BugReport, Description, RateReview, Rule, Science, Update, Storage, Cloud, Security } from '@mui/icons-material';
 
 import '@xyflow/react/dist/base.css';
+
+const StyledButton = styled(Button)(({ theme }) => ({
+  marginTop: theme.spacing(4),
+  padding: theme.spacing(1.5, 4),
+  fontWeight: 'bold',
+  boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+  transition: 'all 0.3s ease',
+  '&:hover': {
+    transform: 'translateY(-2px)',
+    boxShadow: '0 6px 8px rgba(0,0,0,0.15)',
+  },
+}));
 const CodeAssistant = () => {
   const [resetKey, setResetKey] = React.useState(0);
   
@@ -44,7 +58,7 @@ const CodeAssistant = () => {
     { icon: <SmartToyIcon />, text: "Let's start...", color: "#00a592" },
     { icon: <HourglassBottomIcon />, text: "Thinking...", color: "#f57c00" },
     { icon: <SmartToyIcon />, text: "1. Read context files", color: "#00a592" },
-    { icon: <SmartToyIcon />, text: "2. Analyzed company standards", color: "#00a592" },
+    { icon: <SmartToyIcon />, text: "2. Verify team guidelines", color: "#00a592" },
     { icon: <HourglassBottomIcon />, text: "Thinking...", color: "#f57c00" },
     { icon: <SmartToyIcon />, text: "3. Editing files...", color: "#00a592" },
     { icon: <CheckIcon />, text: "index.js, App.js updated!", color: "#388e3c" },
@@ -118,7 +132,7 @@ const CodeAssistant = () => {
                       </AnimatedElement>
                       <AnimatedElement delay={consoleItems2.length * 2}>
                         <SlidingTextDisplay items={[
-                          { icon: <SmartToyIcon />, text: "Would you like to update docs?", color: "#00a592" }
+                          { icon: <SmartToyIcon />, text: "Should we update docs?", color: "#00a592" }
                         ]} interval={2000} fullWidth={true} loop={false} />
                       </AnimatedElement>
                     </Box>
@@ -186,6 +200,18 @@ const CodeAssistant = () => {
           </AnimatedElement>
         </Grid>
       </Grid >
+      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+        <AnimatedElement delay={1}>
+          <StyledButton 
+            variant="contained" 
+            color="secondary" 
+            size="large" 
+            onClick={() => scroller.scrollTo('pricing', { smooth: true, duration: 500 })}
+          >
+            Start Free Trial
+          </StyledButton>
+        </AnimatedElement>
+      </Box>
     </Box>
   );
 };
@@ -290,6 +316,18 @@ const CloudUseCaseSection = () => {
           </AnimatedElement>
         </Grid>
       </Grid>
+      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+        <AnimatedElement delay={1}>
+          <StyledButton 
+            variant="contained" 
+            color="secondary" 
+            size="large" 
+            onClick={() => scroller.scrollTo('pricing', { smooth: true, duration: 500 })}
+          >
+            Start Free Trial
+          </StyledButton>
+        </AnimatedElement>
+      </Box>
     </Container>
   );
 };
