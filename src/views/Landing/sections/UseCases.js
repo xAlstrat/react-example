@@ -41,7 +41,7 @@ const CodeAssistant = () => {
   ];
 
   return (
-    <>
+    <Box mb={10}>
       <Box
         mb={3}
         sx={{
@@ -72,7 +72,7 @@ const CodeAssistant = () => {
         </AnimatedElement>
       </Box>
       <Grid container spacing={4} justifyContent={"center"}>
-        <Grid item size={{ xs: 12, md: 6 }} sx={{ position: 'relative', height: '600px' }}>
+        <Grid item size={{ xs: 12, md: 6 }} sx={{ position: 'relative', height: '350px' }}>
           <Box sx={{ position: 'absolute', width: '90%', height: '100%', overflow: 'hidden' }}>
             <AnimatedElement delay={0.4}>
               <VSCodeSkeleton />
@@ -173,7 +173,7 @@ const CodeAssistant = () => {
           </AnimatedElement>
         </Grid>
       </Grid >
-    </>
+    </Box>
   );
 };
 
@@ -234,17 +234,30 @@ const CloudUseCaseSection = () => {
         </Grid>
         <Grid item size={{ xs: 12, md: 6 }}>
           <AnimatedElement delay={0.8}>
-            <Typography variant="h6" gutterBottom>
-              Key Cloud Features
-            </Typography>
-            <List>
-              {cloudFeatures.map((feature, index) => (
-                <ListItem key={index}>
-                  <ListItemIcon>{feature.icon}</ListItemIcon>
-                  <ListItemText primary={feature.text} />
-                </ListItem>
-              ))}
-            </List>
+            <Box
+              sx={{
+                background: 'linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%)',
+                backdropFilter: 'blur(10px)',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                borderRadius: 3,
+                p: 4,
+                boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)'
+              }}
+            >
+              <Typography variant="h5" gutterBottom sx={{ color: 'primary.main', fontWeight: 'bold', mb: 3 }}>
+                Key Cloud Features
+              </Typography>
+              <Stack spacing={2}>
+                {cloudFeatures.map((feature, index) => (
+                  <Box key={index} sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    {feature.icon}
+                    <Typography variant="body1">
+                      {feature.text}
+                    </Typography>
+                  </Box>
+                ))}
+              </Stack>
+            </Box>
             <Box sx={{ mt: 2, mb: 2 }}>
               <Typography variant="h6" gutterBottom>
                 Common cloud use cases
@@ -273,7 +286,7 @@ const UseCases = () => {
 
   return (
     <Section id="use-cases" index={3} bgColor="dark1">
-      <Container maxWidth="lg">
+      <Container maxWidth="xl">
         <Typography variant="h2" component="h2" align="center" gutterBottom sx={{ fontWeight: 'bold', mb: 6, color: theme.palette.common.white }}>
           AI Agents <HighlightedText>everywhere</HighlightedText> at your company
         </Typography>
