@@ -310,6 +310,41 @@ By using the AnimatedElement component, you can easily add subtle animations to 
 
 When creating a new section in the application, use the Section base component and follow these guidelines for consistent styling and structure.
 
+### 10. CTA Button Usage
+
+The CTA (Call to Action) button component provides a consistent, animated button style across the application. It's designed for primary actions and includes smooth scroll functionality.
+
+Usage:
+```javascript
+import CTA from 'components/Button/CTA';
+
+function ExampleComponent() {
+  return (
+    <CTA>Start Free Trial</CTA>
+  );
+}
+```
+
+Key points for CTA Button:
+- Import from `components/Button/CTA`
+- Props:
+  - `children`: The button text content
+  - `scrollTo`: Optional. The ID of the section to scroll to (default: 'pricing')
+  - All other Material-UI Button props are supported
+- Features:
+  - Consistent styling with theme
+  - Hover animation with elevation change
+  - Smooth scroll functionality
+  - Secondary color by default
+  - Bold text weight
+
+Best Practices:
+- Use for primary actions only
+- Keep button text concise and action-oriented
+- Place in prominent positions within sections
+- Wrap with AnimatedElement for entrance animations when needed
+- Maintain consistent text across similar actions
+
 Usage:
 ```javascript
 import React from 'react';
@@ -603,6 +638,41 @@ By using the AnimatedElement component, you can easily add subtle animations to 
 ### 9. Section Component and Title Styling
 
 When creating a new section in the application, use the Section base component and follow these guidelines for consistent styling and structure.
+
+### 10. CTA Button Usage
+
+The CTA (Call to Action) button component provides a consistent, animated button style across the application. It's designed for primary actions and includes smooth scroll functionality.
+
+Usage:
+```javascript
+import CTA from 'components/Button/CTA';
+
+function ExampleComponent() {
+  return (
+    <CTA>Start Free Trial</CTA>
+  );
+}
+```
+
+Key points for CTA Button:
+- Import from `components/Button/CTA`
+- Props:
+  - `children`: The button text content
+  - `scrollTo`: Optional. The ID of the section to scroll to (default: 'pricing')
+  - All other Material-UI Button props are supported
+- Features:
+  - Consistent styling with theme
+  - Hover animation with elevation change
+  - Smooth scroll functionality
+  - Secondary color by default
+  - Bold text weight
+
+Best Practices:
+- Use for primary actions only
+- Keep button text concise and action-oriented
+- Place in prominent positions within sections
+- Wrap with AnimatedElement for entrance animations when needed
+- Maintain consistent text across similar actions
 
 Usage:
 ```javascript
