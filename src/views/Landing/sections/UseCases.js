@@ -88,7 +88,6 @@ const CodeAssistant = () => {
           }}>
             <AnimatedElement delay={0.8}>
               <Box sx={{ boxShadow: '0px 0px 10px rgba(0,0,0,0.5)' }}>
-
                 <ConsoleComponent>
                   <Stack direction="column"
                     spacing={2}
@@ -97,7 +96,6 @@ const CodeAssistant = () => {
                       justifyContent: "space-between",
                       alignItems: "stretch",
                     }}>
-
                     <Box>
                       <AnimatedElement delay={0}>
                         <SlidingTextDisplay items={consoleItems} fullWidth={true} loop={false} />
@@ -109,7 +107,6 @@ const CodeAssistant = () => {
                         <SlidingTextDisplay items={[
                           { icon: <SmartToyIcon />, text: "Would you like to update docs?", color: "#00a592" }
                         ]} interval={2000} fullWidth={true} loop={false} />
-
                       </AnimatedElement>
                     </Box>
                     <BashInputDisplay text="pluscoder" />
@@ -119,39 +116,58 @@ const CodeAssistant = () => {
             </AnimatedElement>
           </Box>
         </Grid>
-        <Grid item size={{ xs: 12, md: 6 }} >
+        <Grid item size={{ xs: 12, md: 6 }}>
           <AnimatedElement delay={0.8}>
             <Box
               sx={{
-                background: 'rgba(255, 255, 255, 0.03)',
+                background: 'linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%)',
                 backdropFilter: 'blur(10px)',
                 border: '1px solid rgba(255, 255, 255, 0.1)',
-                borderRadius: 2,
+                borderRadius: 3,
                 p: 4,
-                transition: 'all 0.3s ease',
-                '&:hover': {
-                  transform: 'translateY(-5px)',
-                  boxShadow: '0 8px 30px rgba(124, 58, 237, 0.1)',
-                  border: '1px solid rgba(124, 58, 237, 0.5)',
-                }
+                boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)'
               }}
             >
               <Typography variant="h5" gutterBottom sx={{ color: 'primary.main', fontWeight: 'bold', mb: 3 }}>
-                Key Capabilities
+                Key Features
               </Typography>
               <Stack spacing={2}>
-                <Typography variant="body1">
-                  <HighlightedText>Smart Pattern Recognition</HighlightedText> and Best Practices Analysis for automated code improvements
-                </Typography>
-                <Typography variant="body1">
-                  <HighlightedText>Real-time Sync</HighlightedText> with repository and external knowledge sources integration
-                </Typography>
-                <Typography variant="body1">
-                  <HighlightedText>AI-Driven Workflows</HighlightedText> with intelligent task planning and orchestration
-                </Typography>
-                <Typography variant="body1">
-                  <HighlightedText>Specialized Agents</HighlightedText> for different development tasks and continuous learning
-                </Typography>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                  <CodeIcon sx={{ color: 'primary.main' }} />
+                  <Typography variant="body1">
+                    Smart Pattern Recognition and Best Practices Analysis
+                  </Typography>
+                </Box>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                  <Storage sx={{ color: 'primary.main' }} />
+                  <Typography variant="body1">
+                    Flexible Integration with External Knowledge Sources
+                  </Typography>
+                </Box>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                  <Update sx={{ color: 'primary.main' }} />
+                  <Typography variant="body1">
+                    Real-time Repository Synchronization and Code Generation
+                  </Typography>
+                </Box>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                  <Science sx={{ color: 'primary.main' }} />
+                  <Typography variant="body1">
+                    Intelligent Task Planning with Orchestrated Agent Workflows
+                  </Typography>
+                </Box>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                  <SmartToyIcon sx={{ color: 'primary.main' }} />
+                  <Typography variant="body1">
+                    Specialized Agents for Different Development Tasks
+                  </Typography>
+                </Box>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                  <EmojiObjectsIcon sx={{ color: 'primary.main' }} />
+                  <Typography variant="body1">
+                    Continuous Learning through Automated Feedback Loops
+                  </Typography>
+                </Box>
               </Stack>
             </Box>
           </AnimatedElement>
