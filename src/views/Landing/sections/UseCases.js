@@ -1,7 +1,5 @@
 import React from 'react';
-import { Box, Typography, useTheme, Container, List, ListItem, ListItemIcon, ListItemText, Button } from '@mui/material';
-import { styled } from '@mui/system';
-import { scroller } from 'react-scroll';
+import { Box, Typography, useTheme, Container, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import VSCodeSkeleton from 'components/VSCodeSkeleton';
 import ConsoleComponent from 'components/ConsolePaper';
 import SlidingTextDisplay from 'components/SlidingTextDisplay';
@@ -23,20 +21,10 @@ import TextDisplay from 'components/TextDisplay';
 import AnimatedElement from 'components/AnimatedElement';
 import Stack from '@mui/material/Stack';
 import { Code, BugReport, Description, RateReview, Rule, Science, Update, Storage, Cloud, Security } from '@mui/icons-material';
+import CTA from 'components/Button/CTA';
 
 import '@xyflow/react/dist/base.css';
 
-const StyledButton = styled(Button)(({ theme }) => ({
-  marginTop: theme.spacing(4),
-  padding: theme.spacing(1.5, 4),
-  fontWeight: 'bold',
-  boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-  transition: 'all 0.3s ease',
-  '&:hover': {
-    transform: 'translateY(-2px)',
-    boxShadow: '0 6px 8px rgba(0,0,0,0.15)',
-  },
-}));
 const CodeAssistant = () => {
   const [resetKey, setResetKey] = React.useState(0);
   
@@ -202,14 +190,7 @@ const CodeAssistant = () => {
       </Grid >
       <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
         <AnimatedElement delay={1}>
-          <StyledButton 
-            variant="contained" 
-            color="secondary" 
-            size="large" 
-            onClick={() => scroller.scrollTo('pricing', { smooth: true, duration: 500 })}
-          >
-            Start Free Trial
-          </StyledButton>
+          <CTA>Start Free Trial</CTA>
         </AnimatedElement>
       </Box>
     </Box>
@@ -318,14 +299,7 @@ const CloudUseCaseSection = () => {
       </Grid>
       <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
         <AnimatedElement delay={1}>
-          <StyledButton 
-            variant="contained" 
-            color="secondary" 
-            size="large" 
-            onClick={() => scroller.scrollTo('pricing', { smooth: true, duration: 500 })}
-          >
-            Start Free Trial
-          </StyledButton>
+          <CTA>Start Free Trial</CTA>
         </AnimatedElement>
       </Box>
     </Container>
