@@ -96,7 +96,7 @@ const CodeAssistant = () => {
             position: 'absolute',
             top: 100,
             right: 0,
-            width: '70%',
+            width: { xs: '100%', md: '70%' },
             zIndex: 1,
           }}>
             <AnimatedElement delay={0.8}>
@@ -109,15 +109,15 @@ const CodeAssistant = () => {
                       justifyContent: "space-between",
                       alignItems: "stretch",
                     }}>
-                    <Box>
+                    <Box key={`slide1-${resetKey}`}>
                       <AnimatedElement delay={0}>
-                        <SlidingTextDisplay key={`slide1-${resetKey}`} items={consoleItems} fullWidth={true} loop={false} />
+                        <SlidingTextDisplay items={consoleItems} fullWidth={true} loop={false} />
                       </AnimatedElement>
                       <AnimatedElement delay={1}>
-                        <SlidingTextDisplay key={`slide2-${resetKey}`} items={consoleItems2} interval={2000} fullWidth={true} loop={false} />
+                        <SlidingTextDisplay items={consoleItems2} interval={2000} fullWidth={true} loop={false} />
                       </AnimatedElement>
                       <AnimatedElement delay={consoleItems2.length * 2}>
-                        <SlidingTextDisplay key={`slide3-${resetKey}`} items={[
+                        <SlidingTextDisplay items={[
                           { icon: <SmartToyIcon />, text: "Would you like to update docs?", color: "#00a592" }
                         ]} interval={2000} fullWidth={true} loop={false} />
                       </AnimatedElement>
