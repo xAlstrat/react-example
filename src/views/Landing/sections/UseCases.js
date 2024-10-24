@@ -120,7 +120,41 @@ const CodeAssistant = () => {
           </Box>
         </Grid>
         <Grid item size={{ xs: 12, md: 6 }} >
-          asdas
+          <AnimatedElement delay={0.8}>
+            <Typography variant="h6" gutterBottom>
+              Key Features
+            </Typography>
+            <List>
+              <ListItem>
+                <ListItemIcon><CodeIcon /></ListItemIcon>
+                <ListItemText primary="Smart Pattern Recognition and Best Practices Analysis" />
+              </ListItem>
+              <ListItem>
+                <ListItemIcon><Storage /></ListItemIcon>
+                <ListItemText primary="Flexible Integration with External Knowledge Sources" />
+              </ListItem>
+              <ListItem>
+                <ListItemIcon><Update /></ListItemIcon>
+                <ListItemText primary="Real-time Repository Synchronization and Code Generation" />
+              </ListItem>
+              <ListItem>
+                <ListItemIcon><Science /></ListItemIcon>
+                <ListItemText primary="Intelligent Task Planning with Orchestrated Agent Workflows" />
+              </ListItem>
+              <ListItem>
+                <ListItemIcon><SmartToyIcon /></ListItemIcon>
+                <ListItemText primary="Specialized Agents for Different Development Tasks" />
+              </ListItem>
+              <ListItem>
+                <ListItemIcon><EmojiObjectsIcon /></ListItemIcon>
+                <ListItemText primary="Continuous Learning through Automated Feedback Loops" />
+              </ListItem>
+              <ListItem>
+                <ListItemIcon><Expand /></ListItemIcon>
+                <ListItemText primary="And many more capabilities..." />
+              </ListItem>
+            </List>
+          </AnimatedElement>
         </Grid>
       </Grid >
     </>
