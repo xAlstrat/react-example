@@ -24,6 +24,19 @@ import { Code, BugReport, Description, RateReview, Rule, Science, Update, Storag
 
 import '@xyflow/react/dist/base.css';
 const CodeAssistant = () => {
+  const [resetKey, setResetKey] = React.useState(0);
+  
+  React.useEffect(() => {
+    // Calculate total time: consoleItems2 length * interval + extra delay for last message
+    const totalTime = (consoleItems2.length * 2000) + 4000;
+    
+    const timer = setInterval(() => {
+      setResetKey(prev => prev + 1);
+    }, totalTime);
+
+    return () => clearInterval(timer);
+  }, []);
+
   const consoleItems = [
     { icon: <PersonIcon />, text: "You: Add this new feature...", color: "#198dff" },
   ];
@@ -98,13 +111,13 @@ const CodeAssistant = () => {
                     }}>
                     <Box>
                       <AnimatedElement delay={0}>
-                        <SlidingTextDisplay items={consoleItems} fullWidth={true} loop={false} />
+                        <SlidingTextDisplay key={`slide1-${resetKey}`} items={consoleItems} fullWidth={true} loop={false} />
                       </AnimatedElement>
                       <AnimatedElement delay={1}>
-                        <SlidingTextDisplay items={consoleItems2} interval={2000} fullWidth={true} loop={false} />
+                        <SlidingTextDisplay key={`slide2-${resetKey}`} items={consoleItems2} interval={2000} fullWidth={true} loop={false} />
                       </AnimatedElement>
                       <AnimatedElement delay={consoleItems2.length * 2}>
-                        <SlidingTextDisplay items={[
+                        <SlidingTextDisplay key={`slide3-${resetKey}`} items={[
                           { icon: <SmartToyIcon />, text: "Would you like to update docs?", color: "#00a592" }
                         ]} interval={2000} fullWidth={true} loop={false} />
                       </AnimatedElement>
