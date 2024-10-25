@@ -1,5 +1,5 @@
 # GCP Configuration
-PROJECT_ID := your-project-id
+PROJECT_ID := bold-vortex-332122
 REGION := us-central1
 REPOSITORY := pluscoder
 IMAGE_NAME := pluscoder-landing
@@ -33,4 +33,14 @@ deploy:
 # Full deployment pipeline
 all: build push deploy
 
-.PHONY: build auth push deploy all
+# Run locally for testing
+run:
+	docker run --name $(IMAGE_NAME) -d -p 8080:8080 $(IMAGE_NAME):$(TAG)
+	@echo "App running at http://localhost:8080"
+
+# Stop local container
+stop:
+	docker stop $(IMAGE_NAME) || true
+	docker rm $(IMAGE_NAME) || true
+
+.PHONY: build auth push deploy run stop all
