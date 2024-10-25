@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, useTheme } from '@mui/material';
 import { keyframes } from '@mui/system';
 
 const slideUp = keyframes`
@@ -24,10 +24,11 @@ const slideDown = keyframes`
   }
 `;
 
-const SlidingTextDisplay = ({ items, interval = 3000, fullWidth = false, showBackground = false, loop = true }) => {
+const SlidingTextDisplay = ({ items, minHeight, interval = 3000, fullWidth = false, showBackground = false, loop = true }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [containerWidth, setContainerWidth] = useState('auto');
   const containerRef = useRef(null);
+  const theme = useTheme();
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -74,9 +75,11 @@ const SlidingTextDisplay = ({ items, interval = 3000, fullWidth = false, showBac
     <Box 
       ref={containerRef} 
       sx={{ 
-        overflow: 'hidden', 
-        height: '2em', 
+        minHeight: '2em', 
         position: 'relative', 
+        [theme.breakpoints.down('sm')]: {
+          height: minHeight || '2em',
+        },
         width: containerWidth,
         ...(fullWidth && { display: 'flex', justifyContent: 'flex-start' })
       }}
@@ -88,8 +91,7 @@ const SlidingTextDisplay = ({ items, interval = 3000, fullWidth = false, showBac
             display: 'flex',
             alignItems: 'center',
             position: 'absolute',
-            left: fullWidth ? 'auto' : 0,
-            right: fullWidth ? 'auto' : 0,
+            width: '100%',
             color: item.color,
             animation: index === activeIndex
               ? `${slideUp} 0.5s ease-in-out forwards`
@@ -97,7 +99,7 @@ const SlidingTextDisplay = ({ items, interval = 3000, fullWidth = false, showBac
               ? `${slideDown} 0.5s ease-in-out forwards`
               : 'none',
             opacity: index === activeIndex ? 1 : 0,
-            whiteSpace: 'nowrap',
+            //whiteSpace: 'nowrap',
             ...(showBackground && {
               backgroundColor: `${item.color}33`, // 33 is 20% opacity in hex
               borderRadius: '4px',

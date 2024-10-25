@@ -1,7 +1,7 @@
 import React from 'react';
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { styled, keyframes } from '@mui/system';
-import { scroller } from 'react-scroll';
+import CTA from 'components/Button/CTA';
 import BashDisplay from 'components/BashDisplay';
 import AnimatedElement from 'components/AnimatedElement';
 import AnimatedText from 'components/AnimatedText';
@@ -73,18 +73,6 @@ const FixedWidthBox = styled(Box)(({ theme }) => ({
   }
 }));
 
-const StyledButton = styled(Button)(({ theme }) => ({
-  marginTop: theme.spacing(4),
-  padding: theme.spacing(1.5, 4),
-  fontWeight: 'bold',
-  boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-  transition: 'all 0.3s ease',
-  '&:hover': {
-    transform: 'translateY(-2px)',
-    boxShadow: '0 6px 8px rgba(0,0,0,0.15)',
-  },
-}));
-
 const glowAnimation = keyframes`
   0% { text-shadow: 0 0 5px rgba(255,255,255,0.7), 0 0 10px rgba(255,255,255,0.7); }
   50% { text-shadow: 0 0 20px rgba(255,255,255,0.7), 0 0 30px rgba(255,255,255,0.7); }
@@ -119,54 +107,44 @@ const Hero = () => {
           </LogoText>
           <AnimatedTextContainer>
             <StyledTypography variant="h2" component="h1">
-              Your code&nbsp;
+              Unlock your potential to create value
             </StyledTypography>
-            <FixedWidthBox>
+            {/* <FixedWidthBox>
               <StyledTypography variant="h2" component="span">
                 <AnimatedText />
               </StyledTypography>
-            </FixedWidthBox>
+            </FixedWidthBox> */}
           </AnimatedTextContainer>
-          <StyledTypography variant="h2" component="h1" gutterBottom>
-            automated by AI Agents
-          </StyledTypography>
-          <StyledTypography 
-            variant="h4" 
-            gutterBottom 
-            sx={{ 
+          <StyledTypography
+            variant="h4"
+            gutterBottom
+            sx={{
               fontSize: { xs: '1.2rem', sm: '1.5rem', md: '2.125rem' },
               lineHeight: { xs: 1.3, sm: 1.4 }
             }}
           >
-            <HighlightedText>Repository automation</HighlightedText> & <HighlightedText>coding assistance</HighlightedText><br /> 
-            with just one command
+            <HighlightedText>Repository maintenance</HighlightedText> & <HighlightedText>coding assistance</HighlightedText><br />
+            performed by AI Agents
           </StyledTypography>
-            <Box mt={4} mb={4} width="100%" maxWidth="800px" sx={{ px: { xs: 1, sm: 2 } }}>
-          <AnimatedElement>
+          <Box mt={4} mb={4} width="100%" maxWidth="800px" sx={{ px: { xs: 1, sm: 2 } }}>
+            <AnimatedElement>
               <BashDisplay />
-              </AnimatedElement>
-            </Box>
-            <Typography
-              variant="caption"
-              sx={{
-                fontWeight: 'bold',
-                opacity: 0.7,
-                marginBottom: 2,
-                color: 'white',
-              }}
-            >
-              Yes. This website was created with +coder
-            </Typography>
-          
+            </AnimatedElement>
+          </Box>
+          <Typography
+            variant="caption"
+            sx={{
+              fontWeight: 'bold',
+              opacity: 0.7,
+              marginBottom: 2,
+              color: 'white',
+            }}
+          >
+            Yes. This website was created with +coder
+          </Typography>
+
           <AnimatedElement delay={0.4}>
-            <StyledButton 
-              variant="contained" 
-              color="secondary" 
-              size="large" 
-              onClick={() => scroller.scrollTo('pricing', { smooth: true, duration: 500 })}
-            >
-              Start Automating
-            </StyledButton>
+            <CTA>Start Automating</CTA>
           </AnimatedElement>
         </HeroContent>
       </HeroWrapper>

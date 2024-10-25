@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button } from '@mui/material';
+import { Box, Button, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { styled, keyframes } from '@mui/system';
 import { scroller } from 'react-scroll';
+import SlidingTextDisplay from "components/SlidingTextDisplay"
 
 const typing = keyframes`
   from { width: 0 }
@@ -45,20 +46,9 @@ const TextContainer = styled(Box)({
   overflow: 'hidden',
   textAlign: 'left',
   display: 'flex',
-  alignItems: 'center',
+  alignItems: 'left',
+  justifyContent: 'center',
 });
-
-const CommandLine = styled('div')(({ theme }) => ({
-  color: '#d4d4d4',
-  whiteSpace: 'nowrap',
-  fontSize: '14px',
-  [theme.breakpoints.down('sm')]: {
-    fontSize: '12px',
-    whiteSpace: 'pre-wrap',
-    wordBreak: 'break-word',
-    lineHeight: 1.4
-  }
-}));
 
 const AnimatedText = styled('div')(({ color, isTyping }) => ({
   color: color || '#d4d4d4',
@@ -94,6 +84,7 @@ const ReturnButton = styled(Button)(({ theme }) => ({
     minWidth: '36px',
     marginLeft: theme.spacing(1),
     padding: theme.spacing(0.5, 1),
+    display: 'none',
     '& .buttonText': {
       display: 'none'
     }
@@ -104,6 +95,9 @@ const BashDisplay = () => {
   const [animationStage, setAnimationStage] = useState(0);
   const [displayText, setDisplayText] = useState('$ pluscoder --input "Look m\'am im coding"');
   const [isTyping, setIsTyping] = useState(false);
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const animationTexts = [
     { text: 'Thinking...', color: '#FFA500' },
@@ -155,8 +149,16 @@ const BashDisplay = () => {
   return (
     <ConsoleContainer>
       <TextContainer>
+        
+        <Typography style={{whiteSpace: 'nowrap', color: '#4CAF50'}}>{isMobile ? '$pc' : '$ pluscoder'}</Typography>
         {animationStage === 0 ? (
-          <CommandLine>{displayText}</CommandLine>
+          <SlidingTextDisplay minHeight={isMobile? '3.2em' : '2em'}  items={[
+            { text: '--input \'add an API endpoint to unsubscribe users\'', color: "#4CAF50" },
+            { text: '--agent my-own-custom-expert', color: "#4CAF50" },
+            { text: '--task_list REFACTOR_TASKS.md', color: "#4CAF50" },
+            { text: '--input \'update docs\' --source \'DOCS_GUIDELINES.md\' ', color: "#4CAF50" },
+            { text: '--model gpt-4o --openai_api_key <your-key>', color: "#4CAF50" },
+          ]} interval={3000} fullWidth={true} loop={true} />
         ) : (
           <AnimatedText color={animationTexts[animationStage - 1].color} isTyping={isTyping}>
             {displayText}
@@ -166,7 +168,7 @@ const BashDisplay = () => {
       <ReturnButton 
         variant="contained" 
         onClick={handleReturnClick} 
-        disabled={animationStage !== 0}
+        disabled={true}
       >
         <span className="buttonText">Return</span> ↵
       </ReturnButton>

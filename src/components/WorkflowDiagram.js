@@ -416,8 +416,8 @@ const WorkflowDiagram = () => {
       edges={edges}
       fitView
       nodeTypes={nodeTypes}
-      onNodesChange={onNodesChange}
-      onEdgesChange={onEdgesChange}
+      // onNodesChange={onNodesChange}
+      // onEdgesChange={onEdgesChange}
       defaultEdgeOptions={defaultEdgeOptions}
       preventScrolling={false}
       connectOnClick={false}
