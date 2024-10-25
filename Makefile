@@ -10,7 +10,7 @@ IMAGE_PATH := $(REGION)-docker.pkg.dev/$(PROJECT_ID)/$(REPOSITORY)/$(IMAGE_NAME)
 
 # Build docker image
 build:
-	docker build -t $(IMAGE_NAME):$(TAG) .
+	docker build --platform linux/amd64 -t $(IMAGE_NAME):$(TAG) .
 
 # Configure docker for GCP artifact registry
 auth:
