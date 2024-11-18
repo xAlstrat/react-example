@@ -15,19 +15,24 @@ const FAQ = () => {
     {
       question: "What is Pluscoder and how does it work?",
       answer: <>
-        Pluscoder is a next-generation code agent that operates in two powerful modes:
-        
+        Pluscoder is a set of Software AI Agents that are embedded inside your development workflow that operates in 2 modes:
+        <br />
         <HighlightedText>Interactive Mode</HighlightedText> works directly in your IDE as a developer companion, providing real-time assistance through chat and editor interfaces.
-        
-        <HighlightedText>Automated Mode</HighlightedText> runs independently in your cloud infrastructure, executing complex tasks without constant supervision. Perfect for handling repository-wide changes automatically across multiple codebases.
+        <br />
+        <HighlightedText>Automated Mode</HighlightedText> AI Agents run autonomously in your cloud infrastructure, executing simple or complex tasks. Perfect for handling repository-wide changes automatically across multiple codebases or event-based AI Agents executions.
       </>
     },
     {
-      question: "How does Pluscoder's automation work?",
+      question: "How is Pluscoder different from CursorAI or other AI Powered code editors?",
       answer: <>
-        At its core is the <HighlightedText>Orchestrator Agent</HighlightedText> that manages and delegates tasks automatically. It uses <HighlightedText>task-based workflows</HighlightedText> to break down complex requirements, generates multiple solutions, and selects optimal outcomes.
-        
-        Features automated feedback loops for error handling and seamlessly integrates with your <HighlightedText>CI/CD pipeline</HighlightedText> for automated triggers.
+        We are not an IDE or code edition tool. We provide a way to <HighlightedText>manage and run Software AI Agents</HighlightedText>; autonomously or interactively, following company conventions or guidelines, running specialized chains of agents to generate complex repository outcomes.
+        <ul>
+          <li>Design and Planning Assistant - Specialized agent for project brainstorming</li>
+          <li>Issue Enhancement Bot - Automated repository analysis and issue enrichment</li>
+          <li>Guidelines Validator - Parallel codebase validation against company standards</li>
+          <li>Onboarding Assistant - Custom agent for team standards and developer training</li>
+          <li>Workflow Specialist - Complex task automation with specialized agent chains</li>
+        </ul>
       </>
     },
     {
