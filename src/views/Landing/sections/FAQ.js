@@ -29,7 +29,7 @@ const FAQ = () => {
         <ul>
           <li>Design and Planning Assistant - Specialized agent for project brainstorming</li>
           <li>Issue Enhancement Bot - Automated repository analysis and issue enrichment</li>
-          <li>Guidelines Validator - Parallel codebase validation against company standards</li>
+          <li>Guidelines Validator - Parallel codebase validation and modification to enforce company standards</li>
           <li>Onboarding Assistant - Custom agent for team standards and developer training</li>
           <li>Workflow Specialist - Complex task automation with specialized agent chains</li>
         </ul>
