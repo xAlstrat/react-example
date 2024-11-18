@@ -147,19 +147,18 @@ const PricingCard = ({ tier, isPopular }) => (
 const standardTiers = [
   {
     title: 'Developer',
-    subtitle: "Perfect to boost you development to the next level",
+    subtitle: "AI Agents to assist you interactively, in anything",
     price: '15',
     period: '/month',
     features: [
-      'Automated file updates and context loading',
-      'Task based agent workflows and delegation',
-      'Pre-defined and specialized custom agents',
-      'Tests/Lint feedback based solutions',
-      'Adaptive context learning',
-      'Custom context sources',
+      'Pre-defined and specialized custom AI Agents',
+      'Deep repository understanding using most capable models',
+      'Custom public knowledge sources',
+      'Task based workflows',
       'Multi-modal LLM support',
       "Connect your own models",
-      "Standard support"
+      "10 automated runs per day",
+      "Many more..."
     ],
     buttonText: 'Start Free Trial',
   }
@@ -173,19 +172,21 @@ const enterpriseTiers = [
     period: '/month',
     features: [
       'Everything in free for each developer',
-      '100% autonomous runs in your cloud and platforms',
       'Event based hooks',
-      'Dedicated support for development and cloud environments',
+      'Private custom knowledge sources',
+      'Centralized custom specialized agents',
+      'Dedicated support for interactive development',
     ],
     buttonText: 'Start Free Trial',
   },
   {
     title: 'Enterprise',
-    subtitle: 'Customized solutions for large-scale implementations',
+    subtitle: 'Cloud customized solutions for large-scale implementations',
     price: 'CUSTOM',
     period: '/yr',
     features: [
       'Everything in Team',
+      'Unlimited automated agent runs',
       'Enterprise Support & Custom SLAs',
     ],
     buttonText: 'Let\'s talk',

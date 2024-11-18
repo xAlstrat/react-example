@@ -10,18 +10,21 @@ const AnimatedText = () => {
     <TypeAnimation
       sequence={[
         'development',
-        1500,
+        800,
         'documentation',
-        1500,
-        'security patches',
-        1500,
-        'standards',
-        1500,
-        'maintenance',
-        1500
+        800,
+        'standards enforcement',
+        800,
+        'refactoring',
+        800,
+        'test case generation',
+        800,
+        'repository analysis',
+        800,
       ]}
       wrapper="span"
-      speed={1}
+      speed={70}
+      deletionSpeed={72}
       style={{ display: 'inline-block', color: yellowColor }}
       repeat={Infinity}
     />

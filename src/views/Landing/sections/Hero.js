@@ -105,27 +105,26 @@ const Hero = () => {
           <LogoText variant="h1" component="div">
             <span>+</span>CODER
           </LogoText>
-          <AnimatedTextContainer>
-            <StyledTypography variant="h2" component="h1">
-              Unlock your potential to create value
-            </StyledTypography>
-            {/* <FixedWidthBox>
-              <StyledTypography variant="h2" component="span">
-                <AnimatedText />
-              </StyledTypography>
-            </FixedWidthBox> */}
-          </AnimatedTextContainer>
+          <StyledTypography variant="h2" component="h1">
+            Keep focusing in creating value
+          </StyledTypography>
           <StyledTypography
             variant="h4"
             gutterBottom
             sx={{
+              mt: 2,
               fontSize: { xs: '1.2rem', sm: '1.5rem', md: '2.125rem' },
               lineHeight: { xs: 1.3, sm: 1.4 }
             }}
           >
-            <HighlightedText>Repository maintenance</HighlightedText> & <HighlightedText>coding assistance</HighlightedText><br />
+            <HighlightedText>Repository maintenance & coding</HighlightedText><br />
             performed by AI Agents
           </StyledTypography>
+          <AnimatedTextContainer>
+              <StyledTypography variant="h2" component="span">
+                <AnimatedText />
+              </StyledTypography>
+          </AnimatedTextContainer>
           <Box mt={4} mb={4} width="100%" maxWidth="800px" sx={{ px: { xs: 1, sm: 2 } }}>
             <AnimatedElement>
               <BashDisplay />

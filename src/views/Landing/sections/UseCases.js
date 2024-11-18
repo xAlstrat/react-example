@@ -1,15 +1,12 @@
 import React from 'react';
-import { Box, Typography, useTheme, Container, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import { Box, Typography, useTheme, Container, Card, CardContent } from '@mui/material';
 import VSCodeSkeleton from 'components/VSCodeSkeleton';
 import ConsoleComponent from 'components/ConsolePaper';
 import SlidingTextDisplay from 'components/SlidingTextDisplay';
 import HighlightedText from 'components/HighlightedText';
 import BashInputDisplay from 'components/BashInputDisplay';
 import Section from 'components/Section';
-import UpdateIcon from '@mui/icons-material/Update';
 import EmojiObjectsIcon from '@mui/icons-material/EmojiObjects';
-import DevicesIcon from '@mui/icons-material/Devices';
-import BugReportIcon from '@mui/icons-material/BugReport';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 import PersonIcon from '@mui/icons-material/Person';
 import CodeIcon from '@mui/icons-material/Code';
@@ -27,11 +24,11 @@ import '@xyflow/react/dist/base.css';
 
 const CodeAssistant = () => {
   const [resetKey, setResetKey] = React.useState(0);
-  
+
   React.useEffect(() => {
     // Calculate total time: consoleItems2 length * interval + extra delay for last message
     const totalTime = (consoleItems2.length * 2000) + 4000;
-    
+
     const timer = setInterval(() => {
       setResetKey(prev => prev + 1);
     }, totalTime);
@@ -82,7 +79,7 @@ const CodeAssistant = () => {
             A code assistant for your developers
           </Typography>
           <Typography variant="h6">
-            Keep using your VSCode as always. Just tell +coder what you want through the console.
+            Keep using your IDE as always. <strong>Just tell +coder what you want</strong> through the console.
           </Typography>
         </AnimatedElement>
       </Box>
@@ -133,58 +130,62 @@ const CodeAssistant = () => {
         </Grid>
         <Grid item size={{ xs: 12, md: 6 }}>
           <AnimatedElement delay={0.8}>
-            <Box
-              sx={{
-                background: 'linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%)',
-                backdropFilter: 'blur(10px)',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-                borderRadius: 3,
-                p: 4,
-                boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)'
-              }}
+            <Card
             >
-              <Typography variant="h5" gutterBottom sx={{ color: 'primary.main', fontWeight: 'bold', mb: 3 }}>
-                Key Features
-              </Typography>
-              <Stack spacing={2}>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                  <CodeIcon sx={{ color: 'primary.main' }} />
-                  <Typography variant="body1">
-                    Smart Pattern Recognition and Best Practices Analysis
-                  </Typography>
-                </Box>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                  <Storage sx={{ color: 'primary.main' }} />
-                  <Typography variant="body1">
-                    Flexible Integration with External Knowledge Sources
-                  </Typography>
-                </Box>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                  <Update sx={{ color: 'primary.main' }} />
-                  <Typography variant="body1">
-                    Real-time Repository Synchronization and Code Generation
-                  </Typography>
-                </Box>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                  <Science sx={{ color: 'primary.main' }} />
-                  <Typography variant="body1">
-                    Intelligent Task Planning with Orchestrated Agent Workflows
-                  </Typography>
-                </Box>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                  <SmartToyIcon sx={{ color: 'primary.main' }} />
-                  <Typography variant="body1">
-                    Specialized Agents for Different Development Tasks
-                  </Typography>
-                </Box>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                  <EmojiObjectsIcon sx={{ color: 'primary.main' }} />
-                  <Typography variant="body1">
-                    Continuous Learning through Automated Feedback Loops
-                  </Typography>
-                </Box>
-              </Stack>
-            </Box>
+              <CardContent>
+                <Typography
+                  variant="h5"
+                  component="h4"
+                  align="center"
+                  gutterBottom
+                  sx={{
+                    fontWeight: 300,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.1em',
+                  }}
+                >
+                  Key features
+                </Typography>
+                <Stack spacing={2}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <CodeIcon />
+                    <Typography variant="body2" style={{fontWeight: 300}}>
+                      Smart pattern and code practices recognition
+                    </Typography>
+                  </Box>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <Storage />
+                    <Typography variant="body2" style={{fontWeight: 300}}>
+                      Customizable knowledge sources
+                    </Typography>
+                  </Box>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <Update />
+                    <Typography variant="body2" style={{fontWeight: 300}}>
+                      Real-time repository updates
+                    </Typography>
+                  </Box>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <Science />
+                    <Typography variant="body2" style={{fontWeight: 300}}>
+                      Smart task planning and orchestrated agent workflows
+                    </Typography>
+                  </Box>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <SmartToyIcon />
+                    <Typography variant="body2" style={{fontWeight: 300}}>
+                      Specialized agents for different development tasks
+                    </Typography>
+                  </Box>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <EmojiObjectsIcon />
+                    <Typography variant="body2" style={{fontWeight: 300}}>
+                      Automated feedback loops
+                    </Typography>
+                  </Box>
+                </Stack>
+              </CardContent>
+            </Card>
           </AnimatedElement>
         </Grid>
       </Grid >
@@ -199,10 +200,10 @@ const CodeAssistant = () => {
 
 const CloudUseCaseSection = () => {
   const cloudFeatures = [
-    { icon: <Storage />, text: "Load context from different sources" },
-    { icon: <Cloud />, text: "Run in your own cloud infrastructure" },
-    { icon: <Security />, text: "Use your own LLM models" },
-    { icon: <CodeIcon />, text: "Platform-independent operation" },
+    { icon: <Storage />, text: "Customizable & centralized knowledge sources" },
+    { icon: <Cloud />, text: "Runs in your own infrastructure" },
+    { icon: <Security />, text: "Bring your own api keys and models" },
+    { icon: <CodeIcon />, text: "Mass interaction with your code base" },
   ];
 
   const taskItems = [
@@ -216,7 +217,7 @@ const CloudUseCaseSection = () => {
   ];
 
   return (
-    <Container maxWidth="xl">
+    <>
       <Box
         mb={3}
         sx={{
@@ -254,31 +255,35 @@ const CloudUseCaseSection = () => {
         </Grid>
         <Grid item size={{ xs: 12, md: 6 }}>
           <AnimatedElement delay={0.8}>
-            <Box
-              sx={{
-                background: 'linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%)',
-                backdropFilter: 'blur(10px)',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-                borderRadius: 3,
-                p: 4,
-                boxShadow: '0 8px 32px 0 rgba(31, 38, 135, 0.37)'
-              }}
+            <Card
             >
-              <Typography variant="h5" gutterBottom sx={{ color: 'primary.main', fontWeight: 'bold', mb: 3 }}>
-                Key Cloud Features
-              </Typography>
-              <Stack spacing={2}>
-                {cloudFeatures.map((feature, index) => (
-                  <Box key={index} sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                    {feature.icon}
-                    <Typography variant="body1">
-                      {feature.text}
-                    </Typography>
-                  </Box>
-                ))}
-              </Stack>
-            </Box>
-            <Box sx={{ mt: 2, mb: 2 }}>
+              <CardContent>
+                <Typography
+                  variant="h5"
+                  component="h4"
+                  align="center"
+                  gutterBottom
+                  sx={{
+                    fontWeight: 300,
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.1em',
+                  }}
+                >
+                  Key features
+                </Typography>
+                <Stack spacing={2}>
+                  {cloudFeatures.map((feature, index) => (
+                    <Box key={index} sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                      {feature.icon}
+                      <Typography variant="body2" style={{fontWeight: 300,}}>
+                        {feature.text}
+                      </Typography>
+                    </Box>
+                  ))}
+                </Stack>
+              </CardContent>
+            </Card>
+            {/* <Box sx={{ mt: 2, mb: 2 }}>
               <Typography variant="h6" gutterBottom>
                 Common cloud use cases
               </Typography>
@@ -293,7 +298,7 @@ const CloudUseCaseSection = () => {
                   </Grid>
                 ))}
               </Grid>
-            </Box>
+            </Box> */}
           </AnimatedElement>
         </Grid>
       </Grid>
@@ -302,7 +307,7 @@ const CloudUseCaseSection = () => {
           <CTA>Start Free Trial</CTA>
         </AnimatedElement>
       </Box>
-    </Container>
+    </>
   );
 };
 

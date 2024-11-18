@@ -1,5 +1,4 @@
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
-import components from './components';
 import spacing from './spacing';
 import mixins from './mixins';
 import palette from './palette';
@@ -9,7 +8,25 @@ const theme = createTheme({
   palette,
   typography,
   spacing,
-  components,
+  components: {
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          borderRadius: '8px',
+          transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
+          '&:hover': {
+            transform: 'translateY(-5px)',
+          },
+        },
+      },
+    },
+    MuiCardContent: {
+      styleOverrides: {
+        root: {
+        },
+      },
+    },
+  },
   mixins,
   breakpoints: {
     values: {

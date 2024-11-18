@@ -1,5 +1,5 @@
 {
-  "image": "nikolaik/python-nodejs:python3.12-nodejs22-slim",
+  "image": "node:22-slim",
   "features": {
   },
   "onCreateCommand": "./.devcontainer/oncreate.sh",
@@ -15,8 +15,8 @@
       "vscode": {
           "settings": {
               "terminal.integrated.profiles.linux": {
-                  "bashss": {
-                      "path": "bashh",
+                  "bash": {
+                      "path": "bash",
                       "args": [
                           "-l"
                       ],

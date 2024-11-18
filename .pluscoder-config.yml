@@ -25,8 +25,8 @@ initialized: true
 #------------------------------------------------------------------------------
 # Model and API Settings
 #------------------------------------------------------------------------------
-model: openai/claude-3-5-sonnet-20240620 # LLM model to use
-provider: null           # Provider (aws_bedrock, openai, litellm, anthropic, null)
+# model: openai/claude-3-5-sonnet-20240620 # LLM model to use
+# provider: null           # Provider (aws_bedrock, openai, litellm, anthropic, null)
 # openai_api_key:          # OpenAI API key
 # openai_api_base:         # OpenAI API base URL
 # anthropic_api_key:       # Anthropic API key
@@ -72,15 +72,7 @@ repo_exclude_files: ['.devcontainer', '.pluscoder', '.plus_coder']       # Regex
 #------------------------------------------------------------------------------
 # Custom Prompt Commands
 #------------------------------------------------------------------------------
-custom_prompt_commands:
-  - prompt_name: feat
-    description: Feat & Doc
-    prompt: Solve the following feature requirement then document it at DOCS.md
-  - prompt_name: documentation
-    description: Document usage and development documentation
-    prompt: |
-      Generate 2 task; one for generate the usage of this project from the user perpective to /docs/index.md 
-      and another task to document this repo from developer perspective at docs/dev.md. Delegate it now.
+custom_prompt_commands: []
 custom_agents:
   - name: ReactDeveloper
     description: "ReactJS specialized developer"

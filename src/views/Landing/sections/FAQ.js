@@ -94,12 +94,12 @@ const FAQ = () => {
                   },
                 }}
               >
-                <Typography variant="h5" component="h3" sx={{ fontWeight: 'bold' }}>
+                <Typography variant="h5" component="h3" sx={{ fontWeight: '300', letterSpacing: '0.1em', }}>
                   {item.question}
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <Typography>{item.answer}</Typography>
+                <Typography variant='body2' style={{fontWeight: 300}}>{item.answer}</Typography>
               </AccordionDetails>
             </Accordion>
           ))}
