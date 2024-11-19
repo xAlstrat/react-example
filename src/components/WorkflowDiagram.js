@@ -89,23 +89,23 @@ const GradientIcon = styled.div`
   -webkit-text-fill-color: transparent;
 `;
 
-const CircularNode = styled.div`
+const SquaredNode = styled.div`
   width: 60px;
   height: 60px;
-  border-radius: 50%;
+  border-radius: 4px;
   border: 2px dashed #ae53ba;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-const CircularNodeContainer = styled.div`
+const SquaredNodeContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
-const CircularNodeTitle = styled.div`
+const SquaredNodeTitle = styled.div`
   font-size: 12px;
   margin-bottom: 5px;
   text-align: center;
@@ -132,14 +132,14 @@ const StyledReactFlow = styled(ReactFlow)`
 
 const _TurboNode = ({ data }) => {
   return (
-    <CircularNodeContainer>
-      <CircularNodeTitle>{data.title}</CircularNodeTitle>
-      <CircularNode>
+    <SquaredNodeContainer>
+      <SquaredNodeTitle>{data.title}</SquaredNodeTitle>
+      <SquaredNode>
         <GradientIcon>{data.icon}</GradientIcon>
-      </CircularNode>
+      </SquaredNode>
       <Handle type="target" position={Position.Left} style={{top: "calc(50% + 12px)", opacity: 0}} />
       <Handle type="source" position={Position.Right} style={{top: "calc(50% + 12px)", opacity: 0}} />
-    </CircularNodeContainer>
+    </SquaredNodeContainer>
   );
 };
 
