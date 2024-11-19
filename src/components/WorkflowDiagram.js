@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useMemo } from 'react';
+import React, { memo, useCallback, useEffect, useMemo } from 'react';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 import styled from '@emotion/styled';
 import {
@@ -456,19 +456,19 @@ const WorkflowDiagram = ({ activeNodeIds = [], inactiveNodeIds = [] }) => {
       return edge;
     }), []);
 
-  const nodesWithStates = useMemo(() => {
+  const [nodes, setNodes , onNodesChange] = useNodesState(initialNodes);
+  useEffect(() => {
     const baseNodes = isMobile ? mobileNodes : initialNodes;
-    return baseNodes.map(node => ({
+    setNodes(baseNodes.map(node => ({
       ...node,
       data: {
         ...node.data,
         active: activeNodeIds.includes(node.id),
         inactive: inactiveNodeIds.includes(node.id)
       }
-    }));
+    })));
   }, [isMobile, activeNodeIds, inactiveNodeIds]);
 
-  const [nodes, , onNodesChange] = useNodesState(nodesWithStates);
   const [edges, setEdges, onEdgesChange] = useEdgesState(isMobile ? mobileEdges : initialEdges);
 
   return (

@@ -27,12 +27,12 @@ const WorkflowDiagramSection = () => {
   const [inactiveNodes, setInactiveNodes] = React.useState(['4a', '4b']);
 
   React.useEffect(() => {
-    const timer = setInterval(() => {
+    const timer = setTimeout(() => {
       setActiveNodes(['3a', '3c', '2']);
       setInactiveNodes(['1', '4a', '4b']);
     }, 2000);
 
-    return () => clearInterval(timer);
+    return () => clearTimeout(timer);
   }, []);
 
   return <AnimatedElement delay={0.4}>
