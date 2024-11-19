@@ -23,9 +23,26 @@ import CTA from 'components/Button/CTA';
 import '@xyflow/react/dist/base.css';
 
 const WorkflowDiagramSection = () => {
+  const [activeNodes, setActiveNodes] = React.useState(['1', '2']);
+  const [inactiveNodes, setInactiveNodes] = React.useState(['4a', '4b']);
+
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveNodes(['3a', '3c', '2']);
+      setInactiveNodes(['1', '4a', '4b']);
+    }, 2000);
+
+    return () => clearInterval(timer);
+  }, []);
+
   return <AnimatedElement delay={0.4}>
-  <Box sx={{ height: 500 }}><WorkflowDiagram /></Box>
-</AnimatedElement>
+    <Box sx={{ height: 500 }}>
+      <WorkflowDiagram 
+        activeNodeIds={activeNodes}
+        inactiveNodeIds={inactiveNodes}
+      />
+    </Box>
+  </AnimatedElement>
 }
 
 const CodeAssistant = () => {

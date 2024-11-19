@@ -22,9 +22,13 @@ import { Handle, Position } from '@xyflow/react';
 
 const NodeBase = styled.div`
   font-size: 10px;
-  background: linear-gradient(165deg, rgba(142, 45, 226, 0.95), rgba(74, 0, 224, 0.95));
+  background: ${({ active }) => active ? 
+    'linear-gradient(165deg, rgba(142, 45, 226, 1), rgba(74, 0, 224, 1))' :
+    'linear-gradient(165deg, rgba(142, 45, 226, 0.6), rgba(74, 0, 224, 0.6))'
+  };
   border-radius: 12px;
   color: #ffffff;
+  opacity: ${({ active, inactive }) => inactive ? 0.4 : 1};
   font-weight: 300;
   padding: 0px;
   text-align: center;
@@ -75,7 +79,9 @@ const DataNode = styled.div`
   justify-content: center;
   align-items: center;
   padding: 8px 12px;
-  border: 1px solid rgba(174, 83, 186, 0.4);
+  border: 1px solid ${({ active }) => 
+    active ? 'rgba(174, 83, 186, 0.8)' : 'rgba(174, 83, 186, 0.4)'};
+  opacity: ${({ inactive }) => inactive ? 0.4 : 1};
   border-radius: 8px;
   position: relative;
   background: rgba(174, 83, 186, 0.05);
@@ -198,10 +204,12 @@ const _TurboNode = ({ data }) => {
 
 const _MainNode = ({ data }) => {
   const theme = useTheme();
+  const active = data.active;
+  const inactive = data.inactive;
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <NodeBase>
+    <NodeBase active={active} inactive={inactive}>
       {isMobile ? (
         <>
           <Handle type="target" position={Position.Top} id='input' style={{opacity: 0, left: '30%'}}/>
@@ -250,7 +258,7 @@ const _ModelNode = ({ data }) => {
 
 const _SubDataNode = ({ data }) => {
   return (
-    <DataNode>
+    <DataNode active={data.active} inactive={data.inactive}>
       <GradientIcon>{data.icon}</GradientIcon>
       <DataNodeTitle position={data.titlePosition || 'bottom'}>{data.title}</DataNodeTitle>
       {data.targetHandlePosition && <Handle type="target" position={data.targetHandlePosition} style={{opacity: 0}}/>}
@@ -363,7 +371,7 @@ const defaultEdgeOptions = {
   //markerEnd: 'edge-circle',
 };
 
-const WorkflowDiagram = () => {
+const WorkflowDiagram = ({ activeNodeIds = [], inactiveNodeIds = [] }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   
@@ -448,7 +456,19 @@ const WorkflowDiagram = () => {
       return edge;
     }), []);
 
-  const [nodes, , onNodesChange] = useNodesState(isMobile ? mobileNodes : initialNodes);
+  const nodesWithStates = useMemo(() => {
+    const baseNodes = isMobile ? mobileNodes : initialNodes;
+    return baseNodes.map(node => ({
+      ...node,
+      data: {
+        ...node.data,
+        active: activeNodeIds.includes(node.id),
+        inactive: inactiveNodeIds.includes(node.id)
+      }
+    }));
+  }, [isMobile, activeNodeIds, inactiveNodeIds]);
+
+  const [nodes, , onNodesChange] = useNodesState(nodesWithStates);
   const [edges, setEdges, onEdgesChange] = useEdgesState(isMobile ? mobileEdges : initialEdges);
 
   return (
