@@ -22,6 +22,12 @@ import CTA from 'components/Button/CTA';
 
 import '@xyflow/react/dist/base.css';
 
+const WorkflowDiagramSection = () => {
+  return <AnimatedElement delay={0.4}>
+  <Box sx={{ height: 500 }}><WorkflowDiagram /></Box>
+</AnimatedElement>
+}
+
 const CodeAssistant = () => {
   const [resetKey, setResetKey] = React.useState(0);
 
@@ -249,9 +255,6 @@ const CloudUseCaseSection = () => {
       </Box>
       <Grid container spacing={4} justifyContent="center">
         <Grid item size={{ xs: 12, md: 6 }}>
-          <AnimatedElement delay={0.4}>
-            <Box sx={{ height: 500 }}><WorkflowDiagram /></Box>
-          </AnimatedElement>
         </Grid>
         <Grid item size={{ xs: 12, md: 6 }}>
           <AnimatedElement delay={0.8}>
@@ -320,6 +323,7 @@ const UseCases = () => {
         <Typography variant="h2" component="h2" align="center" gutterBottom sx={{ fontWeight: 'bold', mb: 6, color: theme.palette.common.white }}>
           AI Agents <HighlightedText>everywhere</HighlightedText> at your company
         </Typography>
+        <WorkflowDiagramSection />
         <CodeAssistant />
         <CloudUseCaseSection />
       </Container>

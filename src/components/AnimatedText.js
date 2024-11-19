@@ -9,6 +9,8 @@ const AnimatedText = () => {
   return (
     <TypeAnimation
       sequence={[
+        'brainstorming',
+        800,
         'development',
         800,
         'documentation',

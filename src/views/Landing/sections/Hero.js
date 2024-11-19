@@ -106,7 +106,7 @@ const Hero = () => {
             <span>+</span>CODER
           </LogoText>
           <StyledTypography variant="h2" component="h1">
-            Keep focusing in creating value
+            Software AI Agents working for you
           </StyledTypography>
           <StyledTypography
             variant="h4"
@@ -118,7 +118,6 @@ const Hero = () => {
             }}
           >
             <HighlightedText>Repository maintenance & coding</HighlightedText><br />
-            performed by AI Agents
           </StyledTypography>
           <AnimatedTextContainer>
               <StyledTypography variant="h2" component="span">

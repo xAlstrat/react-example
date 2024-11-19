@@ -27,9 +27,9 @@ const FAQ = () => {
       answer: <>
         We are not an IDE or code edition tool. We provide a way to <HighlightedText>manage and run Software AI Agents</HighlightedText>; autonomously or interactively, following company conventions or guidelines, running specialized chains of agents to generate complex repository outcomes.
         <ul>
-          <li>Design and Planning Assistant - Specialized agent for project brainstorming</li>
+          <li>Design and Planning Assistant - Specialized agent for project brainstorming, design and planning</li>
           <li>Issue Enhancement Bot - Automated repository analysis and issue enrichment</li>
-          <li>Guidelines Validator - Parallel codebase validation and modification to enforce company standards</li>
+          <li>Guidelines Automation - Parallel codebase validation and modification to enforce company guidelines or standards</li>
           <li>Onboarding Assistant - Custom agent for team standards and developer training</li>
           <li>Workflow Specialist - Complex task automation with specialized agent chains</li>
         </ul>
@@ -58,7 +58,7 @@ const FAQ = () => {
         • Active development sessions
         • Code reviews and discussions
         • Real-time problem solving
-        
+        <br/>
         <HighlightedText>Automated Mode</HighlightedText> excels at:
         • Large-scale repository updates
         • Documentation maintenance
