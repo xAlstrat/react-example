@@ -65,28 +65,28 @@ const TurboNodeTitle = styled.div`
 
 const DataNode = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
-  width: 60px;
-  height: 60px;
+  padding: 8px 16px;
+  border: 2px solid #ae53ba;
+  border-radius: 4px;
   position: relative;
+  background: transparent;
+  gap: 8px;
 `;
 
 const DataNodeTitle = styled.div`
-  font-size: 10px;
-  text-align: center;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  width: max-content;
-  ${props => props.position === 'top' ? 'bottom: 70%;' : 'top: 70%;'}
+  font-size: 12px;
+  color: #ae53ba;
+  font-weight: 500;
 `;
 
 const GradientIcon = styled.div`
-  font-size: 24px;
+  font-size: 18px;
   background: linear-gradient(to right, #ae53ba, #2a8af6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  display: flex;
+  align-items: center;
 `;
 
 const SquaredNode = styled.div`
@@ -199,7 +199,7 @@ const _SubDataNode = ({ data }) => {
   return (
     <DataNode>
       <GradientIcon>{data.icon}</GradientIcon>
-      <DataNodeTitle position={data.titlePosition || 'bottom'}>{data.title}</DataNodeTitle>
+      <DataNodeTitle>{data.title}</DataNodeTitle>
       {data.targetHandlePosition && <Handle type="target" position={data.targetHandlePosition} style={{opacity: 0}}/>}
       {data.sourceHandlePosition && <Handle type="source" position={data.sourceHandlePosition || Position.Right} style={{opacity: 0}}/>}
     </DataNode>
