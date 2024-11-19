@@ -22,14 +22,16 @@ import { Handle, Position } from '@xyflow/react';
 
 const NodeBase = styled.div`
   font-size: 10px;
-  background: linear-gradient(135deg, #8e2de2, #4a00e0);
-  border-radius: 8px;
+  background: linear-gradient(165deg, rgba(142, 45, 226, 0.95), rgba(74, 0, 224, 0.95));
+  border-radius: 12px;
   color: #ffffff;
   font-weight: 300;
   padding: 0px;
   text-align: center;
-  box-shadow: 0 0 20px rgba(142, 45, 226, 0.6);
-  transition: all 0.3s ease;
+  box-shadow: 0 4px 24px rgba(142, 45, 226, 0.3),
+              inset 0 0 12px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   width: 140px;
   height: 100px;
   ${({ theme }) => theme.breakpoints.down('sm')} {
@@ -40,13 +42,17 @@ const NodeBase = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 
   &:hover {
-    box-shadow: 0 0 30px rgba(142, 45, 226, 0.8);
+    box-shadow: 0 8px 32px rgba(142, 45, 226, 0.4),
+                inset 0 0 12px rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
   }
 
   &.selected {
-    box-shadow: 0 0 0 2px #ff00ff, 0 0 30px rgba(142, 45, 226, 0.8);
+    box-shadow: 0 0 0 2px rgba(255, 0, 255, 0.6),
+                0 8px 32px rgba(142, 45, 226, 0.4);
   }
 `;
 
@@ -64,14 +70,26 @@ const TurboNodeTitle = styled.div`
 `;
 
 const DataNode = styled.div`
+  width: 140px;
   display: flex;
+  justify-content: center;
   align-items: center;
-  padding: 8px 16px;
-  border: 2px solid #ae53ba;
-  border-radius: 4px;
+  padding: 8px 12px;
+  border: 1px solid rgba(174, 83, 186, 0.4);
+  border-radius: 8px;
   position: relative;
-  background: transparent;
-  gap: 8px;
+  background: rgba(174, 83, 186, 0.05);
+  gap: 10px;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 12px rgba(174, 83, 186, 0.1);
+
+  &:hover {
+    border-color: rgba(174, 83, 186, 0.6);
+    background: rgba(174, 83, 186, 0.08);
+    box-shadow: 0 4px 20px rgba(174, 83, 186, 0.2);
+    transform: translateY(-1px);
+  }
 `;
 
 const DataNodeTitle = styled.div`
@@ -81,22 +99,40 @@ const DataNodeTitle = styled.div`
 `;
 
 const GradientIcon = styled.div`
-  font-size: 18px;
-  background: linear-gradient(to right, #ae53ba, #2a8af6);
+  font-size: 20px;
+  background: linear-gradient(135deg, #ae53ba, #2a8af6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: flex;
   align-items: center;
+  filter: drop-shadow(0 2px 4px rgba(174, 83, 186, 0.2));
+  transition: all 0.3s ease;
+
+  &:hover {
+    filter: drop-shadow(0 2px 8px rgba(174, 83, 186, 0.4));
+    transform: scale(1.05);
+  }
 `;
 
 const SquaredNode = styled.div`
   width: 60px;
   height: 60px;
-  border-radius: 4px;
-  border: 2px dashed #ae53ba;
+  border-radius: 12px;
+  border: 2px dashed rgba(174, 83, 186, 0.6);
+  background: rgba(174, 83, 186, 0.03);
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 12px rgba(174, 83, 186, 0.1);
+  backdrop-filter: blur(8px);
+
+  &:hover {
+    border-color: rgba(174, 83, 186, 0.8);
+    background: rgba(174, 83, 186, 0.06);
+    box-shadow: 0 4px 20px rgba(174, 83, 186, 0.2);
+    transform: translateY(-1px);
+  }
 `;
 
 const SquaredNodeContainer = styled.div`
@@ -118,15 +154,32 @@ const StyledReactFlow = styled(ReactFlow)`
 
   .react-flow__edge-path {
     stroke: url(#edge-gradient);
+    stroke-width: 1.5;
+    filter: drop-shadow(0 2px 4px rgba(174, 83, 186, 0.2));
+    transition: all 0.3s ease;
+  }
+
+  .react-flow__edge:hover .react-flow__edge-path {
     stroke-width: 2;
+    filter: drop-shadow(0 4px 8px rgba(174, 83, 186, 0.4));
   }
 
   .react-flow__edge-text {
     font-size: 10px;
+    font-weight: 500;
+    fill: rgba(174, 83, 186, 0.8);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   }
 
   .react-flow__edge-textwrapper {
     display: none;
+  }
+
+  .react-flow__handle {
+    width: 8px;
+    height: 8px;
+    background: rgba(174, 83, 186, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.2);
   }
 `;
 
@@ -199,7 +252,7 @@ const _SubDataNode = ({ data }) => {
   return (
     <DataNode>
       <GradientIcon>{data.icon}</GradientIcon>
-      <DataNodeTitle>{data.title}</DataNodeTitle>
+      <DataNodeTitle position={data.titlePosition || 'bottom'}>{data.title}</DataNodeTitle>
       {data.targetHandlePosition && <Handle type="target" position={data.targetHandlePosition} style={{opacity: 0}}/>}
       {data.sourceHandlePosition && <Handle type="source" position={data.sourceHandlePosition || Position.Right} style={{opacity: 0}}/>}
     </DataNode>
@@ -214,17 +267,17 @@ const ModelNode = memo(_ModelNode);
 const initialNodes = [
   {
     id: '1',
-    position: { x: 100 - 29, y: 150 - 32},
+    position: { x: 0, y: 150},
     data: { 
       icon: <ProcessIcon />, 
-      title: 'Trigger', 
+      title: 'Requirement', 
       sourceHandlePosition: Position.Right,
     },
     type: 'data',
   },
   {
     id: '2',
-    position: { x: 200 - 40, y: 98 },
+    position: { x: 201, y: 120 },
     data: { 
       icon: <SmartToyIcon />, 
       title: '+CODER', 
@@ -233,21 +286,10 @@ const initialNodes = [
   },
   {
     id: '3a',
-    position: { x: 135, y: 0 },
+    position: { x: 120, y: 0 },
     data: { 
-      icon: <ApiIcon />, 
-      title: 'API',
-      titlePosition: 'bottom',
-      sourceHandlePosition: Position.Bottom
-    },
-    type: 'data',
-  },
-  {
-    id: '3b',
-    position: { x: 200, y: 0 },
-    data: { 
-      icon: <FolderIcon />, 
-      title: 'Repository',
+      icon: <ProcessIcon />, 
+      title: 'Agents config',
       titlePosition: 'bottom',
       sourceHandlePosition: Position.Bottom
     },
@@ -255,7 +297,7 @@ const initialNodes = [
   },
   {
     id: '3c',
-    position: { x: 265, y: 0 },
+    position: { x: 280, y: 0 },
     data: { 
       icon: <DescriptionIcon />, 
       title: 'Guidelines',
@@ -266,16 +308,17 @@ const initialNodes = [
   },
   {
     id: '5',
-    position: { x: 200 - 6, y: 230 },
+    position: { x: 200, y: 290 },
     data: { 
-      icon: <SmartToyIcon />, 
-      title: 'Your Model API', 
+      icon: <GitHubIcon />, 
+      title: 'Repository', 
+      sourceHandlePosition: Position.Top
     },
-    type: 'model',
+    type: 'data',
   },
   {
     id: '4a',
-    position: { x: 330, y: 80 },
+    position: { x: 500, y: 150 - 25 },
     data: { 
       icon: <CloudIcon />,
       title: 'Cloud Events', 
@@ -285,7 +328,7 @@ const initialNodes = [
   },
   {
     id: '4b',
-    position: { x: 330, y: 140 },
+    position: { x: 500, y: 150 + 25 },
     data: { 
       icon: <GitHubIcon />,
       title: 'Repo Commits', 
@@ -298,7 +341,6 @@ const initialNodes = [
 const initialEdges = [
   { id: 'e1-2', source: '1', target: '2', label: 'Triggers', animated: true},
   { id: 'e3a-2', source: '3a', target: '2', label: 'Injects data', animated: true, targetHandle: "top" },
-  { id: 'e3b-2', source: '3b', target: '2', label: 'Injects data', animated: true, targetHandle: "top" },
   { id: 'e3c-2', source: '3c', target: '2', label: 'Injects data', animated: true, targetHandle: "top" },
   { id: 'e5-2', source: '5', target: '2', label: 'Provides LLM', animated: true, targetHandle: "bottom" },
   { id: 'e2-4a', source: '2', target: '4a', label: 'Produces', animated: true, },
@@ -416,8 +458,8 @@ const WorkflowDiagram = () => {
       edges={edges}
       fitView
       nodeTypes={nodeTypes}
-      // onNodesChange={onNodesChange}
-      // onEdgesChange={onEdgesChange}
+      onNodesChange={onNodesChange}
+      onEdgesChange={onEdgesChange}
       defaultEdgeOptions={defaultEdgeOptions}
       preventScrolling={false}
       connectOnClick={false}
