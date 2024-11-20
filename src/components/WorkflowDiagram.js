@@ -78,11 +78,11 @@ const DataNode = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 8px 12px;
+  padding: 4px 8px;
   border: 1px solid ${({ active }) => 
     active ? 'rgba(174, 83, 186, 0.8)' : 'rgba(174, 83, 186, 0.4)'};
   opacity: ${({ inactive }) => inactive ? 0.4 : 1};
-  border-radius: 8px;
+  border-radius: 4px;
   position: relative;
   background: rgba(174, 83, 186, 0.05);
   gap: 10px;
@@ -272,22 +272,48 @@ const SubDataNode = memo(_SubDataNode);
 const TurboNode = memo(_TurboNode);
 const ModelNode = memo(_ModelNode);
 
+const horizontalGap = 100;
+const verticalGap = 10;
+const iconSize = "small";
+
 const initialNodes = [
   {
-    id: '1',
-    position: { x: 0, y: 150},
+    id: 'float1',
+    position: { x: 350, y: 10 },
+    data: { text: 'Agents use context from repository and guidelines' },
+    type: 'floating',
+  },
+  {
+    id: 'float2',
+    position: { x: 350, y: 200 },
+    data: { text: 'Generated code is committed back to repository' },
+    type: 'floating',
+  },
+  {
+    id: '1a',
+    position: { x: 60 - horizontalGap, y: 110 - 25 + verticalGap},
     data: { 
-      icon: <ProcessIcon />, 
+      icon: <ProcessIcon fontSize={iconSize} />, 
       title: 'Requirement', 
       sourceHandlePosition: Position.Right,
     },
     type: 'data',
   },
   {
-    id: '2',
-    position: { x: 201, y: 120 },
+    id: '1b',
+    position: { x: 60 - horizontalGap, y: 110 + 25 + verticalGap },
     data: { 
-      icon: <SmartToyIcon />, 
+      icon: <GitHubIcon fontSize={iconSize} />, 
+      title: 'Repository', 
+      sourceHandlePosition: Position.Right
+    },
+    type: 'data',
+  },
+  {
+    id: '2',
+    position: { x: 201, y: 80 + verticalGap },
+    data: { 
+      icon: <SmartToyIcon fontSize={iconSize} />, 
       title: '+CODER', 
     },
     type: 'main',
@@ -296,7 +322,7 @@ const initialNodes = [
     id: '3a',
     position: { x: 120, y: 0 },
     data: { 
-      icon: <ProcessIcon />, 
+      icon: <ProcessIcon fontSize={iconSize} />, 
       title: 'Agents config',
       titlePosition: 'bottom',
       sourceHandlePosition: Position.Bottom
@@ -307,7 +333,7 @@ const initialNodes = [
     id: '3c',
     position: { x: 280, y: 0 },
     data: { 
-      icon: <DescriptionIcon />, 
+      icon: <DescriptionIcon fontSize={iconSize} />, 
       title: 'Guidelines',
       titlePosition: 'bottom',
       sourceHandlePosition: Position.Bottom
@@ -315,20 +341,10 @@ const initialNodes = [
     type: 'data',
   },
   {
-    id: '5',
-    position: { x: 200, y: 290 },
-    data: { 
-      icon: <GitHubIcon />, 
-      title: 'Repository', 
-      sourceHandlePosition: Position.Top
-    },
-    type: 'data',
-  },
-  {
     id: '4a',
-    position: { x: 500, y: 150 - 25 },
+    position: { x: 200 + 140 + horizontalGap, y: 110 - 25 + verticalGap },
     data: { 
-      icon: <CloudIcon />,
+      icon: <CloudIcon fontSize={iconSize} />,
       title: 'Cloud Events', 
       targetHandlePosition: Position.Left
     },
@@ -336,10 +352,10 @@ const initialNodes = [
   },
   {
     id: '4b',
-    position: { x: 500, y: 150 + 25 },
+    position: { x: 200 + 140 + horizontalGap, y: 110 + 25 + verticalGap },
     data: { 
-      icon: <GitHubIcon />,
-      title: 'Repo Commits', 
+      icon: <GitHubIcon fontSize={iconSize} />,
+      title: 'Commit', 
       targetHandlePosition: Position.Left
     },
     type: 'data',
@@ -347,19 +363,36 @@ const initialNodes = [
 ];
 
 const initialEdges = [
-  { id: 'e1-2', source: '1', target: '2', label: 'Triggers', animated: true},
+  { id: 'e1a-2', source: '1a', target: '2', label: 'Triggers', animated: true},
+  { id: 'e1b-2', source: '1b', target: '2', label: 'Provides LLM', animated: true},
   { id: 'e3a-2', source: '3a', target: '2', label: 'Injects data', animated: true, targetHandle: "top" },
   { id: 'e3c-2', source: '3c', target: '2', label: 'Injects data', animated: true, targetHandle: "top" },
-  { id: 'e5-2', source: '5', target: '2', label: 'Provides LLM', animated: true, targetHandle: "bottom" },
   { id: 'e2-4a', source: '2', target: '4a', label: 'Produces', animated: true, },
   { id: 'e2-4b', source: '2', target: '4b', label: 'Produces', animated: true, },
 ];
+
+const _FloatingText = ({ data }) => (
+  <div style={{ 
+    fontSize: '11px',
+    color: 'rgba(174, 83, 186, 0.9)',
+    padding: '8px',
+    textAlign: 'center',
+    fontStyle: 'italic',
+    maxWidth: '120px',
+    lineHeight: '1.3'
+  }}>
+    {data.text}
+  </div>
+);
+_FloatingText.displayName = 'FloatingText';
+const FloatingText = memo(_FloatingText);
 
 const nodeTypes = {
   turbo: TurboNode,
   main: MainNode,
   data: SubDataNode,
   model: ModelNode,
+  floating: FloatingText,
 };
 
 const edgeTypes = {
@@ -473,7 +506,7 @@ const WorkflowDiagram = ({ activeNodeIds = [], inactiveNodeIds = [] }) => {
 
   return (
     <StyledReactFlow
-      style={{ height: isMobile ? '400px' : '500px' }}
+      style={{ height: isMobile ? '300px' : '300px' }}
       nodes={nodes}
       edges={edges}
       fitView
