@@ -373,13 +373,20 @@ const initialEdges = [
 
 const _FloatingText = ({ data }) => (
   <div style={{ 
-    fontSize: '11px',
-    color: 'rgba(174, 83, 186, 0.9)',
-    padding: '8px',
+    fontSize: '12px',
+    color: '#ffffff',
+    padding: '8px 12px',
     textAlign: 'center',
-    fontStyle: 'italic',
-    maxWidth: '120px',
-    lineHeight: '1.3'
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    fontWeight: '300',
+    letterSpacing: '0.5px',
+    maxWidth: '140px',
+    lineHeight: '1.4',
+    background: 'rgba(142, 45, 226, 0.15)',
+    backdropFilter: 'blur(4px)',
+    borderRadius: '4px',
+    border: '1px solid rgba(255, 255, 255, 0.1)',
+    textShadow: '0 1px 2px rgba(0, 0, 0, 0.2)'
   }}>
     {data.text}
   </div>
