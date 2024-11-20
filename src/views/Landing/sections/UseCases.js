@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, useTheme, Container, Card, CardContent } from '@mui/material';
+import { Box, Typography, useTheme, Container, Card, CardContent, Button } from '@mui/material';
 import VSCodeSkeleton from 'components/VSCodeSkeleton';
 import ConsoleComponent from 'components/ConsolePaper';
 import SlidingTextDisplay from 'components/SlidingTextDisplay';
@@ -22,25 +22,72 @@ import CTA from 'components/Button/CTA';
 
 import '@xyflow/react/dist/base.css';
 
+const USE_CASES = [
+  {
+    id: 'brainstorming',
+    title: 'Brainstorming',
+    description: 'AI assists in brainstorming and requirements gathering by analyzing guidelines and existing codebase',
+    activeNodes: ['1a', '2', '3c'],
+    inactiveNodes: ['3a', '4a', '4b']
+  },
+  {
+    id: 'onboarding',
+    title: 'Developer Onboarding',
+    description: 'New developers can interact with an agent that understands project guidelines and best practices',
+    activeNodes: ['2', '3a', '3c'],
+    inactiveNodes: ['1a', '4a', '4b']
+  },
+  {
+    id: 'git-management',
+    title: 'Git Issues Management',
+    description: 'Automated creation and management of Git issues based on code analysis',
+    activeNodes: ['1b', '2', '4b'],
+    inactiveNodes: ['3a', '3c', '4a']
+  }
+];
+
 const WorkflowDiagramSection = () => {
-  const [activeNodes, setActiveNodes] = React.useState(['1', '2']);
-  const [inactiveNodes, setInactiveNodes] = React.useState(['4a', '4b']);
+  const [activeUseCase, setActiveUseCase] = React.useState(0);
+  const [activeNodes, setActiveNodes] = React.useState(USE_CASES[0].activeNodes);
+  const [inactiveNodes, setInactiveNodes] = React.useState(USE_CASES[0].inactiveNodes);
 
   React.useEffect(() => {
-    const timer = setTimeout(() => {
-      setActiveNodes(['3a', '3c', '2']);
-      setInactiveNodes(['1', '4a', '4b']);
-    }, 2000);
+    const interval = setInterval(() => {
+      setActiveUseCase((prev) => (prev + 1) % USE_CASES.length);
+    }, 4000);
 
-    return () => clearTimeout(timer);
+    return () => clearInterval(interval);
   }, []);
 
+  React.useEffect(() => {
+    const currentCase = USE_CASES[activeUseCase];
+    setActiveNodes(currentCase.activeNodes);
+    setInactiveNodes(currentCase.inactiveNodes);
+  }, [activeUseCase]);
+
   return <AnimatedElement delay={0.4}>
-    <Box sx={{ height: 500 }}>
-      <WorkflowDiagram 
-        activeNodeIds={activeNodes}
-        inactiveNodeIds={inactiveNodes}
-      />
+    <Box sx={{ height: 400 }}>
+      <Stack spacing={2}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
+          {USE_CASES.map((useCase, index) => (
+            <Button
+              key={useCase.id}
+              variant={activeUseCase === index ? 'contained' : 'outlined'}
+              onClick={() => setActiveUseCase(index)}
+              sx={{ color: 'white' }}
+            >
+              {useCase.title}
+            </Button>
+          ))}
+        </Box>
+        <Typography variant="body1" align="center" sx={{ color: 'grey.400' }}>
+          {USE_CASES[activeUseCase].description}
+        </Typography>
+        <WorkflowDiagram 
+          activeNodeIds={activeNodes}
+          inactiveNodeIds={inactiveNodes}
+        />
+      </Stack>
     </Box>
   </AnimatedElement>
 }
