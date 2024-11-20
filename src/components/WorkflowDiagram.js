@@ -74,7 +74,7 @@ const TurboNodeTitle = styled.div`
 `;
 
 const DataNode = styled.div`
-  width: 140px;
+  width: 125px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -273,25 +273,14 @@ const TurboNode = memo(_TurboNode);
 const ModelNode = memo(_ModelNode);
 
 const horizontalGap = 100;
-const verticalGap = 10;
+const verticalOffset = 10;
+const verticalMargin = 20;
 const iconSize = "small";
 
 const initialNodes = [
   {
-    id: 'float1',
-    position: { x: 350, y: 10 },
-    data: { text: 'Agents use context from repository and guidelines' },
-    type: 'floating',
-  },
-  {
-    id: 'float2',
-    position: { x: 350, y: 200 },
-    data: { text: 'Generated code is committed back to repository' },
-    type: 'floating',
-  },
-  {
     id: '1a',
-    position: { x: 60 - horizontalGap, y: 110 - 25 + verticalGap},
+    position: { x: 60 - horizontalGap, y: 115 - verticalMargin + verticalOffset},
     data: { 
       icon: <ProcessIcon fontSize={iconSize} />, 
       title: 'Requirement', 
@@ -301,7 +290,7 @@ const initialNodes = [
   },
   {
     id: '1b',
-    position: { x: 60 - horizontalGap, y: 110 + 25 + verticalGap },
+    position: { x: 60 - horizontalGap, y: 115 + verticalMargin + verticalOffset },
     data: { 
       icon: <GitHubIcon fontSize={iconSize} />, 
       title: 'Repository', 
@@ -311,7 +300,7 @@ const initialNodes = [
   },
   {
     id: '2',
-    position: { x: 201, y: 80 + verticalGap },
+    position: { x: 201, y: 80 + verticalOffset },
     data: { 
       icon: <SmartToyIcon fontSize={iconSize} />, 
       title: '+CODER', 
@@ -342,7 +331,7 @@ const initialNodes = [
   },
   {
     id: '4a',
-    position: { x: 200 + 140 + horizontalGap, y: 110 - 25 + verticalGap },
+    position: { x: 200 + 140 + horizontalGap, y: 115 - verticalMargin + verticalOffset },
     data: { 
       icon: <CloudIcon fontSize={iconSize} />,
       title: 'Cloud Events', 
@@ -352,7 +341,7 @@ const initialNodes = [
   },
   {
     id: '4b',
-    position: { x: 200 + 140 + horizontalGap, y: 110 + 25 + verticalGap },
+    position: { x: 200 + 140 + horizontalGap, y: 115 + verticalMargin + verticalOffset },
     data: { 
       icon: <GitHubIcon fontSize={iconSize} />,
       title: 'Commit', 
@@ -371,35 +360,11 @@ const initialEdges = [
   { id: 'e2-4b', source: '2', target: '4b', label: 'Produces', animated: true, },
 ];
 
-const _FloatingText = ({ data }) => (
-  <div style={{ 
-    fontSize: '12px',
-    color: '#ffffff',
-    padding: '8px 12px',
-    textAlign: 'center',
-    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
-    fontWeight: '300',
-    letterSpacing: '0.5px',
-    maxWidth: '140px',
-    lineHeight: '1.4',
-    background: 'rgba(142, 45, 226, 0.15)',
-    backdropFilter: 'blur(4px)',
-    borderRadius: '4px',
-    border: '1px solid rgba(255, 255, 255, 0.1)',
-    textShadow: '0 1px 2px rgba(0, 0, 0, 0.2)'
-  }}>
-    {data.text}
-  </div>
-);
-_FloatingText.displayName = 'FloatingText';
-const FloatingText = memo(_FloatingText);
-
 const nodeTypes = {
   turbo: TurboNode,
   main: MainNode,
   data: SubDataNode,
   model: ModelNode,
-  floating: FloatingText,
 };
 
 const edgeTypes = {

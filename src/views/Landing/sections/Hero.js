@@ -113,17 +113,21 @@ const Hero = () => {
             gutterBottom
             sx={{
               mt: 2,
-              fontSize: { xs: '1.2rem', sm: '1.5rem', md: '2.125rem' },
+              fontSize: { xs: '1.2rem', sm: '1.5rem', md: '1.5rem' },
               lineHeight: { xs: 1.3, sm: 1.4 }
             }}
           >
-            <HighlightedText>Repository maintenance & coding</HighlightedText><br />
+            <HighlightedText>Coding</HighlightedText>{" - "}
+            <HighlightedText>Repository maintenance</HighlightedText>{" - "}
+            <HighlightedText>Brainstorming</HighlightedText>{" - "}
+            <HighlightedText>Planning</HighlightedText>{ "  " }
+            <span style={{whiteSpace: "nowrap"}}>and more..</span>
           </StyledTypography>
-          <AnimatedTextContainer>
+          {/* <AnimatedTextContainer>
               <StyledTypography variant="h2" component="span">
                 <AnimatedText />
               </StyledTypography>
-          </AnimatedTextContainer>
+          </AnimatedTextContainer> */}
           <Box mt={4} mb={4} width="100%" maxWidth="800px" sx={{ px: { xs: 1, sm: 2 } }}>
             <AnimatedElement>
               <BashDisplay />
