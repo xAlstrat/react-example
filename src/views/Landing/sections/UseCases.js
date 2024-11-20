@@ -24,25 +24,52 @@ import '@xyflow/react/dist/base.css';
 
 const USE_CASES = [
   {
+    id: 'coding',
+    title: 'Conversational Development',
+    description: 'Chat with an specialized Agent and instruct them to work in the repository',
+    activeNodes: ['1a', '2', '3c'],
+    inactiveNodes: ['3a', '4a', '4b'],
+    steps: [
+      'Developer initiates conversation with agent',
+      'AI reads repository context and guidelines',
+      'Agent performs requested changes'
+    ]
+  },
+  {
     id: 'brainstorming',
     title: 'Brainstorming',
     description: 'AI assists in brainstorming and requirements gathering by analyzing guidelines and existing codebase',
     activeNodes: ['1a', '2', '3c'],
-    inactiveNodes: ['3a', '4a', '4b']
+    inactiveNodes: ['3a', '4a', '4b'],
+    steps: [
+      'Developer requests creative input',
+      'AI analyzes requirements and guidelines',
+      'Agent provides structured solutions'
+    ]
   },
   {
     id: 'onboarding',
-    title: 'Developer Onboarding',
+    title: 'Developer Onboarding', 
     description: 'New developers can interact with an agent that understands project guidelines and best practices',
     activeNodes: ['2', '3a', '3c'],
-    inactiveNodes: ['1a', '4a', '4b']
+    inactiveNodes: ['1a', '4a', '4b'],
+    steps: [
+      'New developer asks about codebase',
+      'AI processes guidelines and config',
+      'Agent explains patterns and practices'
+    ]
   },
   {
     id: 'git-management',
     title: 'Git Issues Management',
     description: 'Automated creation and management of Git issues based on code analysis',
     activeNodes: ['1b', '2', '4b'],
-    inactiveNodes: ['3a', '3c', '4a']
+    inactiveNodes: ['3a', '3c', '4a'],
+    steps: [
+      'System detects code changes',
+      'AI analyzes changes and context',
+      'Agent creates/updates issues'
+    ]
   }
 ];
 
@@ -54,7 +81,7 @@ const WorkflowDiagramSection = () => {
   React.useEffect(() => {
     const interval = setInterval(() => {
       setActiveUseCase((prev) => (prev + 1) % USE_CASES.length);
-    }, 4000);
+    }, 15000);
 
     return () => clearInterval(interval);
   }, []);
@@ -66,7 +93,7 @@ const WorkflowDiagramSection = () => {
   }, [activeUseCase]);
 
   return <AnimatedElement delay={0.4}>
-    <Box sx={{ height: 400 }}>
+    <Box>
       <Stack spacing={2}>
         <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
           {USE_CASES.map((useCase, index) => (
@@ -83,10 +110,47 @@ const WorkflowDiagramSection = () => {
         <Typography variant="body1" align="center" sx={{ color: 'grey.400' }}>
           {USE_CASES[activeUseCase].description}
         </Typography>
-        <WorkflowDiagram 
-          activeNodeIds={activeNodes}
-          inactiveNodeIds={inactiveNodes}
-        />
+        <Box sx={{ height: 300 }}>
+          <WorkflowDiagram 
+            activeNodeIds={activeNodes}
+            inactiveNodeIds={inactiveNodes}
+          />
+        </Box>
+        <Box sx={{ mt: 4 }}>
+          <Grid container spacing={3} justifyContent="center">
+            {USE_CASES[activeUseCase].steps.map((step, index) => (
+              <Grid key={index} item xs={12} md={4}>
+                <Box sx={{ 
+                  display: 'flex', 
+                  alignItems: 'flex-start', 
+                  gap: 2,
+                  padding: 2,
+                  borderLeft: index < USE_CASES[activeUseCase].steps.length - 1 ? '2px dashed rgba(174, 83, 186, 0.4)' : 'none',
+                  height: '100%'
+                }}>
+                  <Box sx={{
+                    width: 36,
+                    height: 36,
+                    borderRadius: '50%',
+                    backgroundColor: 'rgba(174, 83, 186, 0.1)',
+                    border: '2px solid rgba(174, 83, 186, 0.4)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0,
+                    color: 'white',
+                    fontWeight: 'bold'
+                  }}>
+                    {index + 1}
+                  </Box>
+                  <Typography variant="body1" sx={{ color: 'white', fontWeight: 300 }}>
+                    {step}
+                  </Typography>
+                </Box>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
       </Stack>
     </Box>
   </AnimatedElement>
