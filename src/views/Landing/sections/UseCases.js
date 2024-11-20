@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, useTheme, Container, Card, CardContent, Button } from '@mui/material';
+import { Box, Typography, useTheme, Container, Card, CardContent, Tabs, Tab } from '@mui/material';
 import VSCodeSkeleton from 'components/VSCodeSkeleton';
 import ConsoleComponent from 'components/ConsolePaper';
 import SlidingTextDisplay from 'components/SlidingTextDisplay';
@@ -49,7 +49,7 @@ const USE_CASES = [
   },
   {
     id: 'onboarding',
-    title: 'Developer Onboarding', 
+    title: 'Developer Onboarding',
     description: 'New developers can interact with an agent that understands project guidelines and best practices',
     activeNodes: ['2', '3a', '3c'],
     inactiveNodes: ['1a', '4a', '4b'],
@@ -81,7 +81,7 @@ const WorkflowDiagramSection = () => {
   React.useEffect(() => {
     const interval = setInterval(() => {
       setActiveUseCase((prev) => (prev + 1) % USE_CASES.length);
-    }, 15000);
+    }, 15000*100);
 
     return () => clearInterval(interval);
   }, []);
@@ -95,60 +95,68 @@ const WorkflowDiagramSection = () => {
   return <AnimatedElement delay={0.4}>
     <Box>
       <Stack spacing={2}>
-        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2 }}>
-          {USE_CASES.map((useCase, index) => (
-            <Button
-              key={useCase.id}
-              variant={activeUseCase === index ? 'contained' : 'outlined'}
-              onClick={() => setActiveUseCase(index)}
-              sx={{ color: 'white' }}
-            >
-              {useCase.title}
-            </Button>
-          ))}
+        <Box sx={{ borderBottom: 1, borderColor: 'divider', display: 'flex', justifyContent: 'center' }}>
+          <Tabs 
+            value={activeUseCase}
+            onChange={(e, newValue) => setActiveUseCase(newValue)}
+            textColor="secondary"
+            indicatorColor="secondary"
+            sx={{ 
+              '& .MuiTab-root': { 
+                color: 'rgba(255, 255, 255, 0.7)',
+                '&.Mui-selected': { color: 'white' }
+              }
+            }}
+          >
+            {USE_CASES.map((useCase, index) => (
+              <Tab key={useCase.id} label={useCase.title} />
+            ))}
+          </Tabs>
         </Box>
-        <Typography variant="body1" align="center" sx={{ color: 'grey.400' }}>
-          {USE_CASES[activeUseCase].description}
-        </Typography>
         <Box sx={{ height: 300 }}>
-          <WorkflowDiagram 
+          <WorkflowDiagram
             activeNodeIds={activeNodes}
             inactiveNodeIds={inactiveNodes}
           />
         </Box>
         <Box sx={{ mt: 4 }}>
           <Grid container spacing={3} justifyContent="center">
-            {USE_CASES[activeUseCase].steps.map((step, index) => (
-              <Grid key={index} item xs={12} md={4}>
-                <Box sx={{ 
-                  display: 'flex', 
-                  alignItems: 'flex-start', 
-                  gap: 2,
-                  padding: 2,
-                  borderLeft: index < USE_CASES[activeUseCase].steps.length - 1 ? '2px dashed rgba(174, 83, 186, 0.4)' : 'none',
-                  height: '100%'
-                }}>
-                  <Box sx={{
-                    width: 36,
-                    height: 36,
-                    borderRadius: '50%',
-                    backgroundColor: 'rgba(174, 83, 186, 0.1)',
-                    border: '2px solid rgba(174, 83, 186, 0.4)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexShrink: 0,
-                    color: 'white',
-                    fontWeight: 'bold'
-                  }}>
-                    {index + 1}
-                  </Box>
-                  <Typography variant="body1" sx={{ color: 'white', fontWeight: 300 }}>
-                    {step}
-                  </Typography>
-                </Box>
+            <Grid item size={{ xs: 12, lg: 10 }}>
+              <Grid container spacing={3} justifyContent="center">
+                {USE_CASES[activeUseCase].steps.map((step, index) => (
+                  <Grid key={index} item size={{ xs: 12, md: 4 }}>
+                    <Box sx={{
+                      display: 'flex',
+                      alignItems: 'flex-start',
+                      gap: 2,
+                      padding: 2,
+                      borderLeft: index < USE_CASES[activeUseCase].steps.length ? '2px dashed rgba(174, 83, 186, 0.4)' : 'none',
+                      height: '100%'
+                    }}>
+                      <Box sx={{
+                        width: 36,
+                        height: 36,
+                        borderRadius: '50%',
+                        backgroundColor: 'rgba(174, 83, 186, 0.1)',
+                        border: '2px solid rgba(174, 83, 186, 0.4)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexShrink: 0,
+                        color: 'white',
+                        fontWeight: 'bold'
+                      }}>
+                        {index + 1}
+                      </Box>
+                      <Typography variant="body1" sx={{ color: 'white', fontWeight: 300 }}>
+                        {step}
+                      </Typography>
+                    </Box>
+                  </Grid>
+                ))}
               </Grid>
-            ))}
+            </Grid>
+
           </Grid>
         </Box>
       </Stack>
@@ -283,37 +291,37 @@ const CodeAssistant = () => {
                 <Stack spacing={2}>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                     <CodeIcon />
-                    <Typography variant="body2" style={{fontWeight: 300}}>
+                    <Typography variant="body2" style={{ fontWeight: 300 }}>
                       Smart pattern and code practices recognition
                     </Typography>
                   </Box>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                     <Storage />
-                    <Typography variant="body2" style={{fontWeight: 300}}>
+                    <Typography variant="body2" style={{ fontWeight: 300 }}>
                       Customizable knowledge sources
                     </Typography>
                   </Box>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                     <Update />
-                    <Typography variant="body2" style={{fontWeight: 300}}>
+                    <Typography variant="body2" style={{ fontWeight: 300 }}>
                       Real-time repository updates
                     </Typography>
                   </Box>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                     <Science />
-                    <Typography variant="body2" style={{fontWeight: 300}}>
+                    <Typography variant="body2" style={{ fontWeight: 300 }}>
                       Smart task planning and orchestrated agent workflows
                     </Typography>
                   </Box>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                     <SmartToyIcon />
-                    <Typography variant="body2" style={{fontWeight: 300}}>
+                    <Typography variant="body2" style={{ fontWeight: 300 }}>
                       Specialized agents for different development tasks
                     </Typography>
                   </Box>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                     <EmojiObjectsIcon />
-                    <Typography variant="body2" style={{fontWeight: 300}}>
+                    <Typography variant="body2" style={{ fontWeight: 300 }}>
                       Automated feedback loops
                     </Typography>
                   </Box>
@@ -406,7 +414,7 @@ const CloudUseCaseSection = () => {
                   {cloudFeatures.map((feature, index) => (
                     <Box key={index} sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                       {feature.icon}
-                      <Typography variant="body2" style={{fontWeight: 300,}}>
+                      <Typography variant="body2" style={{ fontWeight: 300, }}>
                         {feature.text}
                       </Typography>
                     </Box>
