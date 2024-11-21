@@ -381,8 +381,31 @@ const WorkflowDiagram = ({ activeNodeIds = [], inactiveNodeIds = [], onNodeClick
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   
   const mobileNodes = useMemo(() => initialNodes.map(node => {
+    const mobileHorizontalAdjustment = 50; // Amount to adjust positions in mobile
     
     switch(node.id) {
+      case '1a':
+        return {
+          ...node,
+          position: { x: node.position.x + mobileHorizontalAdjustment, y: node.position.y }
+        };
+      case '1b':
+        return {
+          ...node,
+          position: { x: node.position.x + mobileHorizontalAdjustment, y: node.position.y }
+        };
+      case '3a':
+        return {
+          ...node,
+          position: { x: node.position.x - mobileHorizontalAdjustment, y: node.position.y }
+        };
+      case '3c':
+        return {
+          ...node,
+          position: { x: node.position.x - mobileHorizontalAdjustment, y: node.position.y }
+        };
+      default:
+        return node;
     }
   }).filter(Boolean), []);
 
