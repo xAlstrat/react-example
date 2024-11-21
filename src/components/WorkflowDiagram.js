@@ -8,8 +8,7 @@ import {
   addEdge,
 } from '@xyflow/react';
 import ProcessIcon from '@mui/icons-material/Settings';
-import ApiIcon from '@mui/icons-material/Api';
-import FolderIcon from '@mui/icons-material/Folder';
+import ConsoleIcon from '@mui/icons-material/Terminal';
 import DescriptionIcon from '@mui/icons-material/Description';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 import CloudIcon from '@mui/icons-material/Cloud';
@@ -273,6 +272,7 @@ const TurboNode = memo(_TurboNode);
 const ModelNode = memo(_ModelNode);
 
 const horizontalGap = 100;
+const horizontalAdjust = 40; // New variable for fine-tuning horizontal positions
 const verticalOffset = 10;
 const verticalMargin = 20;
 const iconSize = "small";
@@ -280,17 +280,17 @@ const iconSize = "small";
 const initialNodes = [
   {
     id: '1a',
-    position: { x: 60 - horizontalGap, y: 115 - verticalMargin + verticalOffset},
+    position: { x: 60 - horizontalGap + horizontalAdjust, y: 115 - verticalMargin + verticalOffset},
     data: { 
-      icon: <ProcessIcon fontSize={iconSize} />, 
-      title: 'Requirement', 
+      icon: <ConsoleIcon fontSize={iconSize} />, 
+      title: 'User', 
       sourceHandlePosition: Position.Right,
     },
     type: 'data',
   },
   {
     id: '1b',
-    position: { x: 60 - horizontalGap, y: 115 + verticalMargin + verticalOffset },
+    position: { x: 60 - horizontalGap + horizontalAdjust, y: 115 + verticalMargin + verticalOffset },
     data: { 
       icon: <GitHubIcon fontSize={iconSize} />, 
       title: 'Repository', 
@@ -309,10 +309,10 @@ const initialNodes = [
   },
   {
     id: '3a',
-    position: { x: 120, y: 0 },
+    position: { x: 120 - horizontalAdjust, y: 0 },
     data: { 
-      icon: <ProcessIcon fontSize={iconSize} />, 
-      title: 'Agents config',
+      icon: <DescriptionIcon fontSize={iconSize} />, 
+      title: 'Guidelines',
       titlePosition: 'bottom',
       sourceHandlePosition: Position.Bottom
     },
@@ -320,10 +320,10 @@ const initialNodes = [
   },
   {
     id: '3c',
-    position: { x: 280, y: 0 },
+    position: { x: 280 - horizontalAdjust, y: 0 },
     data: { 
-      icon: <DescriptionIcon fontSize={iconSize} />, 
-      title: 'Guidelines',
+      icon: <ProcessIcon fontSize={iconSize} />, 
+      title: 'Agents config',
       titlePosition: 'bottom',
       sourceHandlePosition: Position.Bottom
     },
@@ -376,73 +376,13 @@ const defaultEdgeOptions = {
   //markerEnd: 'edge-circle',
 };
 
-const WorkflowDiagram = ({ activeNodeIds = [], inactiveNodeIds = [] }) => {
+const WorkflowDiagram = ({ activeNodeIds = [], inactiveNodeIds = [], onNodeClick }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   
   const mobileNodes = useMemo(() => initialNodes.map(node => {
-    const getSourcePosition = (id) => {
-      if (['3a', '3b', '3c'].includes(id)) return Position.Bottom;
-      if (id === '1') return Position.Right;
-      if (id === '2') return Position.Bottom;
-      return Position.Left;
-    };
-
-    const getTargetPosition = (id) => {
-      if (['4a', '4b'].includes(id)) return Position.Top;
-      return Position.Left;
-    };
-    if (node.id === '5') return null; // Remove Model API node
     
     switch(node.id) {
-      case '1': // Trigger
-        return { 
-          ...node, 
-          position: { x: 100 - 29, y: 30 },
-          data: {
-            ...node.data,
-            sourceHandlePosition: Position.Bottom,
-            targetHandlePosition: getTargetPosition(node.id)
-          }
-        };
-      case '2': // Main node
-        return { ...node, position: { x: 100, y: 120 } };
-      case '3a': // API
-      case '3b': // Repository  
-      case '3c': // Guidelines
-        const xPositions = {
-          '3a': 135,
-          '3b': 200,
-          '3c': 265
-        };
-        return { 
-          ...node, 
-          position: { 
-            x: xPositions[node.id], 
-            y: 30
-          },
-          data: {
-            ...node.data,
-            sourceHandlePosition: getSourcePosition(node.id),
-            targetHandlePosition: getTargetPosition(node.id)
-          }
-        };
-      case '4a': // Cloud Events
-      case '4b': // Repo Commits
-        return {
-          ...node,
-          position: {
-            x: node.id === '4a' ? 120 : 240,
-            y: 270
-          },
-          data: {
-            ...node.data,
-            sourceHandlePosition: getSourcePosition(node.id),
-            targetHandlePosition: getTargetPosition(node.id)
-          }
-        };
-      default:
-        return node;
     }
   }).filter(Boolean), []);
 
@@ -496,6 +436,7 @@ const WorkflowDiagram = ({ activeNodeIds = [], inactiveNodeIds = [] }) => {
       zoomOnDoubleClick={false}
       zoomOnScroll={false}
       zoomOnPinch={false}
+      onNodeClick={onNodeClick}
       
     >
 
