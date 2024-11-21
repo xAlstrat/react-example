@@ -348,9 +348,11 @@ const initialNodes = [
 ];
 
 const initialEdges = [
-  { id: 'e1b-2', source: '1b', target: '2', label: 'Provides LLM', animated: true, sourceHandle: "bottom" },
-  { id: 'e3c-2', source: '3c', target: '2', label: 'Injects data', animated: true, sourceHandle: "bottom" },
-  { id: 'e2-4a', source: '2', target: '4a', label: 'Produces', animated: true, targetHandle: "top" },
+  { id: 'e1a-2', source: '1a', target: '2', label: 'Triggers', animated: true },
+  { id: 'e1b-2', source: '1b', target: '2', label: 'Provides LLM', animated: true },
+  { id: 'e3a-2', source: '3a', target: '2', label: 'Injects data', animated: true, targetHandle: "top" },
+  { id: 'e3c-2', source: '3c', target: '2', label: 'Injects data', animated: true, targetHandle: "top" },
+  { id: 'e2-4a', source: '2', target: '4a', label: 'Produces', animated: true, },
   { id: 'e2-4b', source: '2', target: '4b', label: 'Produces', animated: true, },
 ];
 
@@ -426,7 +428,26 @@ const WorkflowDiagram = ({ activeNodeIds = [], inactiveNodeIds = [], onNodeClick
     })));
   }, [isMobile, activeNodeIds, inactiveNodeIds]);
 
+  const mobileEdges = useMemo(() => initialEdges
+    .filter(edge => !['e1a-2', 'e3a-2'].includes(edge.id))
+    .map(edge => {
+      switch(edge.id) {
+        case 'e1b-2':
+          return { ...edge, sourceHandle: 'bottom' };
+        case 'e3c-2':
+          return { ...edge, sourceHandle: 'bottom' };
+        case 'e2-4a':
+          return { ...edge, targetHandle: 'top' };
+        default:
+          return edge;
+      }
+    }), []);
+
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+
+  useEffect(() => {
+    setEdges(isMobile ? mobileEdges : initialEdges);
+  }, [isMobile, setEdges]);
 
   return (
     <StyledReactFlow
