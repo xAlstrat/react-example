@@ -107,9 +107,13 @@ const WorkflowDiagramSection = () => {
             activeNodeIds={activeNodes}
             inactiveNodeIds={inactiveNodes}
             onNodeClick={(_, node) => {
-              if (node.id === '2' || !activeNodes.includes(node.id)) return;
-              const newActiveNodes = activeNodes.filter(id => id !== node.id);
-              setActiveNodes(newActiveNodes);
+              if (node.id === '2') return; // Skip node 2 as it's always active
+              const useCaseIndex = USE_CASES.findIndex(useCase => 
+                useCase.activeNodes.includes(node.id)
+              );
+              if (useCaseIndex >= 0) {
+                setActiveUseCase(useCaseIndex);
+              }
             }}
           />
         </Box>
