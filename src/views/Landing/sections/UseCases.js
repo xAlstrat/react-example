@@ -14,7 +14,6 @@ import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
 import CheckIcon from '@mui/icons-material/Check';
 import Grid from '@mui/material/Grid2';
 import WorkflowDiagram from 'components/WorkflowDiagram';
-import TextDisplay from 'components/TextDisplay';
 import AnimatedElement from 'components/AnimatedElement';
 import Stack from '@mui/material/Stack';
 import { Code, BugReport, Description, RateReview, Rule, Science, Update, Storage, Cloud, Security } from '@mui/icons-material';
@@ -26,33 +25,23 @@ const USE_CASES = [
   {
     id: 'coding',
     title: 'Conversational Development',
-    description: 'Chat with an specialized Agent and instruct them to work in the repository',
-    activeNodes: ['1a', '2', '3c'],
-    inactiveNodes: ['3a', '4a', '4b'],
-    steps: [
-      'Developer initiates conversation with agent',
-      'AI reads repository context and guidelines',
-      'Agent performs requested changes'
-    ]
+    description: <Typography variant="h6">Chat with specialized AI agents and ask them <HighlightedText>anything</HighlightedText> about your codebase. <br/>Features, bug fixed, brainstorming, implementation plans, implementation of guidelines, etc.</Typography>,
+    activeNodes: ['1a', '1b','2'],
+    inactiveNodes: ['3a', '3c', '4a', '4b'],
   },
   {
-    id: 'brainstorming',
-    title: 'Brainstorming',
-    description: 'AI assists in brainstorming and requirements gathering by analyzing guidelines and existing codebase',
-    activeNodes: ['1a', '2', '3c'],
-    inactiveNodes: ['3a', '4a', '4b'],
-    steps: [
-      'Developer requests creative input',
-      'AI analyzes requirements and guidelines',
-      'Agent provides structured solutions'
-    ]
+    id: 'guidelines',
+    title: 'Guidelines',
+    description: <Typography variant="h6">Feed our agents with <HighlightedText>specialized knowledge</HighlightedText>; guidelines, standards, documentation, etc. <br/>Agents will leverage that knowledge when working of the codebase.</Typography>,
+    activeNodes: ['2', '3a'],
+    inactiveNodes: ['1a', '1b', '3c', '4a', '4b'],
   },
   {
-    id: 'onboarding',
-    title: 'Developer Onboarding',
-    description: 'New developers can interact with an agent that understands project guidelines and best practices',
-    activeNodes: ['2', '3a', '3c'],
-    inactiveNodes: ['1a', '4a', '4b'],
+    id: 'agents',
+    title: 'Specialized Agents',
+    description: <Typography variant="h6">Define <HighlightedText>tailored agents</HighlightedText> that fits your needs. <br/>Place these specialist anywhere in your workflow.</Typography>,
+    activeNodes: ['2', '3c'],
+    inactiveNodes: ['1a', '1b', '3a', '4a', '4b'],
     steps: [
       'New developer asks about codebase',
       'AI processes guidelines and config',
@@ -60,11 +49,11 @@ const USE_CASES = [
     ]
   },
   {
-    id: 'git-management',
-    title: 'Git Issues Management',
-    description: 'Automated creation and management of Git issues based on code analysis',
-    activeNodes: ['1b', '2', '4b'],
-    inactiveNodes: ['3a', '3c', '4a'],
+    id: 'output',
+    title: 'Output',
+    description: <Typography variant="h6">Subscribe to <HighlightedText>custom events</HighlightedText> and enhance your workflow. <br/>Not just coding, agents can trigger want you need at the right time.</Typography>,
+    activeNodes: ['2', '4a', '4b'],
+    inactiveNodes: ['1a', '1b', '3a', '3c'],
     steps: [
       'System detects code changes',
       'AI analyzes changes and context',
@@ -81,7 +70,7 @@ const WorkflowDiagramSection = () => {
   React.useEffect(() => {
     const interval = setInterval(() => {
       setActiveUseCase((prev) => (prev + 1) % USE_CASES.length);
-    }, 15000*100);
+    }, 10000);
 
     return () => clearInterval(interval);
   }, []);
@@ -93,7 +82,7 @@ const WorkflowDiagramSection = () => {
   }, [activeUseCase]);
 
   return <AnimatedElement delay={0.4}>
-    <Box>
+    <Box mb={10}>
       <Stack spacing={2}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider', display: 'flex', justifyContent: 'center' }}>
           <Tabs 
@@ -117,47 +106,15 @@ const WorkflowDiagramSection = () => {
           <WorkflowDiagram
             activeNodeIds={activeNodes}
             inactiveNodeIds={inactiveNodes}
+            onNodeClick={(_, node) => {
+              if (node.id === '2' || !activeNodes.includes(node.id)) return;
+              const newActiveNodes = activeNodes.filter(id => id !== node.id);
+              setActiveNodes(newActiveNodes);
+            }}
           />
         </Box>
-        <Box sx={{ mt: 4 }}>
-          <Grid container spacing={3} justifyContent="center">
-            <Grid item size={{ xs: 12, lg: 10 }}>
-              <Grid container spacing={3} justifyContent="center">
-                {USE_CASES[activeUseCase].steps.map((step, index) => (
-                  <Grid key={index} item size={{ xs: 12, md: 4 }}>
-                    <Box sx={{
-                      display: 'flex',
-                      alignItems: 'flex-start',
-                      gap: 2,
-                      padding: 2,
-                      borderLeft: index < USE_CASES[activeUseCase].steps.length ? '2px dashed rgba(174, 83, 186, 0.4)' : 'none',
-                      height: '100%'
-                    }}>
-                      <Box sx={{
-                        width: 36,
-                        height: 36,
-                        borderRadius: '50%',
-                        backgroundColor: 'rgba(174, 83, 186, 0.1)',
-                        border: '2px solid rgba(174, 83, 186, 0.4)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        flexShrink: 0,
-                        color: 'white',
-                        fontWeight: 'bold'
-                      }}>
-                        {index + 1}
-                      </Box>
-                      <Typography variant="body1" sx={{ color: 'white', fontWeight: 300 }}>
-                        {step}
-                      </Typography>
-                    </Box>
-                  </Grid>
-                ))}
-              </Grid>
-            </Grid>
-
-          </Grid>
+        <Box sx={{textAlign: "center", p: {xs: 0, md: 6}}} >
+          {USE_CASES[activeUseCase].description}
         </Box>
       </Stack>
     </Box>
@@ -457,7 +414,7 @@ const UseCases = () => {
     <Section id="use-cases" index={3} bgColor="dark1">
       <Container maxWidth="xl">
         <Typography variant="h2" component="h2" align="center" gutterBottom sx={{ fontWeight: 'bold', mb: 6, color: theme.palette.common.white }}>
-          AI Agents <HighlightedText>everywhere</HighlightedText> at your company
+          AI Agents <HighlightedText>everywhere</HighlightedText> in your workflow
         </Typography>
         <WorkflowDiagramSection />
         <CodeAssistant />
