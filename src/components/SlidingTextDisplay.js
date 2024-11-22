@@ -24,7 +24,7 @@ const slideDown = keyframes`
   }
 `;
 
-const SlidingTextDisplay = ({ items, minHeight, interval = 3000, fullWidth = false, showBackground = false, loop = true }) => {
+const SlidingTextDisplay = ({ items, minHeight, interval = 3000, fullWidth = false, showBackground = false, loop = true, whitePreffixSize = 17 }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [containerWidth, setContainerWidth] = useState('auto');
   const containerRef = useRef(null);
@@ -108,8 +108,8 @@ const SlidingTextDisplay = ({ items, minHeight, interval = 3000, fullWidth = fal
           }}
         >
           {item.icon}
-          <Typography variant="body1" sx={{ ml: 1 }}>
-            {item.text}
+          <Typography variant="body1" sx={{ ml: {xs: 1, md: 0} }}>
+          {[...Array(whitePreffixSize)].map(() => '\u00A0').join('')}{item.text}
           </Typography>
         </Box>
       ))}
