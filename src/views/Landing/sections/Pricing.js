@@ -130,7 +130,14 @@ const PricingCard = ({ tier, isPopular }) => (
             ))}
           </Box>
         ) : (
-          <Button fullWidth variant="contained" color="primary">
+          <Button 
+            fullWidth 
+            variant="contained" 
+            color="primary"
+            href="https://tally.so/r/nWejrL"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             {tier.buttonText || 'Get Started'}
           </Button>
         )}
@@ -168,13 +175,13 @@ const enterpriseTiers = [
   {
     title: 'Team',
     subtitle: 'Be a top-tier development team',
-    price: '35',
+    price: '50',
     period: '/month',
     features: [
       'Everything in free for each developer',
       'Event based hooks',
-      'Private custom knowledge sources',
-      'Centralized custom specialized agents',
+      'Custom knowledge sources',
+      'Centralized config and specialized agents',
       'Dedicated support for interactive development',
     ],
     buttonText: 'Start Free Trial',
