@@ -1,18 +1,11 @@
-import React, { memo, useCallback, useEffect, useMemo } from 'react';
+import React, { memo} from 'react';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 import styled from '@emotion/styled';
 import {
   ReactFlow,
   useNodesState,
   useEdgesState,
-  addEdge,
 } from '@xyflow/react';
-import ProcessIcon from '@mui/icons-material/Settings';
-import ConsoleIcon from '@mui/icons-material/Terminal';
-import DescriptionIcon from '@mui/icons-material/Description';
-import SmartToyIcon from '@mui/icons-material/SmartToy';
-import CloudIcon from '@mui/icons-material/Cloud';
-import GitHubIcon from '@mui/icons-material/GitHub';
 
 import '@xyflow/react/dist/base.css';
 import TurboEdge from './TurboEdge';
@@ -21,7 +14,7 @@ import { Handle, Position } from '@xyflow/react';
 
 const NodeBase = styled.div`
   font-size: 10px;
-  background: ${({ active }) => active ?
+  background: ${({ active }) => active ? 
     'linear-gradient(165deg, rgba(142, 45, 226, 1), rgba(74, 0, 224, 1))' :
     'linear-gradient(165deg, rgba(142, 45, 226, 0.6), rgba(74, 0, 224, 0.6))'
   };
@@ -38,6 +31,7 @@ const NodeBase = styled.div`
   width: 140px;
   height: 100px;
   ${({ theme }) => theme.breakpoints.down('sm')} {
+    width: 210px;
   }
   display: flex;
   flex-direction: column;
@@ -77,7 +71,7 @@ const DataNode = styled.div`
   justify-content: center;
   align-items: center;
   padding: 4px 8px;
-  border: 1px solid ${({ active }) =>
+  border: 1px solid ${({ active }) => 
     active ? 'rgba(174, 83, 186, 0.8)' : 'rgba(174, 83, 186, 0.4)'};
   opacity: ${({ inactive }) => inactive ? 0.4 : 1};
   border-radius: 4px;
@@ -93,7 +87,6 @@ const DataNode = styled.div`
     background: rgba(174, 83, 186, 0.08);
     box-shadow: 0 4px 20px rgba(174, 83, 186, 0.2);
     transform: translateY(-1px);
-    cursor: pointer;
   }
 `;
 
@@ -195,8 +188,8 @@ const _TurboNode = ({ data }) => {
       <SquaredNode>
         <GradientIcon>{data.icon}</GradientIcon>
       </SquaredNode>
-      <Handle type="target" position={Position.Left} style={{ top: "calc(50% + 12px)", opacity: 0 }} />
-      <Handle type="source" position={Position.Right} style={{ top: "calc(50% + 12px)", opacity: 0 }} />
+      <Handle type="target" position={Position.Left} style={{top: "calc(50% + 12px)", opacity: 0}} />
+      <Handle type="source" position={Position.Right} style={{top: "calc(50% + 12px)", opacity: 0}} />
     </SquaredNodeContainer>
   );
 };
@@ -211,15 +204,16 @@ const _MainNode = ({ data }) => {
     <NodeBase active={active} inactive={inactive}>
       {isMobile ? (
         <>
-          <Handle type="target" position={Position.Top} id='top' style={{ opacity: 0 }} />
-          <Handle type="source" position={Position.Bottom} id='bottom' style={{ opacity: 0 }} />
+          <Handle type="target" position={Position.Top} id='input' style={{opacity: 0, left: '30%'}}/>
+          <Handle type="target" position={Position.Top} id='sources' style={{opacity: 0, left: '70%'}}/>
+          <Handle type="source" position={Position.Bottom} id='output' style={{opacity: 0}}/>
         </>
       ) : (
         <>
-          <Handle type="target" position={Position.Left} style={{ opacity: 0 }} />
-          <Handle type="target" position={Position.Top} id='top' style={{ opacity: 0 }} />
-          <Handle type="source" position={Position.Right} style={{ opacity: 0 }} />
-          <Handle type="target" position={Position.Bottom} id='bottom' style={{ opacity: 0 }} />
+          <Handle type="target" position={Position.Left} style={{opacity: 0}} />
+          <Handle type="target" position={Position.Top} id='top' style={{opacity: 0}}/>
+          <Handle type="source" position={Position.Right} style={{opacity: 0}}/>
+          <Handle type="target" position={Position.Bottom} id='bottom' style={{opacity: 0}}/>
         </>
       )}
       <TurboNodeContainer>
@@ -228,7 +222,8 @@ const _MainNode = ({ data }) => {
       </TurboNodeContainer>
       {isMobile ? (
         <>
-          <div style={{ position: 'absolute', top: '3px', left: '50%', transform: 'translateX(-50%)', fontSize: '8px', color: 'white', textTransform: "uppercase" }}>input</div>
+          <div style={{ position: 'absolute', top: '3px', left: '30%', transform: 'translateX(-50%)', fontSize: '8px', color: 'white', textTransform: "uppercase" }}>input</div>
+          <div style={{ position: 'absolute', top: '3px', left: '70%', transform: 'translateX(-50%)', fontSize: '8px', color: 'white', textTransform: "uppercase" }}>sources</div>
           <div style={{ position: 'absolute', bottom: '3px', left: '50%', transform: 'translateX(-50%)', fontSize: '8px', color: 'white', textTransform: "uppercase" }}>output</div>
         </>
       ) : (
@@ -248,7 +243,7 @@ const _ModelNode = ({ data }) => {
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <GradientIcon>{data.icon}</GradientIcon>
       <div style={{ fontSize: '10px', marginTop: '5px' }}>{data.title}</div>
-      <Handle type="source" position={Position.Top} style={{ opacity: 0 }} />
+      <Handle type="source" position={Position.Top} style={{opacity: 0}}/>
     </div>
   );
 };
@@ -258,8 +253,8 @@ const _SubDataNode = ({ data }) => {
     <DataNode active={data.active} inactive={data.inactive}>
       <GradientIcon>{data.icon}</GradientIcon>
       <DataNodeTitle position={data.titlePosition || 'bottom'}>{data.title}</DataNodeTitle>
-      {data.targetHandlePosition && <Handle type="target" position={data.targetHandlePosition} style={{ opacity: 0 }} />}
-      {data.sourceHandlePosition && <Handle type="source" position={data.sourceHandlePosition || Position.Right} style={{ opacity: 0 }} />}
+      {data.targetHandlePosition && <Handle type="target" position={data.targetHandlePosition} style={{opacity: 0}}/>}
+      {data.sourceHandlePosition && <Handle type="source" position={data.sourceHandlePosition || Position.Right} style={{opacity: 0}}/>}
     </DataNode>
   );
 };
@@ -268,94 +263,6 @@ const MainNode = memo(_MainNode);
 const SubDataNode = memo(_SubDataNode);
 const TurboNode = memo(_TurboNode);
 const ModelNode = memo(_ModelNode);
-
-const horizontalGap = 100;
-const verticalOffset = 10;
-const verticalMargin = 20;
-const iconSize = "small";
-
-const initialNodes = [
-  {
-    id: '1a',
-    position: { x: 60 - horizontalGap, y: 115 - verticalMargin + verticalOffset },
-    data: {
-      icon: <ConsoleIcon fontSize={iconSize} />,
-      title: 'User',
-      sourceHandlePosition: Position.Right,
-    },
-    type: 'data',
-  },
-  {
-    id: '1b',
-    position: { x: 60 - horizontalGap, y: 115 + verticalMargin + verticalOffset },
-    data: {
-      icon: <GitHubIcon fontSize={iconSize} />,
-      title: 'Repository',
-      sourceHandlePosition: Position.Right
-    },
-    type: 'data',
-  },
-  {
-    id: '2',
-    position: { x: 201, y: 80 + verticalOffset },
-    data: {
-      icon: <SmartToyIcon fontSize={iconSize} />,
-      title: '+CODER',
-    },
-    type: 'main',
-  },
-  {
-    id: '3a',
-    position: { x: 120, y: 0 },
-    data: {
-      icon: <DescriptionIcon fontSize={iconSize} />,
-      title: 'Guidelines',
-      titlePosition: 'bottom',
-      sourceHandlePosition: Position.Bottom
-    },
-    type: 'data',
-  },
-  {
-    id: '3c',
-    position: { x: 280, y: 0 },
-    data: {
-      icon: <ProcessIcon fontSize={iconSize} />,
-      title: 'Agents config',
-      titlePosition: 'bottom',
-      sourceHandlePosition: Position.Bottom
-    },
-    type: 'data',
-  },
-  {
-    id: '4a',
-    position: { x: 200 + 140 + horizontalGap, y: 115 - verticalMargin + verticalOffset },
-    data: {
-      icon: <CloudIcon fontSize={iconSize} />,
-      title: 'Cloud Events',
-      targetHandlePosition: Position.Left
-    },
-    type: 'data',
-  },
-  {
-    id: '4b',
-    position: { x: 200 + 140 + horizontalGap, y: 115 + verticalMargin + verticalOffset },
-    data: {
-      icon: <GitHubIcon fontSize={iconSize} />,
-      title: 'Commit',
-      targetHandlePosition: Position.Left
-    },
-    type: 'data',
-  },
-];
-
-const initialEdges = [
-  { id: 'e1a-2', source: '1a', target: '2', label: 'Triggers', animated: true },
-  { id: 'e1b-2', source: '1b', target: '2', label: 'Provides LLM', animated: true },
-  { id: 'e3a-2', source: '3a', target: '2', label: 'Injects data', animated: true, targetHandle: "top" },
-  { id: 'e3c-2', source: '3c', target: '2', label: 'Injects data', animated: true, targetHandle: "top" },
-  { id: 'e2-4a', source: '2', target: '4a', label: 'Produces', animated: true, },
-  { id: 'e2-4b', source: '2', target: '4b', label: 'Produces', animated: true, },
-];
 
 const nodeTypes = {
   turbo: TurboNode,
@@ -373,110 +280,34 @@ const defaultEdgeOptions = {
   //markerEnd: 'edge-circle',
 };
 
-const WorkflowDiagram = ({ activeNodeIds = [], inactiveNodeIds = [], onNodeClick }) => {
+const WorkflowComponent = ({ initialNodes, initialEdges }) => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const mobileNodes = useMemo(() => initialNodes.map(node => {
-    const mobileHorizontalAdjustment = 70; // Amount to adjust positions in mobile
-    const mobileVerticalAdjustment = 70; // Amount to adjust positions in mobile
-    switch (node.id) {
-      case '1a':
-        return {
-          ...node,
-          position: { x: 200 - mobileHorizontalAdjustment, y: 80 - verticalMargin - mobileVerticalAdjustment- 25 }
-        };
-      case '1b':
-        return {
-          ...node,
-          position: { x: 200 - mobileHorizontalAdjustment, y: 80 + verticalMargin - mobileVerticalAdjustment - 25},
-          data: {...node.data, sourceHandlePosition: Position.Bottom}
-        };
-      case '2':
-        return {
-          ...node,
-          position: { x: node.position.x, y: node.position.y - 25},
-          data: {...node.data, sourceHandlePosition: Position.Bottom}
-        };
-      case '3a':
-        return {
-          ...node,
-          position: { x: 200 + mobileHorizontalAdjustment, y: 80 - verticalMargin - mobileVerticalAdjustment- 25 }
-        };
-      case '3c':
-        return {
-          ...node,
-          position: { x: 200 + mobileHorizontalAdjustment, y: 80 + verticalMargin - mobileVerticalAdjustment - 25},
-          data: {...node.data, sourceHandlePosition: Position.Bottom}
-        };
-      case '4a':
-        return {
-          ...node,
-          position: { x: 200 + mobileHorizontalAdjustment, y: 130 + verticalMargin + mobileVerticalAdjustment - 25},
-          data: {...node.data, targetHandlePosition: Position.Top}
-        };
-      case '4b':
-        return {
-          ...node,
-          position: { x: 200 - mobileHorizontalAdjustment, y: 130 + verticalMargin + mobileVerticalAdjustment - 25 },
-          data: {...node.data, targetHandlePosition: Position.Top}
-        };
-      default:
-        return node;
-    }
-  }).filter(Boolean), []);
+  const [nodes, setNodes , onNodesChange] = useNodesState(initialNodes);
 
-  const [nodes, setNodes, onNodesChange] = useNodesState(isMobile ? mobileNodes : initialNodes);
-  useEffect(() => {
-    const baseNodes = isMobile ? mobileNodes : initialNodes;
-    setNodes(baseNodes.map(node => ({
-      ...node,
-      data: {
-        ...node.data,
-        active: activeNodeIds.includes(node.id),
-        inactive: inactiveNodeIds.includes(node.id)
-      }
-    })));
-  }, [isMobile, activeNodeIds, inactiveNodeIds]);
-
-  const mobileEdges = useMemo(() => initialEdges
-    .filter(edge => !['e1a-2', 'e3a-2'].includes(edge.id))
-    .map(edge => {
-      switch(edge.id) {
-        default:
-          return edge;
-      }
-    }), []);
-
-  const [edges, setEdges, onEdgesChange] = useEdgesState(isMobile ? mobileEdges : initialEdges);
-
-  useEffect(() => {
-    setEdges(isMobile ? mobileEdges : initialEdges);
-  }, [isMobile, setEdges]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   return (
     <StyledReactFlow
-      // style={{ height: isMobile ? '400px' : '300px' }}
+      style={{ height: '300px'}}
       nodes={nodes}
       edges={edges}
-      fitView={true}
-      fitViewOptions={{ minZoom: 1 }}
+      fitView
       nodeTypes={nodeTypes}
-      // onNodesChange={onNodesChange}
-      // onEdgesChange={onEdgesChange}
+      onNodesChange={onNodesChange}
+      onEdgesChange={onEdgesChange}
       defaultEdgeOptions={defaultEdgeOptions}
       preventScrolling={false}
       connectOnClick={false}
       panOnScroll={false}
       panOnDrag={false}
-      nodesDraggable={false}
+      nodesDraggable={true}
       elementsSelectable={false}
       nodesConnectable={false}
       zoomOnDoubleClick={false}
       zoomOnScroll={false}
       zoomOnPinch={false}
-      onNodeClick={onNodeClick}
-
+      
     >
 
       <svg>
@@ -500,9 +331,9 @@ const WorkflowDiagram = ({ activeNodeIds = [], inactiveNodeIds = [], onNodeClick
           </marker>
         </defs>
       </svg>
-      <Box sx={{ position: "absolute", left: 0, top: 0, width: 58, height: 19, backgroundColor: "#4a00e0" }} />
+      <Box sx={{position: "absolute", left: 0, top: 0, width: 58, height: 19, backgroundColor:"#4a00e0"}} />
     </StyledReactFlow>
   );
 };
 
-export default WorkflowDiagram;
+export default WorkflowComponent;

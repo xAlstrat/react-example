@@ -15,9 +15,13 @@ const StyledButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-const CTA = ({ children, scrollTo = 'pricing', ...props }) => {
+const CTA = ({ children, scrollTo = 'pricing', linkTo, ...props }) => {
   const handleClick = () => {
-    scroller.scrollTo(scrollTo, { smooth: true, duration: 500 });
+    if (linkTo) {
+      window.open(linkTo, '_blank', 'noopener');
+    } else {
+      scroller.scrollTo(scrollTo, { smooth: true, duration: 500 });
+    }
   };
 
   return (

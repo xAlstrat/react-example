@@ -5,6 +5,7 @@ const HighlightedText = styled('span')(({ theme }) => {
   const baseColor = theme.palette.secondary.main;
   const darkerColor = darken(baseColor, 0.1); // Slightly darker shade
   return {
+    whiteSpace: "nowrap",
     background: `linear-gradient(135deg, ${baseColor} 0%, ${darkerColor} 100%)`,
     color: theme.palette.getContrastText(baseColor),
     padding: '0 8px',

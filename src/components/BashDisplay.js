@@ -150,15 +150,14 @@ const BashDisplay = () => {
     <ConsoleContainer>
       <TextContainer>
         
-        <Typography style={{whiteSpace: 'nowrap', color: '#4CAF50'}}>{isMobile ? '$pc' : '$ pluscoder'}</Typography>
+        <Typography style={{whiteSpace: 'nowrap', color: '#4CAF50', position: "absolute", left: 25}}>{isMobile ? '$pluscoder' : '$ pluscoder'}</Typography>
         {animationStage === 0 ? (
           <SlidingTextDisplay minHeight={isMobile? '3.2em' : '2em'}  items={[
-            { text: '--input \'add an API endpoint to unsubscribe users\'', color: "#4CAF50" },
-            { text: '--agent my-own-custom-expert', color: "#4CAF50" },
-            { text: '--task_list REFACTOR_TASKS.md', color: "#4CAF50" },
-            { text: '--input \'update docs\' --source \'DOCS_GUIDELINES.md\' ', color: "#4CAF50" },
-            { text: '--model gpt-4o --openai_api_key <your-key>', color: "#4CAF50" },
-          ]} interval={3000} fullWidth={true} loop={true} />
+            { text: '--input \'add an API endpoint to subscribe users\'', color: "#4CAF50" },
+            { text: '--agent my-company-expert', color: "#4CAF50" },
+            { text: '--task_list my_instructions.json', color: "#4CAF50" },
+            { text: '--source COMPANY_GUIDELINES.md', color: "#4CAF50" },
+          ]} interval={3000} fullWidth={true} loop={true} whitePrefixSize={18} />
         ) : (
           <AnimatedText color={animationTexts[animationStage - 1].color} isTyping={isTyping}>
             {displayText}

@@ -25,40 +25,54 @@ const USE_CASES = [
   {
     id: 'coding',
     title: 'Conversational Development',
-    description: <Typography variant="h6">Chat with specialized AI agents and ask them <HighlightedText>anything</HighlightedText> about your codebase. <br/>Features, bug fixed, brainstorming, implementation plans, implementation of guidelines, etc.</Typography>,
+    description: (
+      <Typography variant="body1">
+        <strong>Chat with AI, Code Smarter</strong> <br />
+        Ask specialized AI agents <HighlightedText>anything</HighlightedText> about your codebase. <br />
+        Fix bugs, brainstorm ideas, implement features, or plan your next steps with a conversational partner.
+      </Typography>
+    ),
     activeNodes: ['1a', '1b','2'],
     inactiveNodes: ['3a', '3c', '4a', '4b'],
   },
   {
     id: 'guidelines',
     title: 'Guidelines',
-    description: <Typography variant="h6">Feed our agents with <HighlightedText>specialized knowledge</HighlightedText>; guidelines, standards, documentation, etc. <br/>Agents will leverage that knowledge when working of the codebase.</Typography>,
+    description: (
+      <Typography variant="body1">
+        <strong>Embed Your Knowledge</strong> <br />
+        Feed our agents with <HighlightedText>specialized knowledge</HighlightedText>. <br />
+        Share your guidelines, standards, and documentation, and let the agents ensure your codebase aligns with your expectations.
+      </Typography>
+    ),
     activeNodes: ['2', '3a'],
     inactiveNodes: ['1a', '1b', '3c', '4a', '4b'],
   },
   {
     id: 'agents',
     title: 'Specialized Agents',
-    description: <Typography variant="h6">Define <HighlightedText>tailored agents</HighlightedText> that fits your needs. <br/>Place these specialist anywhere in your workflow.</Typography>,
+    description: (
+      <Typography variant="body1">
+        <strong>Custom Agents, Your Way</strong> <br />
+        Define <HighlightedText>tailored agents</HighlightedText> that fit your needs. <br />
+        Place these specialists anywhere in your workflow to boost productivity and efficiency.
+      </Typography>
+    ),
     activeNodes: ['2', '3c'],
     inactiveNodes: ['1a', '1b', '3a', '4a', '4b'],
-    steps: [
-      'New developer asks about codebase',
-      'AI processes guidelines and config',
-      'Agent explains patterns and practices'
-    ]
   },
   {
     id: 'output',
     title: 'Output',
-    description: <Typography variant="h6">Subscribe to <HighlightedText>custom events</HighlightedText> and enhance your workflow. <br/>Not just coding, agents can trigger want you need at the right time.</Typography>,
+    description: (
+      <Typography variant="body1">
+        <strong>Smart Triggers, Smarter Workflow</strong> <br />
+        Subscribe to <HighlightedText>custom events</HighlightedText> and enhance your workflow. <br />
+        Beyond coding, our agents trigger exactly what you need, right when you need it.
+      </Typography>
+    ),
     activeNodes: ['2', '4a', '4b'],
     inactiveNodes: ['1a', '1b', '3a', '3c'],
-    steps: [
-      'System detects code changes',
-      'AI analyzes changes and context',
-      'Agent creates/updates issues'
-    ]
   }
 ];
 
@@ -73,7 +87,7 @@ const WorkflowDiagramSection = () => {
     }, 10000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [activeUseCase]);
 
   React.useEffect(() => {
     const currentCase = USE_CASES[activeUseCase];
@@ -82,27 +96,9 @@ const WorkflowDiagramSection = () => {
   }, [activeUseCase]);
 
   return <AnimatedElement delay={0.4}>
-    <Box mb={10}>
+    <Box mt={10} mb={10}>
       <Stack spacing={2}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider', display: 'flex', justifyContent: 'center' }}>
-          <Tabs 
-            value={activeUseCase}
-            onChange={(e, newValue) => setActiveUseCase(newValue)}
-            textColor="secondary"
-            indicatorColor="secondary"
-            sx={{ 
-              '& .MuiTab-root': { 
-                color: 'rgba(255, 255, 255, 0.7)',
-                '&.Mui-selected': { color: 'white' }
-              }
-            }}
-          >
-            {USE_CASES.map((useCase, index) => (
-              <Tab key={useCase.id} label={useCase.title} />
-            ))}
-          </Tabs>
-        </Box>
-        <Box sx={{ height: 300 }}>
+        <Box sx={{ height: 340 }}>
           <WorkflowDiagram
             activeNodeIds={activeNodes}
             inactiveNodeIds={inactiveNodes}
@@ -117,7 +113,7 @@ const WorkflowDiagramSection = () => {
             }}
           />
         </Box>
-        <Box sx={{textAlign: "center", p: {xs: 0, md: 6}}} >
+        <Box sx={{textAlign: "center", pl: {xs: 0, md: 4}, pr: {xs: 0, md: 4}, pt: 1}} >
           {USE_CASES[activeUseCase].description}
         </Box>
       </Stack>
@@ -156,9 +152,9 @@ const CodeAssistant = () => {
   ];
 
   return (
-    <Box mb={10}>
+    <Box mt={8} mb={8}>
       <Box
-        mb={3}
+        mb={5}
         sx={{
           display: 'flex',
           flexDirection: 'column',
@@ -179,10 +175,10 @@ const CodeAssistant = () => {
               letterSpacing: '0.1em',
             }}
           >
-            A code assistant for your developers
+            Work with AI Agents in your dev environment
           </Typography>
           <Typography variant="h6">
-            Keep using your IDE as always. <strong>Just tell +coder what you want</strong> through the console.
+            Keep using your IDE as always. Work with +coder agents through the console.
           </Typography>
         </AnimatedElement>
       </Box>
@@ -292,11 +288,6 @@ const CodeAssistant = () => {
           </AnimatedElement>
         </Grid>
       </Grid >
-      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
-        <AnimatedElement delay={1}>
-          <CTA>Start Free Trial</CTA>
-        </AnimatedElement>
-      </Box>
     </Box>
   );
 };
@@ -322,7 +313,6 @@ const CloudUseCaseSection = () => {
   return (
     <>
       <Box
-        mb={3}
         sx={{
           display: 'flex',
           flexDirection: 'column',
@@ -343,14 +333,14 @@ const CloudUseCaseSection = () => {
               letterSpacing: '0.1em',
             }}
           >
-            Cloud-based Asynchronous Coding
+            ... Or let agents work for you in the cloud
           </Typography>
           <Typography variant="h6" gutterBottom>
-            Leave Pluscoder working in the cloud, asynchronously performing coding or code maintenance tasks.
+            Offload coding and maintenance to agents in the cloud, saving time and effort.
           </Typography>
         </AnimatedElement>
       </Box>
-      <Grid container spacing={4} justifyContent="center">
+      {/* <Grid container spacing={4} justifyContent="center">
         <Grid item size={{ xs: 12, md: 6 }}>
         </Grid>
         <Grid item size={{ xs: 12, md: 6 }}>
@@ -383,7 +373,7 @@ const CloudUseCaseSection = () => {
                 </Stack>
               </CardContent>
             </Card>
-            {/* <Box sx={{ mt: 2, mb: 2 }}>
+            <Box sx={{ mt: 2, mb: 2 }}>
               <Typography variant="h6" gutterBottom>
                 Common cloud use cases
               </Typography>
@@ -398,13 +388,13 @@ const CloudUseCaseSection = () => {
                   </Grid>
                 ))}
               </Grid>
-            </Box> */}
+            </Box>
           </AnimatedElement>
         </Grid>
-      </Grid>
-      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+      </Grid> */}
+      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 0 }}>
         <AnimatedElement delay={1}>
-          <CTA>Start Free Trial</CTA>
+          <CTA linkTo="https://tally.so/r/nWejrL">Start Free Trial</CTA>
         </AnimatedElement>
       </Box>
     </>

@@ -117,9 +117,9 @@ const Hero = () => {
               lineHeight: { xs: 1.3, sm: 1.4 }
             }}
           >
-            <HighlightedText>Coding</HighlightedText>{" - "}
-            <HighlightedText>Repository maintenance</HighlightedText>{" - "}
-            <HighlightedText>Brainstorming</HighlightedText>{" - "}
+            <HighlightedText>Coding</HighlightedText>{"  "}
+            <HighlightedText>Repository maintenance</HighlightedText>{"  "}
+            <HighlightedText>Brainstorming</HighlightedText>{"  "}
             <HighlightedText>Planning</HighlightedText>{ "  " }
             <span style={{whiteSpace: "nowrap"}}>and more..</span>
           </StyledTypography>
