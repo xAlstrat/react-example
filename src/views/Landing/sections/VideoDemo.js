@@ -22,7 +22,7 @@ const VideoDemo = () => {
                 color: 'common.white'
               }}
             >
-              See <HighlightedText>Pluscoder</HighlightedText> in Action
+              See <HighlightedText>+coder</HighlightedText> in action
             </Typography>
           </AnimatedElement>
           
@@ -46,8 +46,9 @@ const VideoDemo = () => {
                   objectFit: 'cover'
                 }}
                 controls
-                muted
                 loop
+                loading="lazy"
+                //preload="none"
               >
                 <source src="/pluscoder_demo_f.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
