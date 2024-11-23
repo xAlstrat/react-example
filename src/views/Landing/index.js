@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './sections/Header';
 import Hero from './sections/Hero';
+import VideoDemo from './sections/VideoDemo';
 import UseCases from './sections/UseCases';
 // Remove unused imports
 import Pricing from './sections/Pricing';
@@ -13,6 +14,7 @@ function LandingPage() {
       <Header />
       <main>
         <Hero />
+        <VideoDemo />
         <UseCases />
         {/* <KeyFeatures id="key-features" /> */}
         {/* <DisplayComponents /> */}
